@@ -4,16 +4,13 @@ import mongoose from '../src/services/mongoose'
 import { mongo } from '../src/config'
 
 EventEmitter.defaultMaxListeners = Infinity
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000
+jasmine.DEFAULT_TIMEOUT_INTERVAL = 300000
 
 const mockgoose = new Mockgoose(mongoose)
 
 beforeAll(() => {
   mockgoose.prepareStorage().then(() => {
-    mongoose.connect('mongodb://localhost:27017/arc-test')
-    mongoose.connection.on('connected', () => {
-      console.log('db connection is now open')
-    })
+    mongoose.connect(mongo.uri)
   })
 })
 
