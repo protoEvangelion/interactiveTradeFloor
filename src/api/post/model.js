@@ -30,4 +30,5 @@ postSchema.methods = {
 }
 
 module.exports = mongoose.model('Post', postSchema)
+
 export default exports

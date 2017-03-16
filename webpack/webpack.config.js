@@ -4,7 +4,7 @@ const WebpackMd5Hash = require('webpack-md5-hash')
 const WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin')
 const webpackIsomorphicToolsConfig = require('./webpack-isomorphic-tools')
 
-const ip = process.env.IP || '0.0.0.0'
+const ip = process.env.IP || '127.0.0.1'
 const port = (+process.env.PORT + 1) || 3001
 const DEBUG = process.env.NODE_ENV !== 'production'
 const PUBLIC_PATH = `/${process.env.PUBLIC_PATH || ''}/`.replace('//', '/')
