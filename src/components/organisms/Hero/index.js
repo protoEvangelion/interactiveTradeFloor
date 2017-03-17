@@ -1,8 +1,9 @@
 import axios from 'axios'
 import React, { Component } from 'react'
 import styled from 'styled-components'
+import cookie from 'react-cookie'
 
-import { Block, IconButton, Tooltip, Booth } from 'components'
+import { IconButton, Tooltip, Booth } from 'components'
 
 const Wrapper = styled.div`
   display: block;
@@ -17,13 +18,8 @@ export default class Hero extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      booths: [],
+      booths: window.__INITIAL_STATE__.booths,
     }
-  }
-  componentWillMount() {
-    axios.get('/api/read')
-      .then(res => this.setState({ booths: res.data }))
-      .catch(err => console.log(err))
   }
   render() {
     return (

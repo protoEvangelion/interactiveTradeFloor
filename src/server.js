@@ -4,14 +4,13 @@ import serialize from 'serialize-javascript'
 import styleSheet from 'styled-components/lib/models/StyleSheet'
 import cors from 'cors'
 import csrf from 'csurf'
+import cookie from 'react-cookie'
 import { renderToString, renderToStaticMarkup } from 'react-dom/server'
 import { Provider } from 'react-redux'
 import { createMemoryHistory, RouterContext, match } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 import { Router } from 'express'
 import express from 'services/express'
-import session from 'express-session'
-import cookieParser from 'cookie-parser'
 import mongoose from 'services/mongoose'
 import api from 'api'
 import routes from 'routes'
@@ -19,11 +18,7 @@ import configureStore from 'store/configure'
 import { env, port, ip, mongo, basename } from 'config'
 import { setCsrfToken } from 'store/actions'
 import Html from 'components/Html'
-import { schema } from './api/read'
-
-const MongoStore = require('connect-mongo')(session)
-const Booth = mongoose.model('Booth', schema)
-const booths = Booth.find((err, booths) => booths)
+import BoothModel from 'api/read/model'
 
 const router = new Router()
 
@@ -33,24 +28,13 @@ router.use('/api', cors(), api)
 
 router.use(csrf({ cookie: true }))
 
-router.use(cookieParser())
-
-router.use(session({
-  secret: 'superSecretString',
-  saveUninitialized: true,
-  resave: true,
-  store: new MongoStore({ mongooseConnection: mongoose.connection }),
-}))
-
 router.use((req, res, next) => {
   if (env === 'development') {
     global.webpackIsomorphicTools.refresh()
   }
-  req.session.booths = []
-  req.session.save()
   const location = req.url.replace(basename, '')
   const memoryHistory = createMemoryHistory({ basename })
-  const store = configureStore({ entities: req.session.booths }, memoryHistory)
+  const store = configureStore({}, memoryHistory)
   const history = syncHistoryWithStore(memoryHistory, store)
 
   store.dispatch(setCsrfToken(req.csrfToken()))
@@ -85,21 +69,30 @@ router.use((req, res, next) => {
     })
 
     const render = (store) => {
-      const content = renderToString(
-        <Provider store={store}>
-          <RouterContext {...renderProps} />
-        </Provider>
-      )
+      BoothModel.find((err, booths) => {
+        if (err) {
+          console.log(err)
+        }
+        const content = renderToString(
+          <Provider store={store}>
+            <RouterContext {...renderProps} />
+          </Provider>
+        )
+        const styles = styleSheet.rules().map(rule => rule.cssText).join('\n')
+        const initialState = store.getState()
+        const assets = global.webpackIsomorphicTools.assets()
+        const boothsArr = [...booths]
+        const preState = {
+          ...initialState,
+          booths: boothsArr,
+        }
+        const state = `window.__INITIAL_STATE__ = ${serialize(preState)}`
+        const markup = <Html {...{ styles, assets, state, content }} />
+        const doctype = '<!doctype html>\n'
+        const html = renderToStaticMarkup(markup)
 
-      const styles = styleSheet.rules().map(rule => rule.cssText).join('\n')
-      const initialState = store.getState()
-      const assets = global.webpackIsomorphicTools.assets()
-      const state = `window.__INITIAL_STATE__ = ${serialize(initialState)}`
-      const markup = <Html {...{ styles, assets, state, content }} />
-      const doctype = '<!doctype html>\n'
-      const html = renderToStaticMarkup(markup)
-
-      res.send(doctype + html)
+        res.send(doctype + html)
+      })
     }
 
     return fetchData().then(() => {
