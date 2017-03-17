@@ -7,3 +7,8 @@ req.keys().forEach((key) => {
     module.exports[name] = actions[name]
   })
 })
+
+// export const fetchBooths = () => {
+//   const request = axios.get('/api/read')
+//   return { type: 'FETCH_BOOTHS', payload: request }
+// }
