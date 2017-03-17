@@ -10,6 +10,8 @@ import { createMemoryHistory, RouterContext, match } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 import { Router } from 'express'
 import express from 'services/express'
+import session from 'express-session'
+import cookieParser from 'cookie-parser'
 import mongoose from 'services/mongoose'
 import api from 'api'
 import routes from 'routes'
@@ -17,6 +19,11 @@ import configureStore from 'store/configure'
 import { env, port, ip, mongo, basename } from 'config'
 import { setCsrfToken } from 'store/actions'
 import Html from 'components/Html'
+import { schema } from './api/read'
+
+const MongoStore = require('connect-mongo')(session)
+const Booth = mongoose.model('Booth', schema)
+const booths = Booth.find((err, booths) => booths)
 
 const router = new Router()
 
@@ -26,14 +33,24 @@ router.use('/api', cors(), api)
 
 router.use(csrf({ cookie: true }))
 
+router.use(cookieParser())
+
+router.use(session({
+  secret: 'superSecretString',
+  saveUninitialized: true,
+  resave: true,
+  store: new MongoStore({ mongooseConnection: mongoose.connection }),
+}))
+
 router.use((req, res, next) => {
   if (env === 'development') {
     global.webpackIsomorphicTools.refresh()
   }
-
+  req.session.booths = []
+  req.session.save()
   const location = req.url.replace(basename, '')
   const memoryHistory = createMemoryHistory({ basename })
-  const store = configureStore({}, memoryHistory)
+  const store = configureStore({ entities: req.session.booths }, memoryHistory)
   const history = syncHistoryWithStore(memoryHistory, store)
 
   store.dispatch(setCsrfToken(req.csrfToken()))

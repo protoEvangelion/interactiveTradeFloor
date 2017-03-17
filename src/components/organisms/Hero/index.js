@@ -21,7 +21,6 @@ export default class Hero extends Component {
     }
   }
   componentWillMount() {
-    console.log('session', Window.sessionStorage)
     axios.get('/api/read')
       .then(res => this.setState({ booths: res.data }))
       .catch(err => console.log(err))
