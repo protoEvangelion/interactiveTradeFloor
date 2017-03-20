@@ -1,8 +1,6 @@
-import axios from 'axios'
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import cookie from 'react-cookie'
-
+import * as d3 from 'd3'
 import { IconButton, Tooltip, Booth } from 'components'
 
 const Wrapper = styled.div`
@@ -18,8 +16,11 @@ export default class Hero extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      booths: window.__INITIAL_STATE__.booths,
+      booths: [],
     }
+  }
+  componentWillMount() {
+    this.setState({ booths: window.__INITIAL_STATE__.booths })
   }
   render() {
     return (
