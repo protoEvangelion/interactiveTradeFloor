@@ -1,7 +1,7 @@
 const merge = require('lodash/merge')
 
 const browser = typeof window !== 'undefined'
-const ip = process.env.IP || '0.0.0.0'
+const ip = process.env.IP || '127.0.0.1'
 const port = process.env.PORT || 3000
 const basename = `/${process.env.PUBLIC_PATH || ''}`.replace('//', '/')
 
@@ -24,7 +24,7 @@ const config = {
   },
   test: {
     mongo: {
-      uri: `mongodb://${ip}/arc-test`,
+      uri: `mongodb://${ip}/floorplan`,
       options: {
         debug: false,
       },
@@ -32,14 +32,14 @@ const config = {
   },
   development: {
     mongo: {
-      uri: `mongodb://${ip}/arc-dev`,
+      uri: `mongodb://${ip}/floorplan`,
       options: {
         debug: true,
       },
     },
   },
   production: {
-    ip: process.env.IP || '0.0.0.0',
+    ip: process.env.IP || '127.0.0.1',
     port: process.env.PORT || 8080,
     baseUrl: 'https://arc.diegohaz.com',
     apiUrl: 'https://arc.diegohaz.com/api',

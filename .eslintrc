@@ -28,6 +28,9 @@
   "rules": {
     "semi": [2, "never"],
     "comma-dangle": [2, "always-multiline"],
+    "no-underscore-dangle": 0,
+    "linebreak-style": 0,
+    "no-tabs": 0,
     "max-len": 0,
     "no-shadow": 0,
     "arrow-body-style": 0,

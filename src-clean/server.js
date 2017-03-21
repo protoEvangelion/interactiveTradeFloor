@@ -3,6 +3,7 @@ import React from 'react'
 import serialize from 'serialize-javascript'
 import styleSheet from 'styled-components/lib/models/StyleSheet'
 import cors from 'cors'
+import csrf from 'csurf'
 import { renderToString, renderToStaticMarkup } from 'react-dom/server'
 import { Provider } from 'react-redux'
 import { createMemoryHistory, RouterContext, match } from 'react-router'
@@ -14,7 +15,9 @@ import api from 'api'
 import routes from 'routes'
 import configureStore from 'store/configure'
 import { env, port, ip, mongo, basename } from 'config'
+import { setCsrfToken } from 'store/actions'
 import Html from 'components/Html'
+import BoothModel from './api/read/model'
 
 const router = new Router()
 
@@ -22,15 +25,18 @@ mongoose.connect(mongo.uri)
 
 router.use('/api', cors(), api)
 
+router.use(csrf({ cookie: true }))
+
 router.use((req, res, next) => {
   if (env === 'development') {
     global.webpackIsomorphicTools.refresh()
   }
-
   const location = req.url.replace(basename, '')
   const memoryHistory = createMemoryHistory({ basename })
   const store = configureStore({}, memoryHistory)
   const history = syncHistoryWithStore(memoryHistory, store)
+
+  store.dispatch(setCsrfToken(req.csrfToken()))
 
   match({ history, routes, location }, (error, redirectLocation, renderProps) => {
     if (redirectLocation) {
@@ -62,21 +68,30 @@ router.use((req, res, next) => {
     })
 
     const render = (store) => {
-      const content = renderToString(
-        <Provider store={store}>
-          <RouterContext {...renderProps} />
-        </Provider>
-      )
+      BoothModel.find((err, booths) => {
+        if (err) {
+          console.log(err)
+        }
+        const content = renderToString(
+          <Provider store={store}>
+            <RouterContext {...renderProps} />
+          </Provider>
+        )
+        const styles = styleSheet.rules().map(rule => rule.cssText).join('\n')
+        const initialState = store.getState()
+        const assets = global.webpackIsomorphicTools.assets()
+        const boothsArr = [...booths]
+        const preState = {
+          ...initialState,
+          booths: boothsArr,
+        }
+        const state = `window.__INITIAL_STATE__ = ${serialize(preState)}`
+        const markup = <Html {...{ styles, assets, state, content }} />
+        const doctype = '<!doctype html>\n'
+        const html = renderToStaticMarkup(markup)
 
-      const styles = styleSheet.rules().map(rule => rule.cssText).join('\n')
-      const initialState = store.getState()
-      const assets = global.webpackIsomorphicTools.assets()
-      const state = `window.__INITIAL_STATE__ = ${serialize(initialState)}`
-      const markup = <Html {...{ styles, assets, state, content }} />
-      const doctype = '<!doctype html>\n'
-      const html = renderToStaticMarkup(markup)
-
-      res.send(doctype + html)
+        res.send(doctype + html)
+      })
     }
 
     return fetchData().then(() => {

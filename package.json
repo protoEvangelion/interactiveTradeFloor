@@ -19,7 +19,7 @@
   },
   "jest": {
     "modulePathIgnorePatterns": [
-      "<rootDir>/src-clean"
+      "<rootDir>/src-example"
     ],
     "moduleDirectories": [
       "src",

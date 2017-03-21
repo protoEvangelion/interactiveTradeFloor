@@ -4,7 +4,6 @@ import serialize from 'serialize-javascript'
 import styleSheet from 'styled-components/lib/models/StyleSheet'
 import cors from 'cors'
 import csrf from 'csurf'
-import cookie from 'react-cookie'
 import { renderToString, renderToStaticMarkup } from 'react-dom/server'
 import { Provider } from 'react-redux'
 import { createMemoryHistory, RouterContext, match } from 'react-router'
@@ -18,7 +17,7 @@ import configureStore from 'store/configure'
 import { env, port, ip, mongo, basename } from 'config'
 import { setCsrfToken } from 'store/actions'
 import Html from 'components/Html'
-import BoothModel from 'api/read/model'
+import BoothModel from './api/read/model'
 
 const router = new Router()
 
