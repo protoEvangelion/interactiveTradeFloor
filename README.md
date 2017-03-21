@@ -16,7 +16,7 @@ Rather than track everything by paper, you can use this web app to keep track of
 
 The MIT License (MIT)
 
-Copyright (c) 2016 [Diego Haz](https://github.com/diegohaz)
+Copyright (c) 2017 [Ryan Garant](https://github.com/protoEvangelion)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
