@@ -19,9 +19,9 @@ const BoothCo = styled.p`
   line-height: 1.3em;
 `
 
-const Info = ({ num, co, status }) => {
+const Info = ({ num, co, status, tip }) => {
   return (
-    <div>
+    <div data-tip data-for={tip} >
       <BoothNum>{ num }</BoothNum>
       <BoothCo>{ status === 'open' ? status : co }</BoothCo>
     </div>
@@ -32,6 +32,7 @@ Info.propTypes = {
   num: PropTypes.number,
   co: PropTypes.string,
   status: PropTypes.string,
+  tip: PropTypes.string.isRequired,
 }
 
 export default Info

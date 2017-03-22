@@ -15,8 +15,8 @@ const Wrapper = styled.div`
 
 const Booth = ({ num, co, type, x, y, dim, status, tip }) => {
   return (
-    <Wrapper type={type} status={status} x={x} y={y} dim={dim} data-tip={tip} >
-      <Info num={num} co={co} status={status} />
+    <Wrapper type={type} status={status} x={x} y={y} dim={dim} >
+      <Info num={num} co={co} status={status} tip={tip} />
     </Wrapper>
   )
 }
