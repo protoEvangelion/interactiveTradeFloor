@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://travis-ci.org/diegohaz/arc"><img src="https://img.shields.io/travis/diegohaz/arc/fullstack.svg?style=flat-square" alt="Build Status" /></a>
+  <a href="https://travis-ci.org/protoEvangelion/interactiveTradeFloor"><img src="https://img.shields.io/travis/protoEvangelion/interactiveTradeFloor/master.svg?style=flat-square" alt="Build Status" /></a>
 </p>
 
 > This project is still a work in progress and not ready to be release. The words below reflect what I hope the finished product to look like.

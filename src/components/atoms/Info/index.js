@@ -5,19 +5,25 @@ const BoothNum = styled.h3`
   color: black;
   font-size: 1em;
   margin: 0;
+  text-align: center;
+  padding-top: 4px;
 `
 
 const BoothCo = styled.p`
   color: black;
-  font-size: .8em;
+  font-size: .68em;
   margin: 0;
+  text-align: center;
+  padding: 4px 2px 0 2px;
+  overflow-wrap: break-word;
+  line-height: 1.3em;
 `
 
-const Info = ({ num, co }) => {
+const Info = ({ num, co, status }) => {
   return (
     <div>
       <BoothNum>{ num }</BoothNum>
-      <BoothCo>{ co }</BoothCo>
+      <BoothCo>{ status === 'open' ? status : co }</BoothCo>
     </div>
   )
 }
@@ -25,6 +31,7 @@ const Info = ({ num, co }) => {
 Info.propTypes = {
   num: PropTypes.number,
   co: PropTypes.string,
+  status: PropTypes.string,
 }
 
 export default Info
