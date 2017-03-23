@@ -28,6 +28,9 @@
   "rules": {
     "semi": [2, "never"],
     "comma-dangle": [2, "always-multiline"],
+    "jsx-a11y/label-has-for": 0,
+    "react/prefer-stateless-function": 0,
+    "no-class-assign": 0,
     "array-callback-return": 0,
     "no-underscore-dangle": 0,
     "linebreak-style": 0,

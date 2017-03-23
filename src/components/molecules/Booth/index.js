@@ -23,6 +23,7 @@ const determineX = (x, col) => {
 
 const Wrapper = styled.div`
   display: inline-block;
+  cursor: pointer;
   position: absolute;
   background-color: ${props => props.status === 'open' ? 'yellow' : 'white'};
   width: ${props => props.type === 'double' ? (props.dim * 2) + 3 : props.dim}px;
@@ -32,9 +33,9 @@ const Wrapper = styled.div`
   transform: translate(${props => determineX(props.x, props.col)}px, ${props => determineY(props.y, props.row)}px);
 `
 
-const Booth = ({ num, co, type, owner, row, col, x, y, dim, status, tip }) => {
+const Booth = ({ onClick, num, i, co, type, owner, row, col, x, y, dim, status, tip }) => {
   return (
-    <Wrapper type={type} owner={owner} status={status} row={row} col={col} x={x} y={y} dim={dim} >
+    <Wrapper onClick={() => onClick(num, i)} value={num} type={type} owner={owner} status={status} row={row} col={col} x={x} y={y} dim={dim} >
       <Info num={num} co={co} status={status} tip={tip} />
       <StatusCircle status={status} />
     </Wrapper>
@@ -42,7 +43,9 @@ const Booth = ({ num, co, type, owner, row, col, x, y, dim, status, tip }) => {
 }
 
 Booth.propTypes = {
+  onClick: PropTypes.func.isRequired,
   num: PropTypes.number,
+  i: PropTypes.number,
   co: PropTypes.string,
   type: PropTypes.string,
   owner: PropTypes.string,

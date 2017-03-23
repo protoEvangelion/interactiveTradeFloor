@@ -1,112 +1,54 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PropTypes } from 'react'
+import { Field } from 'redux-form'
 import styled from 'styled-components'
-import getMuiTheme from 'material-ui/styles/getMuiTheme'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import Paper from 'material-ui/Paper'
-import RaisedButton from 'material-ui/RaisedButton'
-import Formsy from 'formsy-react'
-import { FormsyCheckbox, FormsyRadio, FormsyRadioGroup, FormsyText } from 'formsy-material-ui/lib'
-import injectTapEventPlugin from 'react-tap-event-plugin'
 
-injectTapEventPlugin()
+import { ReduxField, Heading, Button } from 'components'
 
-const FormsyRadioGroupStyled = styled(FormsyRadioGroup)`
-  margin: 10px 0px
+const Form = styled.form`
+  width: 100%;
+  box-sizing: border-box;
+  padding: 1rem;
 `
 
-export default class BoothForm extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      canSubmit: false,
-    }
-  }
-  submitForm(data) {
-    alert(JSON.stringify(data, null, 4))
-  }
-  notifyFormError(data) {
-    console.log('Form error', data)
-  }
-  enableButton() {
-    this.setState({ canSubmit: true })
-  }
-  disableButton() {
-    this.setState({ canSubmit: false })
-  }
-  render() {
-    return (
-      <MuiThemeProvider muiTheme={getMuiTheme()} >
-        <Paper>
-          <Formsy.Form
-            onValid={() => this.enableButton}
-            onInvalid={() => this.disableButton}
-            onValidSubmit={() => this.submitForm}
-            onInvalidSubmit={() => this.notifyFormError}
-          >
-            <FormsyText
-              name="BoothNumber"
-              validations="isNumeric"
-              validationError="Please only use numbers"
-              required
-              hintText="Booth #"
-              floatingLabelText="Booth #"
-            />
-            <FormsyText
-              name="owner"
-              validations="isWords"
-              validationError="Please only use text"
-              hintText="Who owns this booth?"
-              floatingLabelText="Booth Owner"
-            />
-            <FormsyText
-              name="company"
-              validations="isWords"
-              validationError="Please only use text"
-              hintText="What is the company's name?"
-              floatingLabelText="Company"
-            />
-            <FormsyText
-              name="description"
-              validations="isWords"
-              validationError="Please only use text"
-              hintText="What does the company do?"
-              floatingLabelText="Description"
-            />
-            <FormsyRadioGroupStyled name="status" defaultSelected="open">
-              <FormsyRadio
-                value="open"
-                label="Open"
-              />
-              <FormsyRadio
-                value="holding"
-                label="Holding"
-              />
-              <FormsyRadio
-                value="collect"
-                label="Need to collect"
-              />
-              <FormsyRadio
-                value="good"
-                label="All set"
-              />
-            </FormsyRadioGroupStyled>
-            <FormsyCheckbox
-              name="agree"
-              label="Do you agree to disagree?"
-            />
-            <RaisedButton
-              type="submit"
-              label="Submit"
-              disabled={!this.state.canSubmit}
-            />
-          </Formsy.Form>
-        </Paper>
-      </MuiThemeProvider>
-    )
-  }
+const Label = styled.label`
+  margin: 10px auto;
+`
+
+const BoothForm = ({ handleSubmit, submitting, boothNum }) => {
+  return (
+    <Form method="POST" onSubmit={handleSubmit}>
+      <Heading level={2}>Editing Booth # {boothNum}</Heading>
+      <Field name="_csrf" type="hidden" component="input" />
+      <Field name="company" label="Company Name" component={ReduxField} />
+      <div>
+        <Label>Owner:</Label>
+        <div>
+          <label htmlFor="open"><Field name="owner" component="input" type="radio" value="open" /> Open</label>
+          <label htmlFor="Todd"><Field name="owner" component="input" type="radio" value="Todd" /> Todd</label>
+          <label htmlFor="Richard"><Field name="owner" component="input" type="radio" value="Richard" /> Richard</label>
+          <label htmlFor="Ryan"><Field name="owner" component="input" type="radio" value="Ryan" /> Ryan</label>
+        </div>
+      </div>
+      <div>
+        <Label>Status:</Label>
+        <Field name="status" component="select">
+          <option value="" />
+          <option value="holding">Holding</option>
+          <option value="collect">Need to Collect</option>
+          <option value="good">Good to go</option>
+        </Field>
+      </div>
+      <Field name="description" label="Description" component={ReduxField} />
+      <br />
+      <Button type="submit" disabled={submitting}>Save</Button>
+    </Form>
+  )
 }
 
 BoothForm.propTypes = {
-  handleSubmit: PropTypes.func,
+  handleSubmit: PropTypes.func.isRequired,
   submitting: PropTypes.bool,
+  boothNum: PropTypes.number.isRequired,
 }
+
+export default BoothForm

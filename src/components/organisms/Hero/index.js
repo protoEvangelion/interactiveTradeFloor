@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import { Booth, Tooltip, Modal, BoothForm } from 'components'
+import { Booth, Tooltip, Modal } from 'components'
+import { BoothForm } from 'containers'
 
 const Wrapper = styled.div`
   position: relative;
@@ -15,13 +16,39 @@ export default class Hero extends Component {
       dimension: 55,
       columns: 20,
       screenWidth: 1000,
+      activeBooth: 0,
+      boothIndex: 0,
+      modalOpen: false,
     }
+    this.boothClick = this.boothClick.bind(this)
   }
   componentDidMount() {
     this.setState({
       booths: window.__INITIAL_STATE__.booths,
       screenWidth: window.innerWidth,
     })
+  }
+  boothClick(num, i) {
+    console.log('num', num, i)
+    this.setState({
+      activeBooth: num,
+      modalOpen: true,
+      boothIndex: i,
+    })
+  }
+  handleSubmit = (values) => {
+    const booths = this.state.booths
+    booths[this.state.boothIndex] = Object.assign({}, booths[this.state.boothIndex], {
+      co: values.company,
+      desc: values.description,
+      owner: values.owner,
+      status: values.status,
+    })
+    this.setState({
+      modalOpen: false,
+      booths,
+    })
+    console.log(values)
   }
   render() {
     const dim = this.state.dimension
@@ -30,14 +57,16 @@ export default class Hero extends Component {
     const shiftRight = (screenWidth - floorPlanWidth) / 2
     return (
       <Wrapper opaque {...this.props}>
-        <Modal isOpen onClose={() => console.log('hellow')} title="Edit Booth Below" >
-          <BoothForm />
+        <Modal isOpen={this.state.modalOpen} onClose={() => console.log('hellow')}>
+          <BoothForm onSubmit={this.handleSubmit} boothNum={this.state.activeBooth} />
         </Modal>
-        <div id="floorPlan" >
-          { this.state.booths.map(booth => {
+        <section id="floorPlan" >
+          { this.state.booths.map((booth, i) => {
             return (
               <div key={`ctn_${booth._id}`}>
                 <Booth
+                  onClick={this.boothClick}
+                  i={i}
                   tip={`tool_${booth._id}`}
                   key={booth._id}
                   num={booth.num}
@@ -61,7 +90,7 @@ export default class Hero extends Component {
               </div>
             )
           })}
-        </div>
+        </section>
       </Wrapper>
     )
   }
