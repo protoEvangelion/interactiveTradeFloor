@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import { Booth, Tooltip } from 'components'
+import { Booth, Tooltip, Modal, BoothForm } from 'components'
 
 const Wrapper = styled.div`
+  position: relative;
   margin-bottom: 1500px;
 `
 
@@ -29,6 +30,9 @@ export default class Hero extends Component {
     const shiftRight = (screenWidth - floorPlanWidth) / 2
     return (
       <Wrapper opaque {...this.props}>
+        <Modal isOpen onClose={() => console.log('hellow')} title="Edit Booth Below" >
+          <BoothForm />
+        </Modal>
         <div id="floorPlan" >
           { this.state.booths.map(booth => {
             return (
@@ -38,11 +42,14 @@ export default class Hero extends Component {
                   key={booth._id}
                   num={booth.num}
                   co={booth.co}
+                  row={booth.row}
+                  col={booth.col}
                   x={(booth.col * dim) + shiftRight}
                   y={(booth.row * dim)}
                   dim={dim}
                   status={booth.status}
                   type={booth.type}
+                  owner={booth.owner}
                 />
                 <Tooltip
                   _id={booth._id}
