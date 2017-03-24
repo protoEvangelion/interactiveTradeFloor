@@ -11,12 +11,7 @@ const Form = styled.form`
   margin-top: -20px;
 `
 
-const Label = styled.label`
-  margin: 10px auto;
-`
-
 const BoothForm = ({ handleSubmit, submitting, company, description, owner, status }) => {
-  console.log('status', status)
   return (
     <Form method="POST" onSubmit={handleSubmit}>
       <Field name="_csrf" type="hidden" component="input" />

@@ -56,7 +56,6 @@ export default class Hero extends Component {
       modalOpen: false,
       booths,
     })
-    console.log(values)
   }
   render() {
     const dim = this.state.dimension
