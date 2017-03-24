@@ -33,9 +33,20 @@ const Wrapper = styled.div`
   transform: translate(${props => determineX(props.x, props.col)}px, ${props => determineY(props.y, props.row)}px);
 `
 
-const Booth = ({ onClick, num, i, co, type, owner, row, col, x, y, dim, status, tip }) => {
+const Booth = ({ onClick, num, i, co, description, type, owner, row, col, x, y, dim, status, tip }) => {
   return (
-    <Wrapper onClick={() => onClick(num, i)} value={num} type={type} owner={owner} status={status} row={row} col={col} x={x} y={y} dim={dim} >
+    <Wrapper
+      onClick={() => onClick(num, i, co, description, owner, status)}
+      value={num}
+      type={type}
+      owner={owner}
+      status={status}
+      row={row}
+      col={col}
+      x={x}
+      y={y}
+      dim={dim}
+    >
       <Info num={num} co={co} status={status} tip={tip} />
       <StatusCircle status={status} />
     </Wrapper>
@@ -47,6 +58,7 @@ Booth.propTypes = {
   num: PropTypes.number,
   i: PropTypes.number,
   co: PropTypes.string,
+  description: PropTypes.string,
   type: PropTypes.string,
   owner: PropTypes.string,
   status: PropTypes.string,

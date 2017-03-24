@@ -18,6 +18,10 @@ export default class Hero extends Component {
       screenWidth: 1000,
       activeBooth: 0,
       boothIndex: 0,
+      company: '',
+      description: '',
+      owner: '',
+      status: '',
       modalOpen: false,
     }
     this.boothClick = this.boothClick.bind(this)
@@ -28,12 +32,16 @@ export default class Hero extends Component {
       screenWidth: window.innerWidth,
     })
   }
-  boothClick(num, i) {
+  boothClick(num, i, company, description, owner, status) {
     console.log('num', num, i)
     this.setState({
       activeBooth: num,
       modalOpen: true,
       boothIndex: i,
+      company,
+      description,
+      owner,
+      status,
     })
   }
   handleSubmit = (values) => {
@@ -57,8 +65,20 @@ export default class Hero extends Component {
     const shiftRight = (screenWidth - floorPlanWidth) / 2
     return (
       <Wrapper opaque {...this.props}>
-        <Modal isOpen={this.state.modalOpen} onClose={() => console.log('hellow')}>
-          <BoothForm onSubmit={this.handleSubmit} boothNum={this.state.activeBooth} />
+        <Modal
+          title={`Editing Booth ${this.state.activeBooth}`}
+          isOpen={this.state.modalOpen}
+          closeable
+          onClose={() => this.setState({ modalOpen: false })}
+        >
+          <BoothForm
+            onSubmit={this.handleSubmit}
+            boothNum={this.state.activeBooth}
+            company={this.state.company}
+            description={this.state.description}
+            owner={this.state.owner}
+            status={this.state.status}
+          />
         </Modal>
         <section id="floorPlan" >
           { this.state.booths.map((booth, i) => {
@@ -71,6 +91,7 @@ export default class Hero extends Component {
                   key={booth._id}
                   num={booth.num}
                   co={booth.co}
+                  description={booth.desc}
                   row={booth.row}
                   col={booth.col}
                   x={(booth.col * dim) + shiftRight}

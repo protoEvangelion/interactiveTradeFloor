@@ -8,18 +8,18 @@ const Form = styled.form`
   width: 100%;
   box-sizing: border-box;
   padding: 1rem;
+  margin-top: -20px;
 `
 
 const Label = styled.label`
   margin: 10px auto;
 `
 
-const BoothForm = ({ handleSubmit, submitting, boothNum }) => {
+const BoothForm = ({ handleSubmit, submitting, boothNum, company, description, owner, status }) => {
   return (
     <Form method="POST" onSubmit={handleSubmit}>
-      <Heading level={2}>Editing Booth # {boothNum}</Heading>
       <Field name="_csrf" type="hidden" component="input" />
-      <Field name="company" label="Company Name" component={ReduxField} />
+      <Field name="company" label="Company Name" defaultValue={company} component={ReduxField} />
       <div>
         <Label>Owner:</Label>
         <div>
@@ -38,7 +38,7 @@ const BoothForm = ({ handleSubmit, submitting, boothNum }) => {
           <option value="good">Good to go</option>
         </Field>
       </div>
-      <Field name="description" label="Description" component={ReduxField} />
+      <Field name="description" label="Description" component={ReduxField} defaultValue={description} />
       <br />
       <Button type="submit" disabled={submitting}>Save</Button>
     </Form>
@@ -49,6 +49,10 @@ BoothForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   submitting: PropTypes.bool,
   boothNum: PropTypes.number.isRequired,
+  company: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  owner: PropTypes.string.isRequired,
+  status: PropTypes.string.isRequired,
 }
 
 export default BoothForm

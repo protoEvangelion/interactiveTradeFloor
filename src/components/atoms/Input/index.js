@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react'
 import styled, { css } from 'styled-components'
 import { font, palette } from 'styled-theme'
 import { ifProp } from 'styled-tools'
+import _ from 'lodash'
 
 export const fontSize = ({ height }) => `${height / 35.5555555556}rem`
 
@@ -34,10 +35,20 @@ const StyledSelect = styled.select`${styles}`
 const StyledInput = styled.input`${styles}`
 
 const Input = ({ ...props }) => {
+  if ('defaultValue' in { ...props }) {
+    console.log('it sure does!')
+    console.log({...props})
+    // _.omit({...props}, value)
+    // console.log({...props})
+  }
+
+  // const props = { type, reverse, height, invalid, defaultValue }
   if (props.type === 'textarea') {
     return <StyledTextarea {...props} />
   } else if (props.type === 'select') {
     return <StyledSelect {...props} />
+  } else if (props.type === 'radio') {
+    console.log('its a radio!', {...props})
   }
   return <StyledInput {...props} />
 }
@@ -47,6 +58,7 @@ Input.propTypes = {
   reverse: PropTypes.bool,
   height: PropTypes.number,
   invalid: PropTypes.bool,
+  defaultValue: PropTypes.string,
 }
 
 Input.defaultProps = {
