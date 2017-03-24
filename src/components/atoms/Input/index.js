@@ -43,8 +43,6 @@ const Input = ({ ...props }) => {
     return <StyledTextarea {...modifiedProps} />
   } else if (props.type === 'select') {
     return <StyledSelect {...modifiedProps} />
-  } else if (props.type === 'radio') {
-    console.log('its a radio!', { ...modifiedProps })
   }
   return <StyledInput {...modifiedProps} />
 }

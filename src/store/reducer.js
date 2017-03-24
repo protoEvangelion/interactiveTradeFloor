@@ -13,6 +13,7 @@ import { routerReducer as routing } from 'react-router-redux'
 
 const reducers = {
   routing,
+  booths: [],
 }
 
 const req = require.context('.', true, /\.\/.+\/reducer\.js$/)

@@ -2,8 +2,12 @@ import { PropTypes } from 'react'
 import styled from 'styled-components'
 
 const determineColor = (status) => {
-  if (status === 'open') {
-    return 'red'
+  if (status === 'holding') {
+    return 'rgb(255, 216, 0)' // orange
+  } else if (status === 'good') {
+    return 'rgb(21, 255, 0)' // green
+  } else if (status === 'collect') {
+    return 'red' // red
   }
   return ''
 }

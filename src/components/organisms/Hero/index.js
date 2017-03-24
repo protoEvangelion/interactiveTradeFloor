@@ -33,7 +33,6 @@ export default class Hero extends Component {
     })
   }
   boothClick(num, i, company, description, owner, status) {
-    console.log('num', num, i)
     this.setState({
       activeBooth: num,
       modalOpen: true,
@@ -45,10 +44,11 @@ export default class Hero extends Component {
     })
   }
   handleSubmit = (values) => {
+    const setCompany = values.status === 'n/a' ? 'N/A' : values.company
     const booths = this.state.booths
     booths[this.state.boothIndex] = Object.assign({}, booths[this.state.boothIndex], {
-      co: values.company,
-      desc: values.description,
+      company: setCompany,
+      description: values.description,
       owner: values.owner,
       status: values.status,
     })
@@ -90,8 +90,8 @@ export default class Hero extends Component {
                   tip={`tool_${booth._id}`}
                   key={booth._id}
                   num={booth.num}
-                  co={booth.co}
-                  description={booth.desc}
+                  co={booth.company}
+                  description={booth.description}
                   row={booth.row}
                   col={booth.col}
                   x={(booth.col * dim) + shiftRight}
@@ -103,10 +103,10 @@ export default class Hero extends Component {
                 />
                 <Tooltip
                   _id={booth._id}
-                  co={booth.co}
+                  co={booth.company}
                   owner={booth.owner}
                   status={booth.status}
-                  description={booth.desc}
+                  description={booth.description}
                 />
               </div>
             )

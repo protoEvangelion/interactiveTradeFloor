@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import { Field } from 'redux-form'
 import styled from 'styled-components'
 
-import { ReduxField, Heading, Button } from 'components'
+import { ReduxField, Button } from 'components'
 
 const Form = styled.form`
   width: 100%;
@@ -15,29 +15,24 @@ const Label = styled.label`
   margin: 10px auto;
 `
 
-const BoothForm = ({ handleSubmit, submitting, boothNum, company, description, owner, status }) => {
+const BoothForm = ({ handleSubmit, submitting, company, description, owner, status }) => {
+  console.log('status', status)
   return (
     <Form method="POST" onSubmit={handleSubmit}>
       <Field name="_csrf" type="hidden" component="input" />
       <Field name="company" label="Company Name" defaultValue={company} component={ReduxField} />
-      <div>
-        <Label>Owner:</Label>
-        <div>
-          <label htmlFor="open"><Field name="owner" component="input" type="radio" value="open" /> Open</label>
-          <label htmlFor="Todd"><Field name="owner" component="input" type="radio" value="Todd" /> Todd</label>
-          <label htmlFor="Richard"><Field name="owner" component="input" type="radio" value="Richard" /> Richard</label>
-          <label htmlFor="Ryan"><Field name="owner" component="input" type="radio" value="Ryan" /> Ryan</label>
-        </div>
-      </div>
-      <div>
-        <Label>Status:</Label>
-        <Field name="status" component="select">
-          <option value="" />
-          <option value="holding">Holding</option>
-          <option value="collect">Need to Collect</option>
-          <option value="good">Good to go</option>
-        </Field>
-      </div>
+      <Field name="owner" label="Owner" component={ReduxField} type="select" value={owner}>
+        <option value="Todd">Todd</option>
+        <option value="Richard">Richard</option>
+        <option value="Ryan">Ryan</option>
+      </Field>
+      <Field name="status" label="Status" component={ReduxField} type="select" value={status}>
+        <option value="n/a">N/A</option>
+        <option value="open">Open</option>
+        <option value="holding">Holding</option>
+        <option value="collect">Need to Collect</option>
+        <option value="good">Good to go</option>
+      </Field>
       <Field name="description" label="Description" component={ReduxField} defaultValue={description} />
       <br />
       <Button type="submit" disabled={submitting}>Save</Button>

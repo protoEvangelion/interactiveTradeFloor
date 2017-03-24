@@ -2,13 +2,15 @@ import React, { PropTypes } from 'react'
 import styled from 'styled-components'
 import { Info, StatusCircle } from 'components'
 
-const determineColor = (owner) => {
-  if (owner === 'Todd') {
+const determineColor = (owner, status) => {
+  if (status === 'open' || status === 'n/a') {
+    return 'black'
+  } else if (owner === 'Todd') {
     return 'rgb(0, 178, 14)' // green
   } else if (owner === 'Richard') {
-    return 'rgb(0, 85, 221)' // blue
+    return 'rgb(0, 80, 255)' // blue
   } else if (owner === 'Ryan') {
-    return 'rgb(221, 0, 0)' // purple
+    return 'rgb(255, 0, 170)' // pink
   }
   return 'black'
 }
@@ -28,7 +30,7 @@ const Wrapper = styled.div`
   background-color: ${props => props.status === 'open' ? 'yellow' : 'white'};
   width: ${props => props.type === 'double' ? (props.dim * 2) + 3 : props.dim}px;
   height: ${props => props.dim}px;
-  border: 2px solid ${props => determineColor(props.owner)};
+  border: 2px solid ${props => determineColor(props.owner, props.status)};
   overflow: hidden;
   transform: translate(${props => determineX(props.x, props.col)}px, ${props => determineY(props.y, props.row)}px);
 `

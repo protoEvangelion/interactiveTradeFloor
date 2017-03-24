@@ -18,16 +18,20 @@ const validate = createValidator({
   body: [required],
 })
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state, ownProps) => ({
   initialValues: {
     _csrf: fromForm.getCsrfToken(state),
+    company: ownProps.company,
+    owner: ownProps.owner,
+    status: ownProps.status,
+    description: ownProps.description,
   },
 })
 
 export const config = {
   form: 'BoothForm',
-  fields: ['title', 'body'],
-  destroyOnUnmount: false,
+  fields: ['company', 'owner', 'status', 'description'],
+  destroyOnUnmount: true,
   onSubmit,
   validate,
 }
