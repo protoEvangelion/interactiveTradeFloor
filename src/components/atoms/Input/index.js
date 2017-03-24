@@ -35,22 +35,18 @@ const StyledSelect = styled.select`${styles}`
 const StyledInput = styled.input`${styles}`
 
 const Input = ({ ...props }) => {
-  if ('defaultValue' in { ...props }) {
-    console.log('it sure does!')
-    console.log({...props})
-    // _.omit({...props}, value)
-    // console.log({...props})
-  }
+  const modifiedProps = 'defaultValue' in { ...props }
+    ? _.omit({ ...props }, 'value')
+    : { ...props }
 
-  // const props = { type, reverse, height, invalid, defaultValue }
   if (props.type === 'textarea') {
-    return <StyledTextarea {...props} />
+    return <StyledTextarea {...modifiedProps} />
   } else if (props.type === 'select') {
-    return <StyledSelect {...props} />
+    return <StyledSelect {...modifiedProps} />
   } else if (props.type === 'radio') {
-    console.log('its a radio!', {...props})
+    console.log('its a radio!', { ...modifiedProps })
   }
-  return <StyledInput {...props} />
+  return <StyledInput {...modifiedProps} />
 }
 
 Input.propTypes = {
