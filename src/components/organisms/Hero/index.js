@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import { Booth, Tooltip, Modal } from 'components'
 import { BoothForm } from 'containers'
+import axios from 'axios'
 
 const Wrapper = styled.div`
   position: relative;
@@ -56,6 +57,9 @@ export default class Hero extends Component {
       modalOpen: false,
       booths,
     })
+    axios.get('/update')
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err))
   }
   render() {
     const dim = this.state.dimension

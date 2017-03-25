@@ -6,8 +6,8 @@ const boothSchema = Schema({
   row: Number,
   col: Number,
   owner: String,
-  co: String,
-  desc: String,
+  company: String,
+  description: String,
   status: String,
 })
 
