@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import styled from 'styled-components'
 import { Booth, Tooltip, Modal } from 'components'
 import { BoothForm } from 'containers'
@@ -98,6 +98,7 @@ export default class Hero extends Component {
               <div key={`ctn_${booth._id}`}>
                 <Booth
                   onClick={this.boothClick}
+                  filter={this.props.filter}
                   i={i}
                   tip={`tool_${booth._id}`}
                   key={booth._id}
@@ -127,4 +128,8 @@ export default class Hero extends Component {
       </Wrapper>
     )
   }
+}
+
+Hero.propTypes = {
+  filter: PropTypes.string,
 }

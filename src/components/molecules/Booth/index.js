@@ -2,8 +2,8 @@ import React, { PropTypes } from 'react'
 import styled from 'styled-components'
 import { Info, StatusCircle } from 'components'
 
-const determineColor = (owner, status) => {
-  if (status === 'open' || status === 'n/a') {
+const determineColor = (filter, owner, status) => {
+  if ((filter !== 'None' && filter !== owner) || status === 'open' || status === 'n/a') {
     return 'black'
   } else if (owner === 'Todd') {
     return 'rgb(0, 178, 14)' // green
@@ -30,17 +30,18 @@ const Wrapper = styled.div`
   background-color: ${props => props.status === 'open' ? 'yellow' : 'white'};
   width: ${props => props.type === 'double' ? (props.dim * 2) + 3 : props.dim}px;
   height: ${props => props.dim}px;
-  border: 2px solid ${props => determineColor(props.owner, props.status)};
+  border: 2px solid ${props => determineColor(props.filter, props.owner, props.status)};
   overflow: hidden;
   transform: translate(${props => determineX(props.x, props.col)}px, ${props => determineY(props.y, props.row)}px);
 `
 
-const Booth = ({ onClick, num, i, co, description, type, owner, row, col, x, y, dim, status, tip }) => {
+const Booth = ({ onClick, num, filter, i, co, description, type, owner, row, col, x, y, dim, status, tip }) => {
   return (
     <Wrapper
       onClick={() => onClick(num, i, co, description, owner, status)}
       value={num}
       type={type}
+      filter={filter}
       owner={owner}
       status={status}
       row={row}
@@ -50,7 +51,7 @@ const Booth = ({ onClick, num, i, co, description, type, owner, row, col, x, y, 
       dim={dim}
     >
       <Info num={num} co={co} status={status} tip={tip} />
-      <StatusCircle status={status} />
+      <StatusCircle filter={filter} owner={owner} status={status} />
     </Wrapper>
   )
 }
@@ -58,6 +59,7 @@ const Booth = ({ onClick, num, i, co, description, type, owner, row, col, x, y, 
 Booth.propTypes = {
   onClick: PropTypes.func.isRequired,
   num: PropTypes.number,
+  filter: PropTypes.string,
   i: PropTypes.number,
   co: PropTypes.string,
   description: PropTypes.string,

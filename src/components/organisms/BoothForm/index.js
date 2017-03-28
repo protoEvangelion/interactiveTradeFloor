@@ -17,6 +17,7 @@ const BoothForm = ({ handleSubmit, submitting, company, description, owner, stat
       <Field name="_csrf" type="hidden" component="input" />
       <Field name="company" label="Company Name" defaultValue={company} component={ReduxField} />
       <Field name="owner" label="Owner" component={ReduxField} type="select" value={owner}>
+        <option value="None">None</option>
         <option value="Todd">Todd</option>
         <option value="Richard">Richard</option>
         <option value="Ryan">Ryan</option>

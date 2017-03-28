@@ -1,7 +1,6 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import styled from 'styled-components'
-
-import { IconLink, PrimaryNavigation, Block } from 'components'
+import { IconLink, FilterBtn, PrimaryNavigation, Block } from 'components'
 import { UserButton } from 'containers'
 
 const Wrapper = styled(Block)`
@@ -27,10 +26,15 @@ const Header = (props) => {
   return (
     <Wrapper opaque reverse {...props}>
       <StyledIconLink to="/" icon="arc" height={100} />
-      <StyledPrimaryNavigation reverse />
+      <FilterBtn filter={props.filter} />
+      {/* <StyledPrimaryNavigation reverse /> */}
       <UserButton reverse transparent />
     </Wrapper>
   )
+}
+
+Header.propTypes = {
+  filter: PropTypes.func,
 }
 
 export default Header

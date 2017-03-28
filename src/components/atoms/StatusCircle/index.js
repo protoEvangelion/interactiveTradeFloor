@@ -1,13 +1,15 @@
 import { PropTypes } from 'react'
 import styled from 'styled-components'
 
-const determineColor = (status) => {
-  if (status === 'holding') {
-    return 'rgb(255, 216, 0)' // orange
-  } else if (status === 'good') {
-    return 'rgb(21, 255, 0)' // green
-  } else if (status === 'collect') {
-    return 'red' // red
+const determineColor = (filter, owner, status) => {
+  if (filter === owner || filter === 'None') {
+    if (status === 'holding') {
+      return 'rgb(255, 216, 0)' // orange
+    } else if (status === 'good') {
+      return 'rgb(21, 255, 0)' // green
+    } else if (status === 'collect') {
+      return 'red' // red
+    }
   }
   return ''
 }
@@ -19,11 +21,13 @@ const StatusCircle = styled.div`
   top: 5px;
   left: 2px;
   position: absolute;
-  background-color: ${props => determineColor(props.status)};
+  background-color: ${props => determineColor(props.filter, props.owner, props.status)};
 `
 
 StatusCircle.propTypes = {
   status: PropTypes.string,
+  owner: PropTypes.string,
+  filter: PropTypes.string,
 }
 
 export default StatusCircle
