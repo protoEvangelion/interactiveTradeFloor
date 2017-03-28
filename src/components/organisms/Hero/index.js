@@ -46,6 +46,7 @@ export default class Hero extends Component {
   }
   handleSubmit = (values) => {
     const setCompany = values.status === 'n/a' ? 'N/A' : values.company
+    console.log(values)
     const booths = this.state.booths
     booths[this.state.boothIndex] = Object.assign({}, booths[this.state.boothIndex], {
       company: setCompany,
@@ -57,7 +58,15 @@ export default class Hero extends Component {
       modalOpen: false,
       booths,
     })
-    axios.get('/update')
+    axios.put('/api/update', {
+      data: {
+        num: this.state.activeBooth,
+        company: setCompany,
+        owner: values.owner,
+        status: values.status,
+        description: values.description,
+      },
+    })
       .then((res) => console.log(res))
       .catch((err) => console.log(err))
   }

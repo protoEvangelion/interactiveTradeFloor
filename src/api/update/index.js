@@ -1,11 +1,13 @@
 import { Router } from 'express'
-import { middleware as querymen } from 'querymen'
+import { middleware as bodymen } from 'bodymen'
 import { update } from './controller'
+import { schema } from '../read/model'
 
 const router = new Router()
+const { num, owner, company, description, status } = schema.tree
 
-router.get('/update',
-  querymen(),
+router.put('/',
+  bodymen({ num, owner, company, description, status }),
   update
 )
 
