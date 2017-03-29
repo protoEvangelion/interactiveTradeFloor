@@ -40,14 +40,14 @@ router.get('/email', (req, res) => {
 
   const text = {
     data: `Booth #: ${query.num}
-    Company: ${query.status === 'Open' ? 'None' : query.company}
+    Company: ${query.status === 'open' ? 'open' : query.company}
     Status: ${query.status}
     ${query.description === '' ? '' : `Info: ${query.description}`}
     `,
   }
-
+// , richard@aoausa.com, todd@aoausa.com
   const mailOptions = {
-    from: `${query.owner} <${query.owner}@aoausa.com>`,
+    from: `${query.status === 'open' ? 'Booth Open' : query.owner} <${query.owner}@aoausa.com>`,
     to: 'ryan@aoausa.com, richard@aoausa.com, todd@aoausa.com',
     subject: `${query.num}=${query.status === 'open' ? 'Open' : query.company}`,
     text: text.data,
