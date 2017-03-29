@@ -4,9 +4,26 @@ import { Booth, Tooltip, Modal } from 'components'
 import { BoothForm } from 'containers'
 import axios from 'axios'
 
+const logo = require('../../../../public/aoalogo.jpg')
+const powertalk = require('../../../../public/powertalk.jpg')
+
+const Logo = styled.img`
+  transform: translate(${props => props.dim * 11.7}px, ${props => props.dim * 9}px);
+`
+
+const Powertalk1 = styled.img`
+  transform: translate(-140px, ${props => props.dim * 8}px);
+  width: 15%;
+`
+
+const Powertalk2 = styled.img`
+  transform: translate(${props => props.dim * 10.4}px, ${props => props.dim * 8}px);
+  width: 15%;
+`
+
 const Wrapper = styled.div`
   position: relative;
-  margin-bottom: 1500px;
+  margin-bottom: 1600px;
 `
 
 export default class Hero extends Component {
@@ -95,9 +112,6 @@ export default class Hero extends Component {
   }
   render() {
     const dim = this.state.dimension
-    const screenWidth = this.state.screenWidth
-    const floorPlanWidth = this.state.columns * dim
-    const shiftRight = (screenWidth - floorPlanWidth) / 2
     return (
       <Wrapper opaque {...this.props}>
         <Modal
@@ -131,7 +145,7 @@ export default class Hero extends Component {
                   description={booth.description}
                   row={booth.row}
                   col={booth.col}
-                  x={(booth.col * dim) + shiftRight}
+                  x={(booth.col * dim) + (dim * 1.5)}
                   y={(booth.row * dim)}
                   dim={dim}
                   status={booth.status}
@@ -148,6 +162,9 @@ export default class Hero extends Component {
               </div>
             )
           })}
+          <Logo src={logo} alt="AOA logo" dim={dim} />
+          <Powertalk1 src={powertalk} alt="Power Talk 1" dim={dim} />
+          <Powertalk2 src={powertalk} alt="Power Talk 2" dim={dim} />
         </section>
       </Wrapper>
     )

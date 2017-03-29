@@ -16,11 +16,48 @@ const determineColor = (filter, owner, status) => {
 }
 
 const determineY = (y, row) => {
-  return y + (row * 4)
+  return y + (row * 1.5)
 }
 
-const determineX = (x, col) => {
-  return x + (col * 3)
+const determineX = (x, col, type, dim) => {
+  switch (type) {
+    case 'ptArena1':
+      return (x - 5) - (dim * 2)
+    default:
+      return x + (col * 1.5)
+  }
+}
+
+const determineWidth = (type, dim) => {
+  switch (type) {
+    case 'double':
+      return `${(dim * 2) + 1}px`
+    case 'AOABooth':
+      return `${(dim * 5) + 7}px`
+    case 'Seminar':
+      return `${(dim * 9) + 15}px`
+    case 'ptArena1':
+      return `${(dim * 4) + 7}px`
+    case 'ptArena2':
+      return `${(dim * 4) + 7}px`
+    default:
+      return `${dim}px`
+  }
+}
+
+const determineHeight = (type, dim) => {
+  switch (type) {
+    case 'AOABooth':
+      return `${(dim * 3) + 3}px`
+    case 'Seminar':
+      return `${(dim * 6) + 7}px`
+    case 'ptArena1':
+      return `${(dim * 3) + 3}px`
+    case 'ptArena2':
+      return `${(dim * 3) + 3}px`
+    default:
+      return `${dim}px`
+  }
 }
 
 const Wrapper = styled.div`
@@ -28,11 +65,11 @@ const Wrapper = styled.div`
   cursor: pointer;
   position: absolute;
   background-color: ${props => props.status === 'open' ? 'yellow' : 'white'};
-  width: ${props => props.type === 'double' ? (props.dim * 2) + 3 : props.dim}px;
-  height: ${props => props.dim}px;
-  border: 2px solid ${props => determineColor(props.filter, props.owner, props.status)};
+  width: ${props => determineWidth(props.type, props.dim)};
+  height: ${props => determineHeight(props.type, props.dim)};
+  border: 1px solid ${props => determineColor(props.filter, props.owner, props.status)};
   overflow: hidden;
-  transform: translate(${props => determineX(props.x, props.col)}px, ${props => determineY(props.y, props.row)}px);
+  transform: translate(${props => determineX(props.x, props.col, props.type, props.dim)}px, ${props => determineY(props.y, props.row)}px);
 `
 
 const Booth = ({ onClick, num, filter, i, co, description, type, owner, row, col, x, y, dim, status, tip }) => {
