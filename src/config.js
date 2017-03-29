@@ -46,7 +46,7 @@ const config = {
     baseUrl: 'https://arc.diegohaz.com',
     apiUrl: 'https://arc.diegohaz.com/api',
     mongo: {
-      uri: process.env.MONGODB_URI || 'mongodb://localhost/arc',
+      uri: process.env.MONGODB_URI || 'mongodb://heroku_kb0zhsht:kian09mg989lkjo36k6d7n63l0@ds145380.mlab.com:45380/heroku_kb0zhsht',
     },
   },
 }
