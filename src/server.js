@@ -45,20 +45,21 @@ router.get('/email', (req, res) => {
     ${query.description === '' ? '' : `Info: ${query.description}`}
     `,
   }
+
   const mailOptions = {
     from: `${query.owner} <${query.owner}@aoausa.com>`,
     to: 'ryan@aoausa.com, richard@aoausa.com, todd@aoausa.com',
-    subject: `${query.num}=${query.status === 'Open' ? 'Open' : query.company}`,
+    subject: `${query.num}=${query.status === 'open' ? 'Open' : query.company}`,
     text: text.data,
     html: `
       <strong>
-        Booth #</strong> ${query.num} = ${query.company}
+        Booth #</strong> ${query.num} = ${query.status === 'open' ? 'open' : query.company}
       </br><br>
       <strong>
         Status:</strong> ${query.status}
       </br><br>
       <strong>
-        Info: </strong> ${query.description}</br>
+        Info: </strong> ${query.status === 'open' ? 'n/a' : query.description}</br>
     `,
   }
 
