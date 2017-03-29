@@ -1,5 +1,6 @@
 .DS_Store
 dist
+.env
 *.log
 node_modules
 coverage

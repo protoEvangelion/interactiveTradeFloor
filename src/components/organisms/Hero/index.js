@@ -14,6 +14,7 @@ export default class Hero extends Component {
     super(props)
     this.state = {
       booths: [],
+      email: false,
       dimension: 55,
       columns: 20,
       screenWidth: 1000,
@@ -44,9 +45,29 @@ export default class Hero extends Component {
       status,
     })
   }
+  email() {
+    console.log('Emailing Teams')
+    this.setState({ email: true })
+  }
   handleSubmit = (values) => {
     const setCompany = values.status === 'n/a' ? 'N/A' : values.company
     console.log(values)
+
+    if (this.state.email) {
+      axios.get('/email', {
+        params: {
+          blank: '',
+          num: this.state.activeBooth,
+          company: values.company,
+          owner: values.owner,
+          status: values.status,
+          description: values.description,
+        },
+      })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err))
+    }
+
     const booths = this.state.booths
     booths[this.state.boothIndex] = Object.assign({}, booths[this.state.boothIndex], {
       company: setCompany,
@@ -57,7 +78,9 @@ export default class Hero extends Component {
     this.setState({
       modalOpen: false,
       booths,
+      email: false,
     })
+
     axios.put('/api/update', {
       data: {
         num: this.state.activeBooth,
@@ -85,6 +108,7 @@ export default class Hero extends Component {
         >
           <BoothForm
             onSubmit={this.handleSubmit}
+            email={() => this.email()}
             boothNum={this.state.activeBooth}
             company={this.state.company}
             description={this.state.description}

@@ -1,5 +1,7 @@
 /* eslint-disable no-console */
 import React from 'react'
+import URL from 'url-parse'
+import qs from 'qs'
 import serialize from 'serialize-javascript'
 import styleSheet from 'styled-components/lib/models/StyleSheet'
 import cors from 'cors'
@@ -19,7 +21,57 @@ import { setCsrfToken } from 'store/actions'
 import Html from 'components/Html'
 import BoothModel from './api/read/model'
 
+// const mailgun = require('mailgun-js')({ apiKey, domain })
+const nodemailer = require('nodemailer')
+require('dotenv').config()
+
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'ryantg77@gmail.com',
+    pass: 'ArmorEp.8!',
+  },
+})
+
 const router = new Router()
+
+router.get('/email', (req, res) => {
+  const url = new URL(req.url)
+  const query = qs.parse(url.query)
+
+  const text = {
+    data: `Booth #: ${query.num}
+    Company: ${query.status === 'Open' ? 'None' : query.company}
+    Status: ${query.status}
+    ${query.description === '' ? '' : `Info: ${query.description}`}
+    `,
+  }
+  const mailOptions = {
+    from: `${query.owner} <${query.owner}@aoausa.com>`,
+    to: 'ryantgarant@gmail.com, ryan@aoausa.com',
+    subject: `${query.num}=${query.status === 'Open' ? 'Open' : query.company}`,
+    text: text.data,
+    html: `
+      <strong>
+        Booth #</strong> ${query.num} = ${query.company}
+      </br><br>
+      <strong>
+        Status:</strong> ${query.status}
+      </br><br>
+      <strong>
+        Info: </strong> ${query.description}</br>
+    `,
+  }
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.log(error)
+      res.status(500).send('failure')
+    }
+    console.log(`Message ${info.messageId} sent: ${info.response}`)
+    res.status(200).send('success')
+  })
+})
 
 mongoose.connect(mongo.uri)
 
