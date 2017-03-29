@@ -21,7 +21,6 @@ import { setCsrfToken } from 'store/actions'
 import Html from 'components/Html'
 import BoothModel from './api/read/model'
 
-// const mailgun = require('mailgun-js')({ apiKey, domain })
 const nodemailer = require('nodemailer')
 require('dotenv').config()
 
@@ -29,7 +28,7 @@ const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
     user: 'ryantg77@gmail.com',
-    pass: 'ArmorEp.8!',
+    pass: process.env.GMAIL,
   },
 })
 
@@ -48,7 +47,7 @@ router.get('/email', (req, res) => {
   }
   const mailOptions = {
     from: `${query.owner} <${query.owner}@aoausa.com>`,
-    to: 'ryantgarant@gmail.com, ryan@aoausa.com',
+    to: 'ryan@aoausa.com, richard@aoausa.com, todd@aoausa.com',
     subject: `${query.num}=${query.status === 'Open' ? 'Open' : query.company}`,
     text: text.data,
     html: `

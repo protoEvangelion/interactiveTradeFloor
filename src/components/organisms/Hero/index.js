@@ -8,17 +8,17 @@ const logo = require('../../../../public/aoalogo.jpg')
 const powertalk = require('../../../../public/powertalk.jpg')
 
 const Logo = styled.img`
-  transform: translate(${props => props.dim * 11.7}px, ${props => props.dim * 9}px);
+  transform: translate(${props => props.dim * 12}px, ${props => props.dim * 9}px);
 `
 
 const Powertalk1 = styled.img`
   transform: translate(-140px, ${props => props.dim * 8}px);
-  width: 15%;
+  width: 200px;
 `
 
 const Powertalk2 = styled.img`
-  transform: translate(${props => props.dim * 10.4}px, ${props => props.dim * 8}px);
-  width: 15%;
+  transform: translate(${props => props.dim * 10.8}px, ${props => props.dim * 8}px);
+  width: 200px;
 `
 
 const Wrapper = styled.div`

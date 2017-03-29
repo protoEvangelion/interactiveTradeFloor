@@ -8,7 +8,7 @@ const determineColor = (filter, owner, status) => {
   } else if (owner === 'Todd') {
     return 'rgb(0, 178, 14)' // green
   } else if (owner === 'Richard') {
-    return 'rgb(0, 80, 255)' // blue
+    return 'rgb(8, 0, 255)' // blue
   } else if (owner === 'Ryan') {
     return 'rgb(255, 0, 170)' // pink
   }
@@ -16,7 +16,7 @@ const determineColor = (filter, owner, status) => {
 }
 
 const determineY = (y, row) => {
-  return y + (row * 1.5)
+  return y + (row * 3.1)
 }
 
 const determineX = (x, col, type, dim) => {
@@ -24,22 +24,22 @@ const determineX = (x, col, type, dim) => {
     case 'ptArena1':
       return (x - 5) - (dim * 2)
     default:
-      return x + (col * 1.5)
+      return x + (col * 3.1)
   }
 }
 
 const determineWidth = (type, dim) => {
   switch (type) {
     case 'double':
-      return `${(dim * 2) + 1}px`
+      return `${(dim * 2) + 3}px`
     case 'AOABooth':
-      return `${(dim * 5) + 7}px`
+      return `${(dim * 5) + 10}px`
     case 'Seminar':
-      return `${(dim * 9) + 15}px`
+      return `${(dim * 9) + 25}px`
     case 'ptArena1':
-      return `${(dim * 4) + 7}px`
+      return `${(dim * 4) + 10}px`
     case 'ptArena2':
-      return `${(dim * 4) + 7}px`
+      return `${(dim * 4) + 10}px`
     default:
       return `${dim}px`
   }
@@ -48,13 +48,13 @@ const determineWidth = (type, dim) => {
 const determineHeight = (type, dim) => {
   switch (type) {
     case 'AOABooth':
-      return `${(dim * 3) + 3}px`
+      return `${(dim * 3) + 6}px`
     case 'Seminar':
-      return `${(dim * 6) + 7}px`
+      return `${(dim * 6) + 15}px`
     case 'ptArena1':
-      return `${(dim * 3) + 3}px`
+      return `${(dim * 3) + 6}px`
     case 'ptArena2':
-      return `${(dim * 3) + 3}px`
+      return `${(dim * 3) + 6}px`
     default:
       return `${dim}px`
   }
@@ -67,7 +67,7 @@ const Wrapper = styled.div`
   background-color: ${props => props.status === 'open' ? 'yellow' : 'white'};
   width: ${props => determineWidth(props.type, props.dim)};
   height: ${props => determineHeight(props.type, props.dim)};
-  border: 1px solid ${props => determineColor(props.filter, props.owner, props.status)};
+  border: 2px solid ${props => determineColor(props.filter, props.owner, props.status)};
   overflow: hidden;
   transform: translate(${props => determineX(props.x, props.col, props.type, props.dim)}px, ${props => determineY(props.y, props.row)}px);
 `
