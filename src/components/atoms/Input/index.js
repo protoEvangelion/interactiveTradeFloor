@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import styled, { css } from 'styled-components'
 import { font, palette } from 'styled-theme'
 import { ifProp } from 'styled-tools'
-import _ from 'lodash'
+import { omit } from 'lodash'
 
 export const fontSize = ({ height }) => `${height / 35.5555555556}rem`
 
@@ -36,15 +36,15 @@ const StyledInput = styled.input`${styles}`
 
 const Input = ({ ...props }) => {
   const modifiedProps = 'defaultValue' in { ...props }
-    ? _.omit({ ...props }, 'value')
+    ? omit({ ...props }, 'value')
     : { ...props }
 
   if (props.type === 'textarea') {
-    return <StyledTextarea {...modifiedProps} />
+    return <StyledTextarea {...props} />
   } else if (props.type === 'select') {
-    return <StyledSelect {...modifiedProps} />
+    return <StyledSelect {...props} />
   }
-  return <StyledInput {...modifiedProps} />
+  return <StyledInput {...props} />
 }
 
 Input.propTypes = {
