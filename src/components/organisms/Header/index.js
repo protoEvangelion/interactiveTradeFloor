@@ -5,6 +5,7 @@ import { UserButton } from 'containers'
 
 const Wrapper = styled(Block)`
   display: flex;
+  justify-content: space-around;
   align-items: center;
   padding: 1rem;
 
@@ -29,7 +30,7 @@ const Header = (props) => {
       <FilterBtn filter={props.filter} />
       <PrintBtn />
       {/* <StyledPrimaryNavigation reverse /> */}
-      {/* <UserButton reverse transparent /> */}
+      <UserButton reverse transparent />
     </Wrapper>
   )
 }
