@@ -40,11 +40,11 @@ const Input = ({ ...props }) => {
     : { ...props }
 
   if (props.type === 'textarea') {
-    return <StyledTextarea {...props} />
+    return <StyledTextarea {...modifiedProps} />
   } else if (props.type === 'select') {
-    return <StyledSelect {...props} />
+    return <StyledSelect {...modifiedProps} />
   }
-  return <StyledInput {...props} />
+  return <StyledInput {...modifiedProps} />
 }
 
 Input.propTypes = {
