@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 
-import { PageTemplate, Header, Hero } from 'components'
+import { PageTemplate, Header } from 'components'
+
+import { Hero } from 'containers'
 
 class HomePage extends Component {
   constructor(props) {

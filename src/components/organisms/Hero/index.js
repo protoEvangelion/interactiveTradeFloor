@@ -69,46 +69,54 @@ export default class Hero extends Component {
   handleSubmit = (values) => {
     const setCompany = values.status === 'n/a' ? 'N/A' : values.company
     console.log(values)
+    const userEmail = this.props.social !== undefined
+      ? this.props.social.user.email
+      : ''
 
-    if (this.state.email) {
-      axios.get('/email', {
-        params: {
-          blank: '',
+    if (userEmail === 'ryantgarant@gmail.com') {
+      console.log('correct email')
+      if (this.state.email) {
+        axios.get('/email', {
+          params: {
+            blank: '',
+            num: this.state.activeBooth,
+            company: values.company,
+            owner: values.owner,
+            status: values.status,
+            description: values.description,
+          },
+        })
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err))
+      }
+
+      const booths = this.state.booths
+      booths[this.state.boothIndex] = Object.assign({}, booths[this.state.boothIndex], {
+        company: setCompany,
+        description: values.description,
+        owner: values.owner,
+        status: values.status,
+      })
+      this.setState({
+        modalOpen: false,
+        booths,
+        email: false,
+      })
+
+      axios.put('/api/update', {
+        data: {
           num: this.state.activeBooth,
-          company: values.company,
+          company: setCompany,
           owner: values.owner,
           status: values.status,
           description: values.description,
         },
       })
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err))
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err))
+    } else {
+      console.log('incorrect email', userEmail)
     }
-
-    const booths = this.state.booths
-    booths[this.state.boothIndex] = Object.assign({}, booths[this.state.boothIndex], {
-      company: setCompany,
-      description: values.description,
-      owner: values.owner,
-      status: values.status,
-    })
-    this.setState({
-      modalOpen: false,
-      booths,
-      email: false,
-    })
-
-    axios.put('/api/update', {
-      data: {
-        num: this.state.activeBooth,
-        company: setCompany,
-        owner: values.owner,
-        status: values.status,
-        description: values.description,
-      },
-    })
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err))
   }
   render() {
     const dim = this.state.dimension

@@ -19,6 +19,7 @@ const validate = createValidator({
 })
 
 const mapStateToProps = (state, ownProps) => ({
+  user: state.social.user ? state.social.user.email : null,
   initialValues: {
     _csrf: fromForm.getCsrfToken(state),
     company: ownProps.company,
