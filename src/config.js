@@ -11,7 +11,7 @@ const config = {
     baseUrl: `http://${ip}:${port}${basename}`,
     apiUrl: `http://${ip}:${port}/api`,
     fbAppId: '991453140998882',
-    googleClientId: '464712936089-q953apdu1bjiqtcjndktnnk1ts4f2cgv.apps.googleusercontent.com',
+    googleClientId: '574611677035-1ku4apgtmudpr2eeemaf9vff0tsokhrp.apps.googleusercontent.com',
     mongo: {
       options: {
         db: {

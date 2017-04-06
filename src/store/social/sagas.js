@@ -71,9 +71,11 @@ export function* loginGoogle({ scope = 'profile', ...options } = {}) {
     const auth2 = yield call(window.gapi.auth2.getAuthInstance)
     const user = yield call([auth2, auth2.signIn], { scope, ...options })
     const profile = yield call([user, user.getBasicProfile])
+    console.log('profile', profile)
+    const email = yield call([profile, profile.getEmail])
     const name = yield call([profile, profile.getName])
     const picture = yield call([profile, profile.getImageUrl])
-    yield put(actions.socialLoginSuccess({ name, picture }))
+    yield put(actions.socialLoginSuccess({ email, name, picture }))
   } catch (e) {
     yield put(actions.socialLoginFailure(e))
   }
