@@ -7,7 +7,7 @@ const HeroContainer = props => <Hero {...props} />
 
 const mapStateToProps = (state) => {
   return {
-    user: state.social.user,
+    user: state.social.user === null ? '' : state.social.user.email,
   }
 }
 

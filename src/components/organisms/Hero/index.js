@@ -69,12 +69,9 @@ export default class Hero extends Component {
   handleSubmit = (values) => {
     const setCompany = values.status === 'n/a' ? 'N/A' : values.company
     console.log(values)
-    const userEmail = this.props.social !== undefined
-      ? this.props.social.user.email
-      : ''
 
-    if (userEmail === 'ryantgarant@gmail.com') {
-      console.log('correct email')
+    if (this.props.user === 'ryantgarant@gmail.com') {
+      console.log('correct email', this.props.user)
       if (this.state.email) {
         axios.get('/email', {
           params: {
@@ -115,7 +112,7 @@ export default class Hero extends Component {
         .then((res) => console.log(res))
         .catch((err) => console.log(err))
     } else {
-      console.log('incorrect email', userEmail)
+      console.log('incorrect email', this.props.user)
     }
   }
   render() {
@@ -181,4 +178,5 @@ export default class Hero extends Component {
 
 Hero.propTypes = {
   filter: PropTypes.string,
+  // user: PropTypes.string.isRequired,
 }
