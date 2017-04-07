@@ -157,13 +157,20 @@ router.use((req, res, next) => {
 })
 
 const app = express(router)
+const server = require('http').Server(app)
+const io = require('socket.io')(server)
 
-app.listen(port, (error) => {
+server.listen(port, (error) => {
   if (error) {
     console.error(error)
   } else {
     console.info(`local: http://${ip}:${port}`)
   }
+})
+
+io.on('connection', (socket) => {
+  console.log('connected')
+  socket.emit('news', { hello: 'world' })
 })
 
 export default app
