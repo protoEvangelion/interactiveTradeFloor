@@ -47,6 +47,25 @@ export default class Hero extends Component {
     }
     this.boothClick = this.boothClick.bind(this)
   }
+  componentWillMount() {
+    function storageAvailable(type) {
+      try {
+        const storage = window[type]
+        const x = '__storage_test__'
+        storage.setItem(x, x)
+        storage.removeItem(x)
+        return true
+      } catch (e) {
+        return false
+      }
+    }
+    if (storageAvailable('localStorage')) {
+      console.log('localStorage is available')
+      window.localStorage.setItem('email', this.props.user)
+    } else {
+      console.log('Local storage is not available')
+    }
+  }
   componentDidMount() {
     this.setState({
       booths: window.__INITIAL_STATE__.booths,
@@ -79,7 +98,7 @@ export default class Hero extends Component {
       status: values.status,
     })
 
-    if (this.props.user === 'ryantgarant@gmail.com' || this.props.user === 'rockswild71@gmail.com') {
+    if (this.props.user === 'ryantgarant@gmail.com' || this.props.user === 'rockswild71@gmail.com' || this.props.user === 'toddviani@gmail.com') {
       if (this.state.email) {
         axios.get('/email', {
           params: {
