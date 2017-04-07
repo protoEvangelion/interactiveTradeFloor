@@ -1,29 +1,30 @@
 import React, { Component, PropTypes } from 'react'
 import styled from 'styled-components'
-import { Booth, Tooltip, Modal } from 'components'
+import { Booth, Tooltip, Modal, Message } from 'components'
 import { BoothForm } from 'containers'
 import axios from 'axios'
 
-const logo = require('../../../../public/aoalogo.jpg')
-const powertalk = require('../../../../public/powertalk.jpg')
-
-const Logo = styled.img`
-  transform: translate(${props => props.dim * 12}px, ${props => props.dim * 9}px);
-`
-
-const Powertalk1 = styled.img`
-  transform: translate(-140px, ${props => props.dim * 8}px);
-  width: 200px;
-`
-
-const Powertalk2 = styled.img`
-  transform: translate(${props => props.dim * 10.8}px, ${props => props.dim * 8}px);
-  width: 200px;
-`
+const logo = require('../../../../public/pictures/aoalogo.jpg')
+const powertalk1 = require('../../../../public/pictures/arena1.jpg')
+const powertalk2 = require('../../../../public/pictures/arena2.jpg')
 
 const Wrapper = styled.div`
   position: relative;
   margin-bottom: 1600px;
+`
+
+const Logo = styled.img`
+  transform: translate(${props => props.dim * 9.7}px, ${props => props.dim * 9}px);
+`
+
+const Powertalk1 = styled.img`
+  transform: translate(-165px, 500px);
+  width: 100px;
+`
+
+const Powertalk2 = styled.img`
+  transform: translate(620px, 500px);
+  width: 100px;
 `
 
 export default class Hero extends Component {
@@ -32,6 +33,7 @@ export default class Hero extends Component {
     this.state = {
       booths: [],
       email: false,
+      leftMargin: 45,
       dimension: 55,
       columns: 20,
       screenWidth: 1000,
@@ -68,10 +70,16 @@ export default class Hero extends Component {
   }
   handleSubmit = (values) => {
     const setCompany = values.status === 'n/a' ? 'N/A' : values.company
-    console.log(values)
 
-    if (this.props.user === 'ryantgarant@gmail.com') {
-      console.log('correct email', this.props.user)
+    const booths = this.state.booths
+    booths[this.state.boothIndex] = Object.assign({}, booths[this.state.boothIndex], {
+      company: setCompany,
+      description: values.description,
+      owner: values.owner,
+      status: values.status,
+    })
+
+    if (this.props.user === 'ryantgarant@gmail.com' || this.props.user === 'rockswild71@gmail.com') {
       if (this.state.email) {
         axios.get('/email', {
           params: {
@@ -87,13 +95,6 @@ export default class Hero extends Component {
         .catch((err) => console.log(err))
       }
 
-      const booths = this.state.booths
-      booths[this.state.boothIndex] = Object.assign({}, booths[this.state.boothIndex], {
-        company: setCompany,
-        description: values.description,
-        owner: values.owner,
-        status: values.status,
-      })
       this.setState({
         modalOpen: false,
         booths,
@@ -112,13 +113,24 @@ export default class Hero extends Component {
         .then((res) => console.log(res))
         .catch((err) => console.log(err))
     } else {
-      console.log('incorrect email', this.props.user)
+      this.setState({
+        modalOpen: false,
+        booths,
+      })
     }
   }
   render() {
     const dim = this.state.dimension
+    let authenticated
+
+    if (this.props.user === 'ryantgarant@gmail.com' || this.props.user === 'rockswild71@gmail.com' || this.props.user === 'toddviani@gmail.com') {
+      authenticated = true
+    } else {
+      authenticated = false
+    }
     return (
       <Wrapper opaque {...this.props}>
+        <Message authenticated={authenticated} />
         <Modal
           title={`Editing Booth ${this.state.activeBooth}`}
           isOpen={this.state.modalOpen}
@@ -150,7 +162,7 @@ export default class Hero extends Component {
                   description={booth.description}
                   row={booth.row}
                   col={booth.col}
-                  x={(booth.col * dim) + (dim * 1.5)}
+                  x={(booth.col * dim) - this.state.leftMargin}
                   y={(booth.row * dim)}
                   dim={dim}
                   status={booth.status}
@@ -168,8 +180,8 @@ export default class Hero extends Component {
             )
           })}
           <Logo src={logo} alt="AOA logo" dim={dim} />
-          <Powertalk1 src={powertalk} alt="Power Talk 1" dim={dim} />
-          <Powertalk2 src={powertalk} alt="Power Talk 2" dim={dim} />
+          <Powertalk1 src={powertalk1} alt="Power Talk 1" dim={dim} />
+          <Powertalk2 src={powertalk2} alt="Power Talk 2" dim={dim} />
         </section>
       </Wrapper>
     )
@@ -178,5 +190,5 @@ export default class Hero extends Component {
 
 Hero.propTypes = {
   filter: PropTypes.string,
-  // user: PropTypes.string.isRequired,
+  user: PropTypes.string.isRequired,
 }

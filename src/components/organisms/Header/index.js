@@ -27,8 +27,8 @@ const Header = (props) => {
   return (
     <Wrapper opaque reverse {...props}>
       {/* <StyledIconLink to="/" icon="arc" height={100} /> */}
-      <FilterBtn filter={props.filter} />
       <PrintBtn />
+      <FilterBtn filter={props.filter} />
       {/* <StyledPrimaryNavigation reverse /> */}
       <UserButton reverse transparent />
     </Wrapper>
