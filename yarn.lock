@@ -2467,12 +2467,6 @@ dot-prop@^3.0.0:
   dependencies:
     is-obj "^1.0.0"
 
-dotenv-webpack@^1.4.3:
-  version "1.4.3"
-  resolved "https://registry.yarnpkg.com/dotenv-webpack/-/dotenv-webpack-1.4.3.tgz#f2ff3841e22d360807648d1a070d7fb22b8e2a02"
-  dependencies:
-    dotenv "^4.0.0"
-
 dotenv@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-4.0.0.tgz#864ef1379aced55ce6f95debecdce179f7a0cd1d"
