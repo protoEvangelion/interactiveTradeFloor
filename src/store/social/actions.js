@@ -17,10 +17,21 @@ export const socialLoginRequest = (service, options) => ({
   options,
 })
 
-export const socialLoginSuccess = user => ({
-  type: SOCIAL_LOGIN_SUCCESS,
-  user,
-})
+export const socialLoginSuccess = user => {
+  let authenticated
+  const email = user.email
+  if (email === process.env.EMAIL1 || email === process.env.EMAIL2 || email === process.env.EMAIL3) {
+    authenticated = true
+  } else {
+    authenticated = false
+  }
+  return {
+    type: SOCIAL_LOGIN_SUCCESS,
+    user,
+    authenticated,
+  }
+}
+
 
 export const socialLoginFailure = error => ({
   type: SOCIAL_LOGIN_FAILURE,

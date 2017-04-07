@@ -66,7 +66,7 @@ export function* watchSocialLoginFacebook() {
   }
 }
 
-export function* loginGoogle({ scope = 'profile', ...options } = {}) {
+export function* loginGoogle({ scope = 'profile', ...options } = {}, emails) {
   try {
     const auth2 = yield call(window.gapi.auth2.getAuthInstance)
     const user = yield call([auth2, auth2.signIn], { scope, ...options })
@@ -74,7 +74,7 @@ export function* loginGoogle({ scope = 'profile', ...options } = {}) {
     const email = yield call([profile, profile.getEmail])
     const name = yield call([profile, profile.getName])
     const picture = yield call([profile, profile.getImageUrl])
-    yield put(actions.socialLoginSuccess({ email, name, picture }))
+    yield put(actions.socialLoginSuccess({ email, name, picture }, emails))
   } catch (e) {
     yield put(actions.socialLoginFailure(e))
   }

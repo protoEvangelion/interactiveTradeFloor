@@ -22,6 +22,7 @@ import Html from 'components/Html'
 import BoothModel from './api/read/model'
 
 const nodemailer = require('nodemailer')
+
 require('dotenv').config()
 
 const transporter = nodemailer.createTransport({

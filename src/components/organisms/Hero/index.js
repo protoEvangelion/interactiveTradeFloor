@@ -30,6 +30,7 @@ const Powertalk2 = styled.img`
 export default class Hero extends Component {
   constructor(props) {
     super(props)
+
     this.state = {
       booths: [],
       email: false,
@@ -61,7 +62,7 @@ export default class Hero extends Component {
     }
     if (storageAvailable('localStorage')) {
       console.log('localStorage is available')
-      window.localStorage.setItem('email', this.props.user)
+      // window.localStorage.setItem('email', this.props.user)
     } else {
       console.log('Local storage is not available')
     }
@@ -69,7 +70,6 @@ export default class Hero extends Component {
   componentDidMount() {
     this.setState({
       booths: window.__INITIAL_STATE__.booths,
-      screenWidth: window.innerWidth,
     })
   }
   boothClick(num, i, company, description, owner, status) {
@@ -98,7 +98,7 @@ export default class Hero extends Component {
       status: values.status,
     })
 
-    if (this.props.user === 'ryantgarant@gmail.com' || this.props.user === 'rockswild71@gmail.com' || this.props.user === 'toddviani@gmail.com') {
+    if (this.props.authenticated) {
       if (this.state.email) {
         axios.get('/email', {
           params: {
@@ -140,16 +140,9 @@ export default class Hero extends Component {
   }
   render() {
     const dim = this.state.dimension
-    let authenticated
-
-    if (this.props.user === 'ryantgarant@gmail.com' || this.props.user === 'rockswild71@gmail.com' || this.props.user === 'toddviani@gmail.com') {
-      authenticated = true
-    } else {
-      authenticated = false
-    }
     return (
       <Wrapper opaque {...this.props}>
-        <Message authenticated={authenticated} />
+        <Message authenticated={this.props.authenticated} />
         <Modal
           title={`Editing Booth ${this.state.activeBooth}`}
           isOpen={this.state.modalOpen}
@@ -209,5 +202,5 @@ export default class Hero extends Component {
 
 Hero.propTypes = {
   filter: PropTypes.string,
-  user: PropTypes.string.isRequired,
+  authenticated: PropTypes.bool.isRequired,
 }

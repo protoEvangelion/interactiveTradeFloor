@@ -7,11 +7,13 @@ export default (state = initialState, action) => {
       return {
         ...state,
         user: action.user,
+        authenticated: action.authenticated,
       }
     case SOCIAL_LOGOUT:
       return {
         ...state,
         user: initialState.user,
+        authenticated: false,
       }
     default:
       return state
