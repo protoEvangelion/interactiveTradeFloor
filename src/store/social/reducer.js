@@ -1,8 +1,13 @@
 import { initialState } from './selectors'
-import { SOCIAL_LOGIN_SUCCESS, SOCIAL_LOGOUT } from './actions'
+import { CHECK_AUTH, SOCIAL_LOGIN_SUCCESS, SOCIAL_LOGOUT } from './actions'
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case CHECK_AUTH:
+      return {
+        ...state,
+        authenticated: action.authenticated,
+      }
     case SOCIAL_LOGIN_SUCCESS:
       return {
         ...state,

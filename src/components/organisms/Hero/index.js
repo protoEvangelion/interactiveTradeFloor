@@ -49,6 +49,7 @@ export default class Hero extends Component {
     this.boothClick = this.boothClick.bind(this)
   }
   componentDidMount() {
+    this.props.checkAuth()
     this.setState({
       booths: window.__INITIAL_STATE__.booths,
     })
@@ -183,5 +184,6 @@ export default class Hero extends Component {
 
 Hero.propTypes = {
   filter: PropTypes.string,
+  checkAuth: PropTypes.func.isRequired,
   authenticated: PropTypes.bool.isRequired,
 }

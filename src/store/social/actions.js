@@ -1,3 +1,4 @@
+export const CHECK_AUTH = 'CHECK_AUTH'
 export const SOCIAL_LOGIN = 'SOCIAL_LOGIN'
 export const SOCIAL_LOGIN_PREPARE = 'SOCIAL_LOGIN_PREPARE'
 export const SOCIAL_LOGIN_REQUEST = 'SOCIAL_LOGIN_REQUEST'
@@ -26,6 +27,27 @@ export function storageAvailable(type) {
     return true
   } catch (e) {
     return false
+  }
+}
+
+export const checkAuth = () => {
+  let authenticated
+  if (storageAvailable('localStorage')) {
+    if (window.localStorage.getItem('authorized') === 'true') {
+      console.log('authththththth')
+      authenticated = true
+    } else {
+      console.log('first return auth')
+      authenticated = false
+    }
+  } else {
+    console.log('2nd return auth')
+    authenticated = false
+  }
+
+  return {
+    type: CHECK_AUTH,
+    authenticated,
   }
 }
 
