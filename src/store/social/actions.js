@@ -17,11 +17,28 @@ export const socialLoginRequest = (service, options) => ({
   options,
 })
 
+export function storageAvailable(type) {
+  try {
+    const storage = window[type]
+    const x = '__storage_test__'
+    storage.setItem(x, x)
+    storage.removeItem(x)
+    return true
+  } catch (e) {
+    return false
+  }
+}
+
 export const socialLoginSuccess = user => {
   let authenticated
   const email = user.email
   if (email === process.env.EMAIL1 || email === process.env.EMAIL2 || email === process.env.EMAIL3) {
     authenticated = true
+    if (storageAvailable('localStorage')) {
+      window.localStorage.setItem('authorized', 'true')
+    } else {
+      console.log('Local storage is not available')
+    }
   } else {
     authenticated = false
   }
