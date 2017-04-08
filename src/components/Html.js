@@ -21,10 +21,6 @@ const Html = ({ styles, assets, state, content }) => {
         {Object.keys(assets.javascript).reverse().map((key) =>
           <script key={key} src={assets.javascript[key]} />
         )}
-        <script src="/socket.io/socket.io.js" />
-        <script>
-          var socket = io();
-        </script>
       </body>
     </html>
   )

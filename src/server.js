@@ -169,7 +169,7 @@ server.listen(port, (error) => {
 })
 
 io.on('connection', (socket) => {
-  console.log('connected')
+  console.log('connected: %s', socket.id)
   socket.emit('news', { hello: 'world' })
 })
 

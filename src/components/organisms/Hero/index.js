@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { Booth, Tooltip, Modal, Message } from 'components'
 import { BoothForm } from 'containers'
 import axios from 'axios'
+import io from 'socket.io-client'
 
 const logo = require('../../../../public/pictures/aoalogo.jpg')
 const powertalk1 = require('../../../../public/pictures/arena1.jpg')
@@ -48,11 +49,18 @@ export default class Hero extends Component {
     }
     this.boothClick = this.boothClick.bind(this)
   }
+  componentWillMount() {
+    this.socket = io('http://localhost')
+    this.socket.on('connect', this.connect)
+  }
   componentDidMount() {
     this.props.checkAuth()
     this.setState({
       booths: window.__INITIAL_STATE__.booths,
     })
+  }
+  connect() {
+    console.log(`Connected:  ${this.socket.id}`)
   }
   boothClick(num, i, company, description, owner, status) {
     this.setState({
