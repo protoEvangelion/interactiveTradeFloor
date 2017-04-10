@@ -12,6 +12,16 @@ class HomePage extends Component {
     }
     this.filterOwner = this.filterOwner.bind(this)
   }
+  componentDidMount() {
+    const email = window.localStorage.getItem('email')
+    if (email === 'toddviani@gmail.com') {
+      this.setState({ filter: 'Todd' })
+    } else if (email === 'rockswild71@gmail.com') {
+      this.setState({ filter: 'Richard' })
+    } else if (email === 'ryantgarant@gmail.com') {
+      this.setState({ filter: 'Ryan' })
+    }
+  }
   filterOwner(filter) {
     this.setState({ filter })
   }

@@ -7,6 +7,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         authenticated: action.authenticated,
+        user: action.user,
       }
     case SOCIAL_LOGIN_SUCCESS:
       return {

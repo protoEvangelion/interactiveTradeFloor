@@ -74,7 +74,6 @@ export default class Hero extends Component {
     })
   }
   email() {
-    console.log('Emailing Teams')
     this.setState({ email: true })
   }
   handleSubmit = (values) => {

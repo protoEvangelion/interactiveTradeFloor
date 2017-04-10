@@ -9,6 +9,7 @@ const UserButtonContainer = props => <UserButton {...props} />
 
 const mapStateToProps = (state) => ({
   user: fromSocial.getUser(state),
+  authenticated: state.social.authenticated,
 })
 
 const mapDispatchToProps = (dispatch) => ({

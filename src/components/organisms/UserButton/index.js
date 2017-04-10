@@ -11,26 +11,28 @@ const InnerButton = styled.div`
 
 const Image = styled.img`
   margin-right: 0.5rem;
+  border-radius: 50%;
 `
 
-const UserButton = ({ user, onLogin, onLogout, ...props }) => {
+const UserButton = ({ authenticated, user, onLogin, onLogout, ...props }) => {
   return (
     <div>
-      {user &&
+      {authenticated &&
         <Button {...props} onClick={onLogout}>
           <InnerButton>
-            <Image src={user.picture} width={20} height={20} />
+            <Image src={user.picture} width={25} height={25} />
             Sign out
           </InnerButton>
         </Button>
       }
-      {!user && <Button {...props} onClick={onLogin}>Sign in</Button>}
+      {!authenticated && <Button {...props} onClick={onLogin}>Sign in</Button>}
       <LoginModal />
     </div>
   )
 }
 
 UserButton.propTypes = {
+  authenticated: PropTypes.bool.isRequired,
   user: PropTypes.shape({
     picture: PropTypes.string.isRequired,
   }),

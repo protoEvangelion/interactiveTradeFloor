@@ -32,22 +32,27 @@ export function storageAvailable(type) {
 
 export const checkAuth = () => {
   let authenticated
+  let picture = ''
+  let email = ''
   if (storageAvailable('localStorage')) {
     if (window.localStorage.getItem('authorized') === 'true') {
-      console.log('authththththth')
       authenticated = true
+      picture = window.localStorage.getItem('picture')
+      email = window.localStorage.getItem('email')
     } else {
-      console.log('first return auth')
       authenticated = false
     }
   } else {
-    console.log('2nd return auth')
     authenticated = false
   }
 
   return {
     type: CHECK_AUTH,
     authenticated,
+    user: {
+      email,
+      picture,
+    },
   }
 }
 
@@ -58,6 +63,8 @@ export const socialLoginSuccess = user => {
     authenticated = true
     if (storageAvailable('localStorage')) {
       window.localStorage.setItem('authorized', 'true')
+      window.localStorage.setItem('email', email)
+      window.localStorage.setItem('picture', user.picture)
     } else {
       console.log('Local storage is not available')
     }
