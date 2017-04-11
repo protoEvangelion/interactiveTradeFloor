@@ -50,17 +50,21 @@ export default class Hero extends Component {
     this.boothClick = this.boothClick.bind(this)
   }
   componentWillMount() {
-    this.socket = io('http://localhost')
-    this.socket.on('connect', this.connect)
+    this.socket = io('http://localhost:3000')
+    this.socket.on('connect', () => {
+      this.socket.on('save', (data) => {
+        const booths = this.state.booths
+        booths[data.index] = Object.assign({}, booths[data.index], data)
+
+        this.setState({ booths })
+      })
+    })
   }
   componentDidMount() {
     this.props.checkAuth()
     this.setState({
       booths: window.__INITIAL_STATE__.booths,
     })
-  }
-  connect() {
-    console.log(`Connected:  ${this.socket.id}`)
   }
   boothClick(num, i, company, description, owner, status) {
     this.setState({
@@ -78,14 +82,17 @@ export default class Hero extends Component {
   }
   handleSubmit = (values) => {
     const setCompany = values.status === 'n/a' ? 'N/A' : values.company
-
     const booths = this.state.booths
-    booths[this.state.boothIndex] = Object.assign({}, booths[this.state.boothIndex], {
+
+    const data = {
+      num: this.state.activeBooth,
       company: setCompany,
-      description: values.description,
       owner: values.owner,
       status: values.status,
-    })
+      description: values.description,
+    }
+
+    booths[this.state.boothIndex] = Object.assign({}, booths[this.state.boothIndex], data)
 
     if (this.props.authenticated) {
       if (this.state.email) {
@@ -109,16 +116,12 @@ export default class Hero extends Component {
         email: false,
       })
 
-      axios.put('/api/update', {
-        data: {
-          num: this.state.activeBooth,
-          company: setCompany,
-          owner: values.owner,
-          status: values.status,
-          description: values.description,
-        },
-      })
-        .then((res) => console.log(res))
+      axios.put('/api/update', { data })
+        .then((res) => {
+          data.index = this.state.boothIndex
+          this.socket.emit('save', data)
+          console.log(res)
+        })
         .catch((err) => console.log(err))
     } else {
       this.setState({

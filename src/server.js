@@ -160,6 +160,12 @@ const app = express(router)
 const server = require('http').Server(app)
 const io = require('socket.io')(server)
 
+io.on('connection', (socket) => {
+  socket.on('save', (data) => {
+    io.emit('save', data)
+  })
+})
+
 server.listen(port, (error) => {
   if (error) {
     console.error(error)
@@ -168,9 +174,5 @@ server.listen(port, (error) => {
   }
 })
 
-io.on('connection', (socket) => {
-  console.log('connected: %s', socket.id)
-  socket.emit('news', { hello: 'world' })
-})
 
 export default app
