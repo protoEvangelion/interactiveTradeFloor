@@ -14,11 +14,11 @@ class HomePage extends Component {
   }
   componentDidMount() {
     const email = window.localStorage.getItem('email')
-    if (email === 'toddviani@gmail.com') {
+    if (email === process.env.EMAIL3) {
       this.setState({ filter: 'Todd' })
-    } else if (email === 'rockswild71@gmail.com') {
+    } else if (email === process.env.EMAIL2) {
       this.setState({ filter: 'Richard' })
-    } else if (email === 'ryantgarant@gmail.com') {
+    } else if (email === process.env.EMAIL1) {
       this.setState({ filter: 'Ryan' })
     }
   }

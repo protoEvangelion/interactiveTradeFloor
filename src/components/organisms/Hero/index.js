@@ -50,7 +50,10 @@ export default class Hero extends Component {
     this.boothClick = this.boothClick.bind(this)
   }
   componentWillMount() {
-    this.socket = io('http://localhost:3000')
+    const url = process.env.NODE_ENV === 'production'
+      ? 'https://aoatradeshow.herokuapp.com/'
+      : 'http://localhost:3000'
+    this.socket = io(url)
     this.socket.on('connect', () => {
       this.socket.on('save', (data) => {
         const booths = this.state.booths
