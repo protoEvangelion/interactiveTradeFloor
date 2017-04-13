@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders User button snapshot 1`] = `
+<div>
+  <span>
+    Sign in
+  </span>
+  <span />
+</div>
+`;

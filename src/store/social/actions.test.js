@@ -19,8 +19,8 @@ test('socialLoginRequest', () => {
 test('socialLoginSuccess', () => {
   expect(actions.socialLoginSuccess(1)).toEqual({
     type: actions.SOCIAL_LOGIN_SUCCESS,
-    user: 1,
     authenticated: true,
+    user: 1,
   })
 })
 

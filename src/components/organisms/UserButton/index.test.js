@@ -1,18 +1,17 @@
 import React from 'react'
-import { shallow } from 'enzyme'
+import renderer from 'react-test-renderer'
 import UserButton from '.'
 
-const onLogin = jest.fn()
-const onLogout = jest.fn()
+const props = {
+  authenticated: false,
+  user: { picture: 'test.jpg' },
+  onLogin: jest.fn(),
+  onLogout: jest.fn(),
+}
 
-const wrap = (props = {}) => shallow(<UserButton {...{ onLogin, onLogout }} {...props} />)
-
-it('renders props when passed in', () => {
-  const wrapper = wrap({ id: 'foo' })
-  expect(wrapper.find({ id: 'foo' })).toHaveLength(1)
-})
-
-it('renders user picture when passed in', () => {
-  const wrapper = wrap({ user: { picture: 'test.jpg' } })
-  expect(wrapper.find({ src: 'test.jpg' })).toHaveLength(1)
+it('renders User button snapshot', () => {
+  const tree = renderer.create(
+    <UserButton {...props} />
+  ).toJSON()
+  expect(tree).toMatchSnapshot()
 })
