@@ -1,22 +1,33 @@
 import React from 'react'
-import { shallow } from 'enzyme'
+import renderer from 'react-test-renderer'
+import { reduxForm } from 'redux-form'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
 import BoothForm from '.'
 
-const handleSubmit = jest.fn()
+const spy = jest.fn()
+const store = createStore(() => ({}))
 
-const wrap = (props = {}) => shallow(<BoothForm handleSubmit={handleSubmit} {...props} />)
+const Decorated = reduxForm({ form: 'testForm' })(BoothForm)
 
-it('calls renderSubmit when submitted', () => {
-  handleSubmit.mockClear()
-  const wrapper = wrap()
-  expect(handleSubmit).not.toBeCalled()
-  wrapper.simulate('submit')
-  expect(handleSubmit).toBeCalled()
-})
+const props = {
+  handleSubmit: spy,
+  email: () => {},
+  submitting: false,
+  boothNum: 110,
+  company: 'AOA',
+  description: 'advertising',
+  owner: 'Ryan',
+  status: 'Holding',
+}
 
-it('disables button while submitting', () => {
-  const wrapper = wrap()
-  expect(wrapper.find({ disabled: true }).length).toBe(0)
-  wrapper.setProps({ submitting: true })
-  expect(wrapper.find({ disabled: true })).toHaveLength(1)
+describe('BoothForm snapshot', () => {
+  it('should render the snapshot', () => {
+    const tree = renderer.create(
+      <Provider store={store}>
+        <Decorated {...props} />
+      </Provider>
+    ).toJSON()
+    expect(tree).toMatchSnapshot()
+  })
 })

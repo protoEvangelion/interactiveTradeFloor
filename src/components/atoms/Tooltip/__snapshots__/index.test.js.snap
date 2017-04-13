@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tooltip snapshot renders tooltip 1`] = `
+<wrapper
+  className="__react_component_tooltip place-top type-dark "
+  data-id="tooltip"
+>
+  
+</wrapper>
+`;

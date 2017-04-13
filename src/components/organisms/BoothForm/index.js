@@ -52,7 +52,7 @@ BoothForm.propTypes = {
   submitting: PropTypes.bool,
   boothNum: PropTypes.number.isRequired,
   company: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
+  description: PropTypes.string,
   owner: PropTypes.string.isRequired,
   status: PropTypes.string.isRequired,
 }
