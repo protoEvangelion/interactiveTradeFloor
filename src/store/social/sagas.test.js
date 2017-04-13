@@ -2,7 +2,7 @@ import { put, call, fork } from 'redux-saga/effects'
 import * as actions from './actions'
 import saga, * as sagas from './sagas'
 
-const profile = { getName: () => 'name', getImageUrl: () => 'imageUrl' }
+const profile = { getEmail: () => 'email', getName: () => 'name', getImageUrl: () => 'imageUrl' }
 const user = { getBasicProfile: () => profile }
 const auth2 = { signIn: () => user }
 
@@ -96,10 +96,11 @@ describe('loginGoogle', () => {
     expect(generator.next().value).toEqual(call(window.gapi.auth2.getAuthInstance))
     expect(generator.next(auth2).value).toEqual(call([auth2, auth2.signIn], { scope: 'profile' }))
     expect(generator.next(user).value).toEqual(call([user, user.getBasicProfile]))
-    expect(generator.next(profile).value).toEqual(call([profile, profile.getName]))
+    expect(generator.next(profile).value).toEqual(call([profile, profile.getEmail]))
+    expect(generator.next('email').value).toEqual(call([profile, profile.getName]))
     expect(generator.next('name').value).toEqual(call([profile, profile.getImageUrl]))
     expect(generator.next('imageUrl').value)
-      .toEqual(put(actions.socialLoginSuccess({ name: 'name', picture: 'imageUrl' })))
+      .toEqual(put(actions.socialLoginSuccess({ email: 'email', name: 'name', picture: 'imageUrl' })))
   })
 
   it('calls failure', () => {
