@@ -1,11 +1,16 @@
 import React from 'react'
-import { shallow } from 'enzyme'
-import Booth from '.'
+import { mount, shallow } from 'enzyme'
+import sinon from 'sinon'
+import Booth, { determineColor, determineX, determineWidth, determineHeight } from '.'
+
+const wrap = (props = {}) => shallow(<Booth {...props} />).dive()
+
+const onClick = sinon.spy()
 
 const props = {
   key: 1,
   num: 1,
-  onClick: () => {},
+  onClick,
   filter: 'Ryan',
   i: 1,
   co: 'AOA',
@@ -21,19 +26,48 @@ const props = {
   tip: 'AOA cool co',
 }
 
-it('renders props', () => {
-  const booth = shallow(
-    <Booth {...props} />
-  )
-  expect(booth.text()).toEqual('<styled.div />')
-})
+describe('<Booth />', () => {
+  it('renders props', () => {
+    let wrapper = wrap({ ...props })
+    expect(wrapper.find('.boothCtn')).toHaveLength(1)
+    props.status = 'open'
+    wrapper = wrap({ ...props })
+    expect(wrapper.find('.boothCtn')).toHaveLength(1)
+  })
 
-// const wrap = (props = {}) => shallow(<Booth {...props} />)
-// it('renders children when passed in', () => {
-//   const wrapper = wrap({ children: 'test' })
-//   expect(wrapper.contains('test')).toBe(true)
-// })
-// it('renders props when passed in', () => {
-//   const wrapper = wrap({ id: 'foo' })
-//   expect(wrapper.find({ id: 'foo' })).toHaveLength(1)
-// })
+  it('simulates Booth click', () => {
+    const wrapper = mount(
+      <Booth {...props} />
+    )
+    wrapper.find('.boothCtn').simulate('click')
+    expect(props.onClick).toHaveProperty('callCount', 1)
+  })
+
+  it('determines color function', () => {
+    expect(determineColor('ryan', 'ryan', 'open')).toEqual('black')
+    expect(determineColor('None', 'ryan', 'holding')).toEqual('black')
+    expect(determineColor('ryan', 'ryan', 'n/a')).toEqual('black')
+    expect(determineColor('Todd', 'Todd', 'holding')).toEqual('rgb(0, 178, 14)')
+    expect(determineColor('Richard', 'Richard', 'holding')).toEqual('rgb(8, 0, 255)')
+    expect(determineColor('Ryan', 'Ryan', 'holding')).toEqual('rgb(255, 0, 170)')
+  })
+
+  it('determines X coord', () => {
+    expect(determineX(1, 1, 'ptArena1', 1)).toEqual(-6)
+  })
+
+  it('determines Width', () => {
+    expect(determineWidth('double', 1)).toEqual('5px')
+    expect(determineWidth('AOABooth', 1)).toEqual('15px')
+    expect(determineWidth('Seminar', 1)).toEqual('34px')
+    expect(determineWidth('ptArena1', 1)).toEqual('14px')
+    expect(determineWidth('ptArena2', 1)).toEqual('14px')
+  })
+
+  it('determines Height', () => {
+    expect(determineHeight('AOABooth', 1)).toEqual('9px')
+    expect(determineHeight('Seminar', 1)).toEqual('21px')
+    expect(determineHeight('ptArena1', 1)).toEqual('9px')
+    expect(determineHeight('ptArena2', 1)).toEqual('9px')
+  })
+})

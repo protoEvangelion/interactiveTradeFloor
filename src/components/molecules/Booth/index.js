@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import styled from 'styled-components'
 import { Info, StatusCircle } from 'components'
 
-const determineColor = (filter, owner, status) => {
+export const determineColor = (filter, owner, status) => {
   if ((filter !== 'None' && filter !== owner) || status === 'open' || status === 'n/a') {
     return 'black'
   } else if (owner === 'Todd') {
@@ -15,11 +15,11 @@ const determineColor = (filter, owner, status) => {
   return 'black'
 }
 
-const determineY = (y, row) => {
+export const determineY = (y, row) => {
   return y + (row * 3.1)
 }
 
-const determineX = (x, col, type, dim) => {
+export const determineX = (x, col, type, dim) => {
   switch (type) {
     case 'ptArena1':
       return (x - 5) - (dim * 2)
@@ -28,7 +28,7 @@ const determineX = (x, col, type, dim) => {
   }
 }
 
-const determineWidth = (type, dim) => {
+export const determineWidth = (type, dim) => {
   switch (type) {
     case 'double':
       return `${(dim * 2) + 3}px`
@@ -45,7 +45,7 @@ const determineWidth = (type, dim) => {
   }
 }
 
-const determineHeight = (type, dim) => {
+export const determineHeight = (type, dim) => {
   switch (type) {
     case 'AOABooth':
       return `${(dim * 3) + 6}px`
@@ -75,6 +75,7 @@ const Wrapper = styled.div`
 const Booth = ({ onClick, num, filter, i, co, description, type, owner, row, col, x, y, dim, status, tip }) => {
   return (
     <Wrapper
+      className="boothCtn"
       onClick={() => onClick(num, i, co, description, owner, status)}
       value={num}
       type={type}

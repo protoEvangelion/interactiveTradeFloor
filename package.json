@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node .",
     "test": "cross-env NODE_ENV=test jest --runInBand --forceExit",
+    "test:lean": "cross-env NODE_ENV=test jest -o --runInBand --forceExit --watch",
     "coverage": "npm test -- --coverage",
+    "coverage:lean": "npm run test:lean -- --coverage && npm run postcoverage",
     "postcoverage": "opn coverage/lcov-report/index.html",
     "lint": "eslint src src-clean .storybook",
     "dev": "concurrently --kill-others \"nodemon --watch src\" \"node webpack/webpack-dev-server\"",
@@ -52,6 +54,7 @@
     "react-addons-test-utils": "^15.4.1",
     "react-test-renderer": "^15.5.4",
     "redux-mock-store": "^1.2.1",
+    "sinon": "^2.1.0",
     "supertest": "^2.0.1",
     "webpack-dev-server": "^2.3.0"
   },

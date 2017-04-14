@@ -1,7 +1,8 @@
 import { PropTypes } from 'react'
 import styled from 'styled-components'
 
-const determineColor = (filter, owner, status) => {
+export const determineColor = (filter, owner, status) => {
+  /* istanbul ignore else */
   if (filter === owner || filter === 'None') {
     if (status === 'holding') {
       return 'rgb(255, 216, 0)' // orange
