@@ -29,6 +29,14 @@ const Powertalk2 = styled.img`
 `
 
 export default class Hero extends Component {
+  static getBooths(w) {
+    /* istanbul ignore else */
+    if (w) {
+      return w
+    }
+    /* istanbul ignore next */
+    return window.__INITIAL_STATE__.booths
+  }
   constructor(props) {
     super(props)
 
@@ -49,8 +57,8 @@ export default class Hero extends Component {
     }
     this.boothClick = this.boothClick.bind(this)
   }
-  componentWillMount() {
-    const url = process.env.NODE_ENV === 'production'
+  componentWillMount() /* istanbul ignore next */ {
+    const url = process.env.NODE_ENV
       ? 'https://aoatradeshow.herokuapp.com/'
       : 'http://localhost:3000'
     this.socket = io(url)
@@ -65,8 +73,11 @@ export default class Hero extends Component {
   }
   componentDidMount() {
     this.props.checkAuth()
+    const booths = process.env.NODE_ENV === 'test'
+      ? Hero.getBooths(this.props.booths)
+      : Hero.getBooths()
     this.setState({
-      booths: window.__INITIAL_STATE__.booths,
+      booths,
     })
   }
   boothClick(num, i, company, description, owner, status) {
@@ -83,7 +94,7 @@ export default class Hero extends Component {
   email() {
     this.setState({ email: true })
   }
-  handleSubmit = (values) => {
+  handleSubmit /* istanbul ignore next */ = (values) => {
     const setCompany = values.status === 'n/a' ? 'N/A' : values.company
     const booths = this.state.booths
 
@@ -142,11 +153,11 @@ export default class Hero extends Component {
           title={`Editing Booth ${this.state.activeBooth}`}
           isOpen={this.state.modalOpen}
           closeable
-          onClose={() => this.setState({ modalOpen: false })}
+          onClose={/* istanbul ignore next */ () => this.setState({ modalOpen: false })}
         >
           <BoothForm
             onSubmit={this.handleSubmit}
-            email={() => this.email()}
+            email={/* istanbul ignore next */ () => this.email()}
             boothNum={this.state.activeBooth}
             company={this.state.company}
             description={this.state.description}
@@ -158,7 +169,7 @@ export default class Hero extends Component {
           { this.state.booths.map((booth, i) => {
             return (
               <div key={`ctn_${booth._id}`}>
-                <Booth
+                <button
                   onClick={this.boothClick}
                   filter={this.props.filter}
                   i={i}
@@ -199,4 +210,6 @@ Hero.propTypes = {
   filter: PropTypes.string,
   checkAuth: PropTypes.func.isRequired,
   authenticated: PropTypes.bool.isRequired,
+  env: PropTypes.string,
+  booths: PropTypes.array,
 }
