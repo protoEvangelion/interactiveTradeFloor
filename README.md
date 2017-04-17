@@ -1,8 +1,7 @@
+![tradeshow](https://cloud.githubusercontent.com/assets/20076677/25107976/6cb4abd6-2387-11e7-8faa-69a684bc3054.gif)
 <p align="center">
   <a href="https://travis-ci.org/protoEvangelion/interactiveTradeFloor"><img src="https://img.shields.io/travis/protoEvangelion/interactiveTradeFloor/master.svg?style=flat-square" alt="Build Status" /></a>
 </p>
-
-> This project is still a work in progress and not ready to be release. The words below reflect what I hope the finished product to look like.
 
 ## Tradeshow Floorplan Manager
 
@@ -11,6 +10,26 @@ This is a project built to simplify the trade show managing process.
 It helps sales people consolidate their efforts and collaborate in real time with team mates.
 
 Rather than track everything by paper, you can use this web app to keep track of all booths that you have sold or still need to collect on.  You can also differentiate between what you have sold along with what your teammates have sold!
+
+
+## Features
+
+  - 🚀 ES6 Javascript
+  - 🔩 Socket.io for live updating between users.
+  - 👀 `react` as the view.
+  - 🔀 `react-router` v4 as the router.
+  - 🏪 `redux` as the central store for state management.
+  - 💅  Styling: `Styled Components`
+  - 📀 `MongoDB` as the database.
+  - 🚄 `express` with `Node.js` as the server.
+  - 🌍 Universal / Server Side Rendering.
+  - 🔥 Client & Server side hot reloading with `react-hot-loader
+  - 👮 Security on the express server using helmet
+  - 📦 All source is bundled using `Webpack v2`.
+  - 🤖 Optimised Webpack builds via `HappyPack`.
+  - 👼 `ESlint` Airbnb configuration.
+  - 🎭 `Jest` as the testing framework.
+  - ❤️ Continuous integration with `Travis-CI` and Heroku
 
 ## License
 
