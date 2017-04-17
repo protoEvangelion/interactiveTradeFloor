@@ -12,6 +12,7 @@ const props = {
     {
       env: 'production',
       num: 100,
+      _id: '23498sdflkjsd',
       co: 'AOA',
       description: 'Stuff',
       row: 1,
@@ -24,12 +25,12 @@ const props = {
 }
 
 describe('<Hero /> snapshot', () => {
-  it('tests boothClick function', () => {
-    const spy = sinon.spy(Hero.prototype, 'boothClick')
-    const wrapper = mount(<Hero {...props} />).children()
-    // wrapper.find('button').simulate('click')
-    console.log(wrapper)
-  })
+  // it('tests boothClick function', () => {
+  //   const spy = sinon.spy(Hero.prototype, 'boothClick')
+  //   const wrapper = mount(<Hero {...props} />)
+  //   wrapper.find('Booth').simulate('click')
+  //   console.log(spy.called)
+  // })
   it('renders snapshot', () => {
     const tree = renderer.create(
       <Hero {...props} />

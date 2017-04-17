@@ -76,6 +76,7 @@ const Booth = ({ onClick, num, filter, i, co, description, type, owner, row, col
   return (
     <Wrapper
       className="boothCtn"
+      id="boothCtn"
       onClick={() => onClick(num, i, co, description, owner, status)}
       value={num}
       type={type}

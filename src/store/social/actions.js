@@ -18,7 +18,9 @@ export const socialLoginRequest = (service, options) => ({
   options,
 })
 
+/* istanbul ignore next */
 export function storageAvailable(type) {
+  /* istanbul ignore next */
   try {
     const storage = window[type]
     const x = '__storage_test__'
@@ -34,6 +36,7 @@ export const checkAuth = () => {
   let authenticated
   let picture = ''
   let email = ''
+  /* istanbul ignore next */
   if (storageAvailable('localStorage')) {
     if (window.localStorage.getItem('authorized') === 'true') {
       authenticated = true
@@ -61,6 +64,7 @@ export const socialLoginSuccess = user => {
   const email = user.email
   if (email === process.env.EMAIL1 || email === process.env.EMAIL2 || email === process.env.EMAIL3) {
     authenticated = true
+    /* istanbul ignore next */
     if (storageAvailable('localStorage')) {
       window.localStorage.setItem('authorized', 'true')
       window.localStorage.setItem('email', email)

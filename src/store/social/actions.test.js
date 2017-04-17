@@ -1,5 +1,9 @@
 import * as actions from './actions'
 
+test('check Auth', () => {
+  actions.checkAuth()
+})
+
 test('socialLoginPrepare', () => {
   expect(actions.socialLoginPrepare('facebook', 1)).toEqual({
     type: actions.SOCIAL_LOGIN_PREPARE,

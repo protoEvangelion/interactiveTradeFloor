@@ -55,7 +55,7 @@ export default class Hero extends Component {
       status: '',
       modalOpen: false,
     }
-    this.boothClick = this.boothClick.bind(this)
+    // this.boothClick = this.boothClick.bind(this)
   }
   componentWillMount() /* istanbul ignore next */ {
     const url = process.env.NODE_ENV
@@ -75,11 +75,12 @@ export default class Hero extends Component {
     this.props.checkAuth()
     const booths = process.env.NODE_ENV === 'test'
       ? Hero.getBooths(this.props.booths)
-      : Hero.getBooths()
+      : /* istanbul ignore next */ Hero.getBooths()
     this.setState({
       booths,
     })
   }
+  /* istanbul ignore next */
   boothClick(num, i, company, description, owner, status) {
     this.setState({
       activeBooth: num,
@@ -91,6 +92,7 @@ export default class Hero extends Component {
       status,
     })
   }
+  /* istanbul ignore next */
   email() {
     this.setState({ email: true })
   }
@@ -169,8 +171,8 @@ export default class Hero extends Component {
           { this.state.booths.map((booth, i) => {
             return (
               <div key={`ctn_${booth._id}`}>
-                <button
-                  onClick={this.boothClick}
+                <Booth
+                  onClick={/* istanbul ignore next */ () => this.boothClick()}
                   filter={this.props.filter}
                   i={i}
                   tip={`tool_${booth._id}`}

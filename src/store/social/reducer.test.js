@@ -11,6 +11,13 @@ it('returns the initial state', () => {
   expect(reducer(undefined, {})).toEqual(initialState)
 })
 
+it('checks auth', () => {
+  const action = { type: actions.CHECK_AUTH, authenticated: true, user: 'Ryan' }
+  expect(reducer(initialState, action)).toEqual({
+    ...initialState, authenticated: true, user: 'Ryan',
+  })
+})
+
 it('handles SOCIAL_LOGIN_SUCCESS', () => {
   const action = { type: actions.SOCIAL_LOGIN_SUCCESS, authenticated: true, user: 1 }
   expect(reducer(initialState, action)).toEqual({ ...initialState, authenticated: true, user: 1 })
