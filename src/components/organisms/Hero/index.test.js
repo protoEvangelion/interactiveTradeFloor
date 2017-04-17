@@ -1,7 +1,5 @@
 import React from 'react'
-import sinon from 'sinon'
 import renderer from 'react-test-renderer'
-import { mount } from 'enzyme'
 import Hero from '.'
 
 const props = {

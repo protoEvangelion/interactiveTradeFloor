@@ -5,6 +5,7 @@ const ip = process.env.IP || 'localhost'
 const port = process.env.PORT || 3000
 const basename = `/${process.env.PUBLIC_PATH || ''}`.replace('//', '/')
 
+/* istanbul ignore next */
 const config = {
   all: {
     env: process.env.NODE_ENV || 'development',

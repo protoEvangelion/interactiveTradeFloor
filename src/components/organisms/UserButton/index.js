@@ -25,7 +25,7 @@ const UserButton = ({ authenticated, user, onLogin, onLogout, ...props }) => {
           </InnerButton>
         </Button>
       }
-      {!authenticated && <Button {...props} onClick={onLogin}>Sign in</Button>}
+      {/* istanbul ignore next */ !authenticated && <Button {...props} onClick={onLogin}>Sign in</Button>}
       <LoginModal />
     </div>
   )

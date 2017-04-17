@@ -3,7 +3,7 @@ import renderer from 'react-test-renderer'
 import UserButton from '.'
 
 const props = {
-  authenticated: false,
+  authenticated: true,
   user: { picture: 'test.jpg' },
   onLogin: jest.fn(),
   onLogout: jest.fn(),

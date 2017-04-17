@@ -3,7 +3,17 @@
 exports[`renders User button snapshot 1`] = `
 <div>
   <span>
-    Sign in
+    <div
+      className="dqUvXD"
+    >
+      <img
+        className="hOOyAl"
+        height={25}
+        src="test.jpg"
+        width={25}
+      />
+      Sign out
+    </div>
   </span>
   <span />
 </div>

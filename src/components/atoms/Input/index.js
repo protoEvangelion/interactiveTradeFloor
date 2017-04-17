@@ -34,6 +34,7 @@ const StyledTextarea = styled.textarea`${styles}`
 const StyledSelect = styled.select`${styles}`
 const StyledInput = styled.input`${styles}`
 
+/* istanbul ignore next */
 const Input = ({ ...props }) => {
   const modifiedProps = 'defaultValue' in { ...props }
     ? omit({ ...props }, 'value')

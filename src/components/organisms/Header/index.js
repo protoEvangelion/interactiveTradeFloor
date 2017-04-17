@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 import styled from 'styled-components'
-import { IconLink, FilterBtn, PrintBtn, PrimaryNavigation, Block } from 'components'
+import { FilterBtn, PrintBtn, Block } from 'components'
 import { UserButton } from 'containers'
 
 const Wrapper = styled(Block)`
@@ -12,15 +12,6 @@ const Wrapper = styled(Block)`
   & > :not(:first-child) {
     margin-left: 1rem;
   }
-`
-
-const StyledIconLink = styled(IconLink)`
-  display: inline-block;
-  transform-origin: center;
-`
-
-const StyledPrimaryNavigation = styled(PrimaryNavigation)`
-  flex: 1
 `
 
 const Header = (props) => {
