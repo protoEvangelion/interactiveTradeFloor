@@ -1,7 +1,9 @@
 <p align="center">
   <a href="https://travis-ci.org/protoEvangelion/interactiveTradeFloor"><img src="https://img.shields.io/travis/protoEvangelion/interactiveTradeFloor/master.svg?style=flat-square" alt="Build Status" /></a>
-  <a href="https://travis-ci.org/protoEvangelion/interactiveTradeFloor"><img src="https://img.shields.io/codecov/c/github/protoEvangelion/interactiveTradeFloor.svg?style=flat-square" alt="Build Status" /></a>
-  <a href="https://travis-ci.org/protoEvangelion/interactiveTradeFloor"><img src="https://img.shields.io/website-up-down-green-red/http/shields.io.svg" alt="Build Status" /></a>
+  <a href="https://codecov.io/gh/protoEvangelion/interactiveTradeFloor"><img src="https://img.shields.io/codecov/c/github/protoEvangelion/interactiveTradeFloor.svg?style=flat-square" alt="Build Status" /></a>
+  <a href="https://aoatradeshow.herokuapp.com/"><img src="https://img.shields.io/website-up-down-green-red/http/shields.io.svg" alt="Code Coverage" /></a>
+  <a href="https://www.codacy.com/app/protoEvangelion/interactiveTradeFloor?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=protoEvangelion/interactiveTradeFloor&amp;utm_campaign=Badge_Grade"><img src="https://api.codacy.com/project/badge/Grade/488a2a3f487a4d568d005ec5ef831bfa" alt="Code Grade" /></a>
+  <a href="https://snyk.io/test/github/protoevangelion/interactivetradefloor"><img src="https://snyk.io/test/github/protoevangelion/interactivetradefloor/badge.svg" alt="Known Vulnerabilities" data-canonical-src="https://snyk.io/test/github/protoevangelion/interactivetradefloor" style="max-width:100%;"></a>
 </p>
 
 ![tradeshow](https://cloud.githubusercontent.com/assets/20076677/25107976/6cb4abd6-2387-11e7-8faa-69a684bc3054.gif)
