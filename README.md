@@ -5,6 +5,8 @@
 
 ## Tradeshow Floorplan Manager
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/488a2a3f487a4d568d005ec5ef831bfa)](https://www.codacy.com/app/protoEvangelion/interactiveTradeFloor?utm_source=github.com&utm_medium=referral&utm_content=protoEvangelion/interactiveTradeFloor&utm_campaign=badger)
+
 This is a project built to simplify the trade show managing process.
 
 It helps sales people consolidate their efforts and collaborate in real time with team mates.
