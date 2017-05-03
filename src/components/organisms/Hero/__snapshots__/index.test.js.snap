@@ -3,7 +3,7 @@
 exports[`<Hero /> snapshot renders snapshot 1`] = `
 <div
   className="zzAnF"
-  filter="Ryan"
+  filter="Jin"
 >
   <span />
   <span>

@@ -20,7 +20,7 @@ class HomePage extends Component {
       } else if (email === process.env.EMAIL2) {
         this.setState({ filter: 'Richard' })
       } else if (email === process.env.EMAIL1) {
-        this.setState({ filter: 'Ryan' })
+        this.setState({ filter: 'Jin' })
       } else {
         this.setState({ filter: 'None' })
       }

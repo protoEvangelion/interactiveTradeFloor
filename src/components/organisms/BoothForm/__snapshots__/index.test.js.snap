@@ -34,9 +34,9 @@ exports[`BoothForm snapshot should render the snapshot 1`] = `
       Richard
     </option>
     <option
-      value="Ryan"
+      value="Jin"
     >
-      Ryan
+      Jin
     </option>
   </span>
   <span>

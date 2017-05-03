@@ -17,7 +17,7 @@ const props = {
   boothNum: 110,
   company: 'AOA',
   description: 'advertising',
-  owner: 'Ryan',
+  owner: 'Jin',
   status: 'Holding',
 }
 

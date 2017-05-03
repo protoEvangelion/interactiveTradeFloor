@@ -49,7 +49,7 @@ router.get('/email', (req, res) => {
 // , richard@aoausa.com, todd@aoausa.com
   const mailOptions = {
     from: `${query.status === 'open' ? 'Booth Open' : query.owner} <${query.owner}@aoausa.com>`,
-    to: 'ryan@aoausa.com, richard@aoausa.com, todd@aoausa.com',
+    to: 'jin@aoausa.com, richard@aoausa.com, todd@aoausa.com',
     subject: `${query.num}=${query.status === 'open' ? 'Open' : query.company}`,
     text: text.data,
     html: `

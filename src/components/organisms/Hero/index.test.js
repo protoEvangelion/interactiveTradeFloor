@@ -3,7 +3,7 @@ import renderer from 'react-test-renderer'
 import Hero from '.'
 
 const props = {
-  filter: 'Ryan',
+  filter: 'Jin',
   checkAuth: () => {},
   authenticated: true,
   booths: [
@@ -17,7 +17,7 @@ const props = {
       col: 1,
       status: 'Holding',
       type: 'single',
-      owner: 'Ryan',
+      owner: 'Jin',
     },
   ],
 }

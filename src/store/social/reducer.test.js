@@ -12,9 +12,9 @@ it('returns the initial state', () => {
 })
 
 it('checks auth', () => {
-  const action = { type: actions.CHECK_AUTH, authenticated: true, user: 'Ryan' }
+  const action = { type: actions.CHECK_AUTH, authenticated: true, user: 'Jin' }
   expect(reducer(initialState, action)).toEqual({
-    ...initialState, authenticated: true, user: 'Ryan',
+    ...initialState, authenticated: true, user: 'Jin',
   })
 })
 

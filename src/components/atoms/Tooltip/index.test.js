@@ -5,7 +5,7 @@ import Tooltip from '.'
 const props = {
   _id: '2sdf5d2sdf',
   co: 'AOA',
-  owner: 'Ryan',
+  owner: 'Jin',
   status: 'open',
   description: 'Stuff',
 }

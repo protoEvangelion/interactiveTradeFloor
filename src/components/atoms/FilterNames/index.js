@@ -30,7 +30,7 @@ class FilterNames extends Component {
         <Name onClick={() => this.props.onSelect('None')}>None</Name>
         <Name onClick={() => this.props.onSelect('Todd')}>Todd</Name>
         <Name onClick={() => this.props.onSelect('Richard')}>Richard</Name>
-        <Name onClick={() => this.props.onSelect('Ryan')}>Ryan</Name>
+        <Name onClick={() => this.props.onSelect('Jin')}>Jin</Name>
       </Names>
     )
   }

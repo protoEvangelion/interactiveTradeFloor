@@ -55,7 +55,8 @@ export default class Hero extends Component {
       status: '',
       modalOpen: false,
     }
-    // this.boothClick = this.boothClick.bind(this)
+
+    this.boothClick = this.boothClick.bind(this)
   }
   componentWillMount() /* istanbul ignore next */ {
     const url = process.env.NODE_ENV
@@ -82,6 +83,7 @@ export default class Hero extends Component {
   }
   /* istanbul ignore next */
   boothClick(num, i, company, description, owner, status) {
+    console.log(num, i, company, description, owner, status)
     this.setState({
       activeBooth: num,
       modalOpen: true,
@@ -172,7 +174,7 @@ export default class Hero extends Component {
             return (
               <div key={`ctn_${booth._id}`}>
                 <Booth
-                  onClick={/* istanbul ignore next */ () => this.boothClick()}
+                  boothClick={this.boothClick}
                   filter={this.props.filter}
                   i={i}
                   tip={`tool_${booth._id}`}

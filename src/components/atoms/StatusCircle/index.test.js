@@ -16,8 +16,8 @@ describe('<StatusCircle />', () => {
   })
 
   it('determines color', () => {
-    expect(determineColor('None', 'Ryan', 'holding')).toEqual('rgb(255, 216, 0)')
-    expect(determineColor('None', 'Ryan', 'good')).toEqual('rgb(21, 255, 0)')
-    expect(determineColor('None', 'Ryan', 'collect')).toEqual('red')
+    expect(determineColor('None', 'Jin', 'holding')).toEqual('rgb(255, 216, 0)')
+    expect(determineColor('None', 'Jin', 'good')).toEqual('rgb(21, 255, 0)')
+    expect(determineColor('None', 'Jin', 'collect')).toEqual('red')
   })
 })

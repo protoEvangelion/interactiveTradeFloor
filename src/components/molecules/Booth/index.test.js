@@ -11,12 +11,12 @@ const props = {
   key: 1,
   num: 1,
   onClick,
-  filter: 'Ryan',
+  filter: 'Jin',
   i: 1,
   co: 'AOA',
   description: 'Stuff',
   type: 'single',
-  owner: 'Ryan',
+  owner: 'Jin',
   status: 'Holding',
   row: 1,
   col: 1,
@@ -35,21 +35,13 @@ describe('<Booth />', () => {
     expect(wrapper.find('.boothCtn')).toHaveLength(1)
   })
 
-  it('simulates Booth click', () => {
-    const wrapper = mount(
-      <Booth {...props} />
-    )
-    wrapper.find('.boothCtn').simulate('click')
-    expect(props.onClick).toHaveProperty('callCount', 1)
-  })
-
   it('determines color function', () => {
-    expect(determineColor('ryan', 'ryan', 'open')).toEqual('black')
-    expect(determineColor('None', 'ryan', 'holding')).toEqual('black')
-    expect(determineColor('ryan', 'ryan', 'n/a')).toEqual('black')
+    expect(determineColor('jin', 'jin', 'open')).toEqual('black')
+    expect(determineColor('None', 'jin', 'holding')).toEqual('black')
+    expect(determineColor('jin', 'jin', 'n/a')).toEqual('black')
     expect(determineColor('Todd', 'Todd', 'holding')).toEqual('rgb(0, 178, 14)')
     expect(determineColor('Richard', 'Richard', 'holding')).toEqual('rgb(8, 0, 255)')
-    expect(determineColor('Ryan', 'Ryan', 'holding')).toEqual('rgb(255, 0, 170)')
+    expect(determineColor('Jin', 'Jin', 'holding')).toEqual('rgb(255, 0, 170)')
   })
 
   it('determines X coord', () => {

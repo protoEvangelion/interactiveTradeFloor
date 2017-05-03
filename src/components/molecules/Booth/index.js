@@ -9,7 +9,7 @@ export const determineColor = (filter, owner, status) => {
     return 'rgb(0, 178, 14)' // green
   } else if (owner === 'Richard') {
     return 'rgb(8, 0, 255)' // blue
-  } else if (owner === 'Ryan') {
+  } else if (owner === 'Jin') {
     return 'rgb(255, 0, 170)' // pink
   }
   return 'black'
@@ -72,12 +72,12 @@ const Wrapper = styled.div`
   transform: translate(${props => determineX(props.x, props.col, props.type, props.dim)}px, ${props => determineY(props.y, props.row)}px);
 `
 
-const Booth = ({ onClick, num, filter, i, co, description, type, owner, row, col, x, y, dim, status, tip }) => {
+const Booth = ({ boothClick, num, filter, i, co, description, type, owner, row, col, x, y, dim, status, tip }) => {
   return (
     <Wrapper
       className="boothCtn"
       id="boothCtn"
-      onClick={() => onClick(num, i, co, description, owner, status)}
+      onClick={() => boothClick(num, i, co, description, owner, status)}
       value={num}
       type={type}
       filter={filter}
@@ -96,7 +96,7 @@ const Booth = ({ onClick, num, filter, i, co, description, type, owner, row, col
 }
 
 Booth.propTypes = {
-  onClick: PropTypes.func.isRequired,
+  boothClick: PropTypes.func.isRequired,
   num: PropTypes.number,
   filter: PropTypes.string,
   i: PropTypes.number,

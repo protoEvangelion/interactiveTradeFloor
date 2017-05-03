@@ -26,7 +26,7 @@ class BoothForm extends Component {
           <option value="None">None</option>
           <option value="Todd">Todd</option>
           <option value="Richard">Richard</option>
-          <option value="Ryan">Ryan</option>
+          <option value="Jin">Jin</option>
         </Field>
         <Field name="status" label="Status" component={ReduxField} type="select" value={status}>
           <option value="n/a">N/A</option>

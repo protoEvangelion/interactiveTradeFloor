@@ -27,6 +27,9 @@ const config = {
     filename: '[name].[hash].js',
     publicPath: DEBUG ? `http://${ip}:${port}/` : PUBLIC_PATH,
   },
+  node: {
+    fs: 'empty',
+  },
   resolve: {
     modules: ['src', 'node_modules'],
   },
@@ -37,6 +40,7 @@ const config = {
       'process.env.EMAIL1': JSON.stringify(process.env.EMAIL1),
       'process.env.EMAIL2': JSON.stringify(process.env.EMAIL2),
       'process.env.EMAIL3': JSON.stringify(process.env.EMAIL3),
+      'process.env.EMAIL4': JSON.stringify(process.env.EMAIL4),
     }),
     new ProgressBarPlugin(),
   ],
