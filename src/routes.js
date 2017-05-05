@@ -2,13 +2,13 @@ import React from 'react'
 import { Route, IndexRoute } from 'react-router'
 
 import App from 'components/App'
-import { HomePage } from 'components'
-import { SamplePage, NotFoundPage } from 'containers'
+import { FloorplanPage } from 'components'
+import { NotFoundPage } from 'containers'
 
 const routes = (
   <Route path="/" component={App}>
-    <IndexRoute component={HomePage} />
-    <Route path="/sample-page" component={SamplePage} />
+    <Route path="/la" component={FloorplanPage} />
+    <Route path="/lb" component={FloorplanPage} />
     <Route path="*" component={NotFoundPage} />
   </Route>
 )

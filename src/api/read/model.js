@@ -11,5 +11,5 @@ const boothSchema = Schema({
   status: String,
 })
 
-module.exports = mongoose.model('Booth', boothSchema)
+module.exports = mongoose.model('Booth', boothSchema, 'booths')
 export default exports
