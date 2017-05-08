@@ -122,7 +122,7 @@ router.use((req, res, next) => {
     })
 
     const render = (store) => {
-      const renderHtml = (err, booths) => {
+      const renderHtml = (err, booths, path) => {
         if (err) {
           console.log(err)
         }
@@ -138,6 +138,7 @@ router.use((req, res, next) => {
         const preState = {
           ...initialState,
           booths: boothsArr,
+          path,
         }
         const state = `window.__INITIAL_STATE__ = ${serialize(preState)}`
         const markup = <Html {...{ styles, assets, state, content }} />
@@ -148,9 +149,9 @@ router.use((req, res, next) => {
       }
 
       if (req.originalUrl === '/la') {
-        laBoothModel.find((err, booths) => res.send(renderHtml(err, booths)))
+        laBoothModel.find((err, booths) => res.send(renderHtml(err, booths, 'la')))
       } else if (req.originalUrl === '/lb') {
-        lbBoothModel.find((err, booths) => res.send(renderHtml(err, booths)))
+        lbBoothModel.find((err, booths) => res.send(renderHtml(err, booths, 'lb')))
       }
     }
 

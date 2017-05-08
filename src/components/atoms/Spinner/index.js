@@ -13,8 +13,8 @@ const Spinner = styled.div`
   border-bottom-color: ${palette(1)};
   border-radius: 50%;
   margin: 0 auto;
-  width: 1em;
-  height: 1em;
+  width: 5em;
+  height: 5em;
   animation: ${spin} 1s linear infinite;
 `
 

@@ -7,7 +7,7 @@ import { checkAuth } from '../store/social/actions'
 const HeroContainer = props => <Hero {...props} />
 
 const mapStateToProps = (state) => {
-  return { authenticated: state.social.authenticated }
+  return { authenticated: state.social.authenticated, path: state.path }
 }
 
 const mapDispatchToProps = (dispatch) => {

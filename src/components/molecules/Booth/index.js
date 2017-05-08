@@ -19,10 +19,10 @@ export const determineY = (y, row) => {
   return y + (row * 3.1)
 }
 
-export const determineX = (x, col, type, dim) => {
+export const determineX = (x, col, type, dim, path) => {
   switch (type) {
     case 'ptArena1':
-      return (x - 5) - (dim * 2)
+      return path === 'la' ? x + 3 : (x - 5) - (dim * 2)
     default:
       return x + (col * 3.1)
   }
@@ -45,12 +45,12 @@ export const determineWidth = (type, dim) => {
   }
 }
 
-export const determineHeight = (type, dim) => {
+export const determineHeight = (type, dim, path) => {
   switch (type) {
     case 'AOABooth':
       return `${(dim * 3) + 6}px`
     case 'Seminar':
-      return `${(dim * 6) + 15}px`
+      return path === 'la' ? `${(dim * 5) + 13}px` : `${(dim * 6) + 15}px`
     case 'ptArena1':
       return `${(dim * 3) + 6}px`
     case 'ptArena2':
@@ -66,13 +66,13 @@ const Wrapper = styled.div`
   position: absolute;
   background-color: ${props => props.status === 'open' ? 'yellow' : 'white'};
   width: ${props => determineWidth(props.type, props.dim)};
-  height: ${props => determineHeight(props.type, props.dim)};
+  height: ${props => determineHeight(props.type, props.dim, props.path)};
   border: 2px solid ${props => determineColor(props.filter, props.owner, props.status)};
   overflow: hidden;
-  transform: translate(${props => determineX(props.x, props.col, props.type, props.dim)}px, ${props => determineY(props.y, props.row)}px);
+  transform: translate(${props => determineX(props.x, props.col, props.type, props.dim, props.path)}px, ${props => determineY(props.y, props.row)}px);
 `
 
-const Booth = ({ boothClick, num, filter, i, co, description, type, owner, row, col, x, y, dim, status, tip }) => {
+const Booth = ({ boothClick, num, filter, i, co, description, type, owner, row, col, x, y, dim, status, tip, path }) => {
   return (
     <Wrapper
       className="boothCtn"
@@ -88,6 +88,7 @@ const Booth = ({ boothClick, num, filter, i, co, description, type, owner, row, 
       x={x}
       y={y}
       dim={dim}
+      path={path}
     >
       <Info num={num} co={co} status={status} tip={tip} />
       <StatusCircle filter={filter} owner={owner} status={status} />
@@ -111,6 +112,7 @@ Booth.propTypes = {
   y: PropTypes.number.isRequired,
   dim: PropTypes.number.isRequired,
   tip: PropTypes.string.isRequired,
+  path: PropTypes.string.isRequired,
 }
 
 export default Booth
