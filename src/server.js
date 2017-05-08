@@ -19,7 +19,8 @@ import configureStore from 'store/configure'
 import { env, port, ip, mongo, basename } from 'config'
 import { setCsrfToken } from 'store/actions'
 import Html from 'components/Html'
-import BoothModel from './api/read/model'
+import lbBoothModel from './api/read/lbModel'
+import laBoothModel from './api/read/laModel'
 
 const nodemailer = require('nodemailer')
 
@@ -121,7 +122,7 @@ router.use((req, res, next) => {
     })
 
     const render = (store) => {
-      BoothModel.find((err, booths) => {
+      const renderHtml = (err, booths) => {
         if (err) {
           console.log(err)
         }
@@ -143,8 +144,14 @@ router.use((req, res, next) => {
         const doctype = '<!doctype html>\n'
         const html = renderToStaticMarkup(markup)
 
-        res.send(doctype + html)
-      })
+        return doctype + html
+      }
+
+      if (req.originalUrl === '/la') {
+        laBoothModel.find((err, booths) => res.send(renderHtml(err, booths)))
+      } else if (req.originalUrl === '/lb') {
+        lbBoothModel.find((err, booths) => res.send(renderHtml(err, booths)))
+      }
     }
 
     return fetchData().then(() => {

@@ -9,6 +9,6 @@ router.get('/',
   show
 )
 
-export Booth, { schema } from './model'
+export Booth, { schema } from './lbModel'
 
 export default router

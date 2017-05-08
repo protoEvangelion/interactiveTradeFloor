@@ -108,6 +108,7 @@ export default class Hero extends Component {
       owner: values.owner,
       status: values.status,
       description: values.description,
+      path: window.location.pathname,
     }
 
     booths[this.state.boothIndex] = Object.assign({}, booths[this.state.boothIndex], data)
