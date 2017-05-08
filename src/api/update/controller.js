@@ -13,7 +13,7 @@ export const update = (req, res, next) => {
     })
       .then(success(res))
       .catch(next)
-  } else if(req.body.data.path === '/lb') {
+  } else if (req.body.data.path === '/lb') {
     lbBooth.findOneAndUpdate({ num: req.body.data.num }, {
       company: req.body.data.company,
       owner: req.body.data.owner,

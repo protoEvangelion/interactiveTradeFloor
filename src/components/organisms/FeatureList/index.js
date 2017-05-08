@@ -59,7 +59,7 @@ const FeatureList = ({ ...props }) => (
     <Grid>
       <StyledFeature
         icon="redux"
-        link="https://github.com/diegohaz/arc/tree/redux"
+        link="redux.js.org"
         title="Redux"
       >
         The predictable state container for JavaScript apps.
