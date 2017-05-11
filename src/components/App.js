@@ -10,11 +10,11 @@ injectGlobal`
   }
 `
 
-const App = ({ children }) => {
+const App = ({ children, location }) => {
   return (
     <div>
       <Helmet
-        title="LB 17' Tradeshow"
+        title={`${location.pathname.toUpperCase()} 17' Tradeshow`}
         titleTemplate="AOA - %s"
         meta={[
           { name: 'description', content: 'Trade show management tool' },
@@ -51,6 +51,7 @@ const App = ({ children }) => {
 
 App.propTypes = {
   children: PropTypes.any,
+  location: PropTypes.object,
 }
 
 export default App

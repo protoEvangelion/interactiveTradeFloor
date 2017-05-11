@@ -45,12 +45,12 @@ export const determineWidth = (type, dim) => {
   }
 }
 
-export const determineHeight = (type, dim, path) => {
+export const determineHeight = (type, dim) => {
   switch (type) {
     case 'AOABooth':
       return `${(dim * 3) + 6}px`
     case 'Seminar':
-      return path === 'la' ? `${(dim * 5) + 13}px` : `${(dim * 6) + 15}px`
+      return `${(dim * 6) + 15}px`
     case 'ptArena1':
       return `${(dim * 3) + 6}px`
     case 'ptArena2':
@@ -88,7 +88,6 @@ const Booth = ({ boothClick, num, filter, i, co, description, type, owner, row, 
       x={x}
       y={y}
       dim={dim}
-      path={path}
     >
       <Info num={num} co={co} status={status} tip={tip} />
       <StatusCircle filter={filter} owner={owner} status={status} />
