@@ -27,7 +27,7 @@ const Logo = styled.img`
 `
 
 const Powertalk1 = styled.img`
-  transform: translate(${props => props.path === 'la' ? -22 : -135}px, 500px);
+  transform: translate(${props => props.path === 'la' ? -185 : -135}px, 500px);
   width: 100px;
 `
 
