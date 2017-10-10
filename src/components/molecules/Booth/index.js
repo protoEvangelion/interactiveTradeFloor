@@ -82,6 +82,7 @@ const Booth = ({ boothClick, num, filter, i, co, description, type, owner, row, 
       type={type}
       filter={filter}
       owner={owner}
+      path={path}
       status={status}
       row={row}
       col={col}
