@@ -62,7 +62,7 @@ export const checkAuth = () => {
 export const socialLoginSuccess = user => {
   let authenticated
   const email = user.email
-  if (email === process.env.EMAIL1 || email === process.env.EMAIL2 || email === process.env.EMAIL3) {
+  if (email === process.env.EMAIL1 || email === process.env.EMAIL2 || email === process.env.EMAIL3 || email === process.env.EMAIL4) {
     authenticated = true
     /* istanbul ignore next */
     if (storageAvailable('localStorage')) {
