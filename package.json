@@ -22,7 +22,7 @@
     "prepublish": "npm run snyk-protect",
     "mongo:showla": "bsondump --pretty laBooths.bson",
     "mongo:showlb": "bsondump --pretty lbBooths.bson",
-    "mongo:restore": "mongorestore --collection laBooths --db floorplan laBooths.bson",
+    "mongo:restore": "mongorestore -h ds249575.mlab.com:49575 -d heroku_n9739n51 -u heroku_n9739n51 -p <password> lbBooths.bson",
     "mongo:start": "sudo service mongod start",
     "mongo:stop": "sudo service mongod stop",
     "mongo:restart": "sudo service mongod restart",
