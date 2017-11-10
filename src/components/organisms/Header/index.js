@@ -1,9 +1,11 @@
-import React, { PropTypes } from 'react'
-import styled from 'styled-components'
-import { FilterBtn, PrintBtn, Block } from 'components'
-import { UserButton } from 'containers'
+import { Block, FilterBtn, PrintBtn } from 'components'
 
-const Wrapper = styled(Block)`
+import PropTypes from 'prop-types'
+import React from 'react'
+import { UserButton } from 'containers'
+import styled from 'styled-components'
+
+const Wrapper = styled(Block) `
   display: flex;
   justify-content: space-around;
   align-items: center;

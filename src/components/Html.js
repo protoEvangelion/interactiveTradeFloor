@@ -1,6 +1,7 @@
-/* eslint-disable react/no-danger */
-import React, { PropTypes } from 'react'
 import Helmet from 'react-helmet'
+import PropTypes from 'prop-types'
+/* eslint-disable react/no-danger */
+import React from 'react'
 
 const Html = ({ styles, assets, state, content }) => {
   const helmet = Helmet.rewind()

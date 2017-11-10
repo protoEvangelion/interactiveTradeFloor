@@ -1,8 +1,8 @@
-import React, { PropTypes } from 'react'
-import styled from 'styled-components'
-
 import { Button } from 'components'
 import { LoginModal } from 'containers'
+import PropTypes from 'prop-types'
+import React from 'react'
+import styled from 'styled-components'
 
 const InnerButton = styled.div`
   display: flex;

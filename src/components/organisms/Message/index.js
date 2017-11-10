@@ -1,6 +1,7 @@
-import React, { PropTypes } from 'react'
-import styled from 'styled-components'
+import PropTypes from 'prop-types'
+import React from 'react'
 import { palette } from 'styled-theme'
+import styled from 'styled-components'
 
 const Wrapper = styled.div`
   background-color: ${({ authenticated }) => {

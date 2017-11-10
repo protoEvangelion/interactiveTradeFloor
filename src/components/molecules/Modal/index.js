@@ -1,9 +1,10 @@
-import React, { PropTypes } from 'react'
-import styled, { css, injectGlobal } from 'styled-components'
-import ReactModal from 'react-modal'
-import { font, palette } from 'styled-theme'
-
 import { Heading, IconButton } from 'components'
+import { font, palette } from 'styled-theme'
+import styled, { css, injectGlobal } from 'styled-components'
+
+import PropTypes from 'prop-types'
+import React from 'react'
+import ReactModal from 'react-modal'
 
 injectGlobal`
   body.ReactModal__Body--open {
@@ -29,7 +30,7 @@ const overlayStyles = css`
   }
 `
 
-const ModalBox = styled(ReactModal)`
+const ModalBox = styled(ReactModal) `
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -72,7 +73,7 @@ const Header = styled.header`
   }
 `
 
-const StyledHeading = styled(Heading)`
+const StyledHeading = styled(Heading) `
   margin: 0 1rem 0 0;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -87,7 +88,7 @@ const Content = styled.div`
 
 const StyledReactModal = styled(({ className, ...props }) =>
   <ModalBox overlayClassName={className} closeTimeoutMS={250} {...props} />
-)`${overlayStyles}`
+) `${overlayStyles}`
 
 const Modal = ({ children, title, closeable, onClose, ...props }) => {
   const hasHeader = title || closeable

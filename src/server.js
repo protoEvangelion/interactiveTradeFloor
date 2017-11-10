@@ -23,6 +23,15 @@ import { setCsrfToken } from 'store/actions'
 import styleSheet from 'styled-components/lib/models/StyleSheet'
 import { syncHistoryWithStore } from 'react-router-redux'
 
+const path = require('path')
+const https = require('https')
+const fs = require('fs')
+
+const privateKey = fs.readFileSync(path.join(__dirname, '../sslcert/server.key'), 'utf8')
+const certificate = fs.readFileSync(path.join(__dirname, '../sslcert/server.crt'), 'utf8')
+
+const credentials = { key: privateKey, cert: certificate }
+
 const nodemailer = require('nodemailer')
 
 require('dotenv').config()
@@ -50,7 +59,6 @@ router.get('/email', (req, res) => {
     ${query.description === '' ? '' : `Info: ${query.description}`}
     `,
   }
-
   const mailOptions = {
     from: `${query.status === 'open' ? 'Booth Open' : query.owner} <${query.owner}@aoausa.com>`,
     to: 'jin@aoausa.com, richard@aoausa.com, todd@aoausa.com',
@@ -174,7 +182,7 @@ router.use((req, res, next) => {
 })
 
 const app = express(router)
-const server = require('http').Server(app)
+const server = https.createServer(credentials, app)
 const io = require('socket.io')(server)
 
 io.on('connection', (socket) => {
@@ -190,6 +198,5 @@ server.listen(port, (error) => {
     console.info(`local: http://${ip}:${port}`)
   }
 })
-
 
 export default app

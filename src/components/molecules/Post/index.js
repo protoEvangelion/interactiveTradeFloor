@@ -1,7 +1,8 @@
-import React, { PropTypes } from 'react'
-import styled from 'styled-components'
-
 import { Heading, Paragraph } from 'components'
+
+import PropTypes from 'prop-types'
+import React from 'react'
+import styled from 'styled-components'
 
 const Article = styled.article``
 

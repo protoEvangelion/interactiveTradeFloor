@@ -1,8 +1,9 @@
-import React, { PropTypes } from 'react'
+import { Button, Icon } from 'components'
+import { get, ifProp } from 'styled-tools'
 import styled, { css, keyframes } from 'styled-components'
-import { ifProp, get } from 'styled-tools'
 
-import { Icon, Button } from 'components'
+import PropTypes from 'prop-types'
+import React from 'react'
 
 const fadeIn = keyframes`
   0% { display: none; opacity: 0; }
@@ -10,7 +11,7 @@ const fadeIn = keyframes`
   100% { display: block; opacity: 1; }
 `
 
-const StyledButton = styled(Button)`
+const StyledButton = styled(Button) `
   max-width: ${props => props.hasText && !props.collapsed ? '100%' : '2.5em'};
   width: ${ifProp('hasText', 'auto', '2.5em')};
   padding: ${ifProp('hasText', '0 0.4375em', 0)};
@@ -54,7 +55,7 @@ const Wrapper = styled.div`
   height: 100%;
 `
 
-const StyledIcon = styled(Icon)`
+const StyledIcon = styled(Icon) `
   flex: none;
 `
 

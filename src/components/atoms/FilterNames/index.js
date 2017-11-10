@@ -1,6 +1,8 @@
-import React, { Component, PropTypes } from 'react'
-import styled from 'styled-components'
+import React, { Component } from 'react'
+
+import PropTypes from 'prop-types'
 import onClickOutside from 'react-onclickoutside'
+import styled from 'styled-components'
 
 const Names = styled.div`
   position: absolute;

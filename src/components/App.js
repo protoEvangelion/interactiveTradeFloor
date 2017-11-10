@@ -1,7 +1,8 @@
-import React, { PropTypes } from 'react'
-import { injectGlobal, ThemeProvider } from 'styled-components'
-import Helmet from 'react-helmet'
+import { ThemeProvider, injectGlobal } from 'styled-components'
 
+import Helmet from 'react-helmet'
+import PropTypes from 'prop-types'
+import React from 'react'
 import theme from './themes/default'
 
 injectGlobal`

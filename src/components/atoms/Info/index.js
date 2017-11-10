@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react'
+import PropTypes from 'prop-types'
+import React from 'react'
 import styled from 'styled-components'
 
 const BoothNum = styled.h3`
@@ -22,8 +23,8 @@ const BoothCo = styled.p`
 const Info = ({ num, co, status, tip }) => {
   return (
     <div data-tip data-for={tip} >
-      <BoothNum>{ num }</BoothNum>
-      <BoothCo>{ status === 'open' ? status : co }</BoothCo>
+      <BoothNum>{num}</BoothNum>
+      <BoothCo>{status === 'open' ? status : co}</BoothCo>
     </div>
   )
 }

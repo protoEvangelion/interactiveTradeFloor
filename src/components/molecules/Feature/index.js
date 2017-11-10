@@ -1,7 +1,8 @@
-import React, { PropTypes } from 'react'
-import styled from 'styled-components'
+import { Badge, Heading, Icon, Link, Paragraph } from 'components'
 
-import { Icon, Link, Paragraph, Heading, Badge } from 'components'
+import PropTypes from 'prop-types'
+import React from 'react'
+import styled from 'styled-components'
 
 const Wrapper = styled.div`
   position: relative;
@@ -11,7 +12,7 @@ const Wrapper = styled.div`
   opacity: ${props => props.soon ? 0.4 : 1};
 `
 
-const StyledIcon = styled(Icon)`
+const StyledIcon = styled(Icon) `
   flex: none;
 `
 
@@ -22,7 +23,7 @@ const Text = styled.div`
   }
 `
 
-const StyledBadge = styled(Badge)`
+const StyledBadge = styled(Badge) `
   position: absolute;
   top: 1rem;
   right: 1rem;

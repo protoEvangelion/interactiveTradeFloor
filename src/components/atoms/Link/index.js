@@ -1,6 +1,8 @@
-import React, { PropTypes } from 'react'
-import styled, { css } from 'styled-components'
 import { font, palette } from 'styled-theme'
+import styled, { css } from 'styled-components'
+
+import PropTypes from 'prop-types'
+import React from 'react'
 import { Link as RouterLink } from 'react-router'
 
 const styles = css`
@@ -16,7 +18,7 @@ const styles = css`
 
 const StyledLink = styled(({ theme, reverse, palette, ...props }) =>
   <RouterLink {...props} />
-)`${styles}`
+) `${styles}`
 const Anchor = styled.a`${styles}`
 
 const Link = ({ ...props }) => {

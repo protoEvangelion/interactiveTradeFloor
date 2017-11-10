@@ -1,6 +1,8 @@
-import React, { PropTypes } from 'react'
-import styled, { css } from 'styled-components'
 import { font, palette } from 'styled-theme'
+import styled, { css } from 'styled-components'
+
+import PropTypes from 'prop-types'
+import React from 'react'
 
 export const fontSize = ({ level }) => `${0.75 + (1 * (1 / level))}rem`
 
@@ -16,7 +18,7 @@ const styles = css`
 
 const Heading = styled(({ level, children, reverse, palette, theme, ...props }) =>
   React.createElement(`h${level}`, props, children)
-)`${styles}`
+) `${styles}`
 
 Heading.propTypes = {
   level: PropTypes.number,

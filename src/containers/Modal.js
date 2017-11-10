@@ -1,9 +1,9 @@
-import React, { PropTypes } from 'react'
+import { Modal } from 'components'
+import PropTypes from 'prop-types'
+import React from 'react'
 import { connect } from 'react-redux'
 import { fromModal } from 'store/selectors'
 import { modalHide } from 'store/actions'
-
-import { Modal } from 'components'
 
 const ModalContainer = props => <Modal {...props} />
 

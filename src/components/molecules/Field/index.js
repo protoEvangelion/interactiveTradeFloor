@@ -1,9 +1,10 @@
-import React, { PropTypes } from 'react'
+import { Block, Input, Label } from 'components'
+
+import PropTypes from 'prop-types'
+import React from 'react'
 import styled from 'styled-components'
 
-import { Label, Input, Block } from 'components'
-
-const Error = styled(Block)`
+const Error = styled(Block) `
   margin: 0.5rem 0 0;
 `
 

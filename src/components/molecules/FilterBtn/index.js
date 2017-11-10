@@ -1,5 +1,7 @@
-import React, { Component, PropTypes } from 'react'
 import { Button, FilterNames } from 'components'
+import React, { Component } from 'react'
+
+import PropTypes from 'prop-types'
 
 class FilterBtn extends Component {
   constructor(props) {

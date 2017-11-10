@@ -1,5 +1,7 @@
-import React, { PropTypes } from 'react'
 import styled, { css } from 'styled-components'
+
+import PropTypes from 'prop-types'
+import React from 'react'
 
 const styles = css`
   text-align: left;

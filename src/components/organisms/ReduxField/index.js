@@ -1,6 +1,6 @@
-import React, { PropTypes } from 'react'
-
 import { Field } from 'components'
+import PropTypes from 'prop-types'
+import React from 'react'
 
 const ReduxField = ({ meta, input, ...props }) => {
   return (

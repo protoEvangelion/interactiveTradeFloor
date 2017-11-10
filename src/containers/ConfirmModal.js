@@ -1,8 +1,8 @@
-import React, { PropTypes } from 'react'
+import { ConfirmModal } from 'components'
+import PropTypes from 'prop-types'
+import React from 'react'
 import { connect } from 'react-redux'
 import { modalHide } from 'store/actions'
-
-import { ConfirmModal } from 'components'
 
 const ConfirmModalContainer = props => <ConfirmModal {...props} />
 

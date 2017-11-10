@@ -1,7 +1,9 @@
-import React, { PropTypes } from 'react'
-import styled from 'styled-components'
 import { font, palette } from 'styled-theme'
-import { ifProp, get } from 'styled-tools'
+import { get, ifProp } from 'styled-tools'
+
+import PropTypes from 'prop-types'
+import React from 'react'
+import styled from 'styled-components'
 
 export const fontSize = ({ height }) => `${height / 35.5555555556}rem`
 

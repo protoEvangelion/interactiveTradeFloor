@@ -1,8 +1,8 @@
-import React, { PropTypes } from 'react'
-import styled from 'styled-components'
-
 import { Button } from 'components'
 import { Modal } from 'containers'
+import PropTypes from 'prop-types'
+import React from 'react'
+import styled from 'styled-components'
 
 const Options = styled.div`
   display: flex;

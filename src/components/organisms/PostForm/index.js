@@ -1,8 +1,9 @@
-import React, { PropTypes } from 'react'
-import { Field } from 'redux-form'
-import styled from 'styled-components'
+import { Button, Heading, ReduxField } from 'components'
 
-import { ReduxField, Heading, Button } from 'components'
+import { Field } from 'redux-form'
+import PropTypes from 'prop-types'
+import React from 'react'
+import styled from 'styled-components'
 
 const Form = styled.form`
   width: 100%;

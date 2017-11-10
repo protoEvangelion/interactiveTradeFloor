@@ -1,9 +1,11 @@
-import React, { Component, PropTypes } from 'react'
-import styled from 'styled-components'
-import { Booth, Tooltip, Modal, Message, Spinner } from 'components'
+import { Booth, Message, Modal, Spinner, Tooltip } from 'components'
+import React, { Component } from 'react'
+
 import { BoothForm } from 'containers'
+import PropTypes from 'prop-types'
 import axios from 'axios'
 import io from 'socket.io-client'
+import styled from 'styled-components'
 
 const logo = require('../../../../public/pictures/aoalogo.jpg')
 const powertalk1 = require('../../../../public/pictures/arena1.jpg')
@@ -36,7 +38,7 @@ const Powertalk2 = styled.img`
   width: 100px;
 `
 
-const StyledSpinner = styled(Spinner)`
+const StyledSpinner = styled(Spinner) `
   marginTop: 200px;
 `
 
@@ -137,8 +139,8 @@ export default class Hero extends Component {
             description: values.description,
           },
         })
-        .then((res) => console.log(res))
-        .catch((err) => console.log(err))
+          .then((res) => console.log(res))
+          .catch((err) => console.log(err))
       }
 
       this.setState({
@@ -185,7 +187,7 @@ export default class Hero extends Component {
               />
             </Modal>
             <FloorplanCtn id="floorPlan" path={this.state.path}>
-              { this.state.booths.map((booth, i) => {
+              {this.state.booths.map((booth, i) => {
                 return (
                   <div key={`ctn_${booth._id}`}>
                     <Booth
@@ -223,7 +225,7 @@ export default class Hero extends Component {
             </FloorplanCtn>
           </Wrapper>
         )
-      : <StyledSpinner />
+        : <StyledSpinner />
     )
   }
 }

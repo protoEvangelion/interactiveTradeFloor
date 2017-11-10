@@ -1,7 +1,8 @@
-import React, { PropTypes } from 'react'
-import styled from 'styled-components'
-
 import { Icon, Link } from 'components'
+
+import PropTypes from 'prop-types'
+import React from 'react'
+import styled from 'styled-components'
 
 const fontSize = ({ height }) => height ? `${height / 3 / 16}rem` : '0.75em'
 
@@ -12,7 +13,7 @@ const margin = ({ hasText, right }) => {
   return 0
 }
 
-const StyledIcon = styled(Icon)`
+const StyledIcon = styled(Icon) `
   font-size: ${fontSize};
   margin: ${margin};
   @media screen and (max-width: 420px) {
