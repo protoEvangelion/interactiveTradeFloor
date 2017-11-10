@@ -1,36 +1,39 @@
+import { RouterContext, createMemoryHistory, match } from 'react-router'
+import { basename, env, ip, mongo, port } from 'config'
+import { renderToStaticMarkup, renderToString } from 'react-dom/server'
+
+import Html from 'components/Html'
+import { Provider } from 'react-redux'
 /* eslint-disable no-console */
 import React from 'react'
+import { Router } from 'express'
 import URL from 'url-parse'
-import qs from 'qs'
-import serialize from 'serialize-javascript'
-import styleSheet from 'styled-components/lib/models/StyleSheet'
+import api from 'api'
+import configureStore from 'store/configure'
 import cors from 'cors'
 import csrf from 'csurf'
-import { renderToString, renderToStaticMarkup } from 'react-dom/server'
-import { Provider } from 'react-redux'
-import { createMemoryHistory, RouterContext, match } from 'react-router'
-import { syncHistoryWithStore } from 'react-router-redux'
-import { Router } from 'express'
 import express from 'services/express'
-import mongoose from 'services/mongoose'
-import api from 'api'
-import routes from 'routes'
-import configureStore from 'store/configure'
-import { env, port, ip, mongo, basename } from 'config'
-import { setCsrfToken } from 'store/actions'
-import Html from 'components/Html'
-import lbBoothModel from './api/read/lbModel'
 import laBoothModel from './api/read/laModel'
+import lbBoothModel from './api/read/lbModel'
+import mongoose from 'services/mongoose'
+import qs from 'qs'
+import routes from 'routes'
+import serialize from 'serialize-javascript'
+import { setCsrfToken } from 'store/actions'
+import styleSheet from 'styled-components/lib/models/StyleSheet'
+import { syncHistoryWithStore } from 'react-router-redux'
 
 const nodemailer = require('nodemailer')
 
 require('dotenv').config()
 
+console.log('NODE_ENV', process.env.NODE_ENV)
+
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'ryantg77@gmail.com',
-    pass: process.env.GMAIL,
+    user: process.env.GMAILUSER,
+    pass: process.env.GMAILPASS,
   },
 })
 
@@ -47,7 +50,7 @@ router.get('/email', (req, res) => {
     ${query.description === '' ? '' : `Info: ${query.description}`}
     `,
   }
-// , richard@aoausa.com, todd@aoausa.com
+
   const mailOptions = {
     from: `${query.status === 'open' ? 'Booth Open' : query.owner} <${query.owner}@aoausa.com>`,
     to: 'jin@aoausa.com, richard@aoausa.com, todd@aoausa.com',
@@ -75,7 +78,11 @@ router.get('/email', (req, res) => {
   })
 })
 
-mongoose.connect(mongo.uri)
+console.log('mongoURI!', mongo)
+
+mongoose.connect(mongo.uri, {
+  useMongoClient: true,
+})
 
 router.use('/api', cors(), api)
 
@@ -85,6 +92,7 @@ router.use((req, res, next) => {
   if (env === 'development') {
     global.webpackIsomorphicTools.refresh()
   }
+
   const location = req.url.replace(basename, '')
   const memoryHistory = createMemoryHistory({ basename })
   const store = configureStore({}, memoryHistory)
@@ -113,8 +121,8 @@ router.use((req, res, next) => {
             component = component.WrappedComponent
           }
           component &&
-          component[method] &&
-          promises.push(component[method]({ req, res, params, location, store }))
+            component[method] &&
+            promises.push(component[method]({ req, res, params, location, store }))
         }
       })
 
@@ -135,6 +143,7 @@ router.use((req, res, next) => {
         const initialState = store.getState()
         const assets = global.webpackIsomorphicTools.assets()
         const boothsArr = [...booths]
+
         const preState = {
           ...initialState,
           booths: boothsArr,

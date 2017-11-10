@@ -37,10 +37,7 @@ const config = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
       'process.env.PUBLIC_PATH': JSON.stringify(PUBLIC_PATH),
-      'process.env.EMAIL1': JSON.stringify(process.env.EMAIL1),
-      'process.env.EMAIL2': JSON.stringify(process.env.EMAIL2),
-      'process.env.EMAIL3': JSON.stringify(process.env.EMAIL3),
-      'process.env.EMAIL4': JSON.stringify(process.env.EMAIL4),
+      'process.env.USERS': process.env.USERS,
     }),
     new ProgressBarPlugin(),
   ],

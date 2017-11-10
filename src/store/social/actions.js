@@ -62,19 +62,25 @@ export const checkAuth = () => {
 export const socialLoginSuccess = user => {
   let authenticated
   const email = user.email
-  if (email === process.env.EMAIL1 || email === process.env.EMAIL2 || email === process.env.EMAIL3 || email === process.env.EMAIL4) {
-    authenticated = true
-    /* istanbul ignore next */
-    if (storageAvailable('localStorage')) {
-      window.localStorage.setItem('authorized', 'true')
-      window.localStorage.setItem('email', email)
-      window.localStorage.setItem('picture', user.picture)
+
+  const users = process.env.USERS
+
+  users.map((user) => {
+    if (email === user[0]) {
+      authenticated = true
+      /* istanbul ignore next */
+      if (storageAvailable('localStorage')) {
+        window.localStorage.setItem('authorized', 'true')
+        window.localStorage.setItem('email', email)
+        window.localStorage.setItem('picture', user.picture)
+      } else {
+        console.log('Local storage is not available')
+      }
     } else {
-      console.log('Local storage is not available')
+      authenticated = false
     }
-  } else {
-    authenticated = false
-  }
+  })
+
   return {
     type: SOCIAL_LOGIN_SUCCESS,
     user,

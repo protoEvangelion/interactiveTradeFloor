@@ -36,6 +36,62 @@ Rather than track everything by paper, you can use this web app to keep track of
   - 🎭 `Jest` as the testing framework.
   - ❤️ Continuous integration with `Travis-CI` and Heroku
 
+
+## Steps to run in production
+
+* Add a `.env` file to the root of directory
+  * You can add as many emails as you want
+  * It should like this:
+
+```
+GMAILUSER=yourgmail
+GMAILPASS=yourpassword
+USERS=[['fakeemail1@gmail.com', 'FirstName1'], ['fakeemail2@gmail.com', 'FirstName2'], ...]
+```
+
+* Start up mongo db by running
+
+```shell
+mongod
+```
+
+* It should start up and say listening on port `27017`
+  * If it shows a different port specify it in the `package.json` file in the root of this project under the `mongo:port` script
+
+
+* Then restore the backups into the database
+  * Navigate to `backup` directory and restore each of the two collections
+
+```shell
+mongorestore --collection laBooths --db floorplan laBooths.bson
+mongorestore --collection lbBooths --db floorplan lbBooths.bson
+```
+
+* It should say finished restoring floorplan.lbBooths (177 documents) or something like that
+
+* then type this to open up a mongo shell
+
+```shell
+mongo
+```
+
+* once inside the shell type
+
+```shell
+show dbs
+```
+
+* floorplan should show up as one of the dbs
+
+* then type
+
+```shell
+use floorplan
+```
+
+* It should say switched to db floorplan
+
+
 ## License
 
 The MIT License (MIT)

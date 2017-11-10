@@ -1,7 +1,8 @@
+import { Header, PageTemplate } from 'components'
 import React, { Component } from 'react'
-import path from 'path'
-import { PageTemplate, Header } from 'components'
+
 import { Hero } from 'containers'
+import path from 'path'
 
 class HomePage extends Component {
   constructor(props) {
@@ -12,18 +13,16 @@ class HomePage extends Component {
     this.filterOwner = this.filterOwner.bind(this)
   }
   componentDidMount() {
+    const users = process.env.USERS
+
     const checkEmail = (window) => {
       const email = window.localStorage.getItem('email')
 
-      if (email === process.env.EMAIL3) {
-        this.setState({ filter: 'Todd' })
-      } else if (email === process.env.EMAIL2) {
-        this.setState({ filter: 'Richard' })
-      } else if (email === process.env.EMAIL1) {
-        this.setState({ filter: 'Jin' })
-      } else {
-        this.setState({ filter: 'None' })
-      }
+      users.map((user) => {
+        if (email === user[0]) {
+          this.setState({ filter: user[1] })
+        }
+      })
     }
 
     /* istanbul ignore else */
@@ -33,14 +32,15 @@ class HomePage extends Component {
 
       const mockWindow = {
         localStorage: {
-          getItem: () => process.env.EMAIL1,
+          getItem: () => process.env.USERS[0][0],
         },
       }
-      checkEmail(mockWindow)
-      mockWindow.localStorage.getItem = () => process.env.EMAIL2
-      checkEmail(mockWindow)
-      mockWindow.localStorage.getItem = () => process.env.EMAIL3
-      checkEmail(mockWindow)
+
+      users.map(user => {
+        checkEmail(mockWindow)
+        mockWindow.localStorage.getItem = () => user[0]
+      })
+
       mockWindow.localStorage.getItem = () => 'hellow'
       checkEmail(mockWindow)
     } else {

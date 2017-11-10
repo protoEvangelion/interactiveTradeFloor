@@ -44,10 +44,11 @@ const config = {
   production: {
     ip: process.env.IP || 'localhost',
     port: process.env.PORT || 8080,
-    baseUrl: 'https://arc.diegohaz.com',
-    apiUrl: 'https://arc.diegohaz.com/api',
     mongo: {
-      uri: process.env.MONGODB_URI,
+      uri: `mongodb://${ip}/floorplan`,
+      options: {
+        debug: false,
+      },
     },
   },
 }
