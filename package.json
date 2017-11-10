@@ -4,7 +4,7 @@
   "private": true,
   "main": "src",
   "scripts": {
-    "env": "cross-env NODE_ENV=development MONGODB_URI=mongodb://localhost/floorplan PORT=3000",
+    "env": "cross-env NODE_ENV=production MONGODB_URI=mongodb://localhost/floorplan PORT=3000",
     "start": "npm run env node .",
     "build:clean": "rimraf \"dist/!(.git*|Procfile)**\"",
     "build:copy": "copyfiles -u 1 public/* public/**/* dist",

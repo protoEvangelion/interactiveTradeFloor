@@ -24,13 +24,9 @@ import styleSheet from 'styled-components/lib/models/StyleSheet'
 import { syncHistoryWithStore } from 'react-router-redux'
 
 const path = require('path')
+// const http = require('http')
 const https = require('https')
 const fs = require('fs')
-
-const privateKey = fs.readFileSync(path.join(__dirname, '../sslcert/server.key'), 'utf8')
-const certificate = fs.readFileSync(path.join(__dirname, '../sslcert/server.crt'), 'utf8')
-
-const credentials = { key: privateKey, cert: certificate }
 
 const nodemailer = require('nodemailer')
 
@@ -150,6 +146,7 @@ router.use((req, res, next) => {
         const styles = styleSheet.rules().map(rule => rule.cssText).join('\n')
         const initialState = store.getState()
         const assets = global.webpackIsomorphicTools.assets()
+
         const boothsArr = [...booths]
 
         const preState = {
@@ -182,7 +179,15 @@ router.use((req, res, next) => {
 })
 
 const app = express(router)
+
+const privateKey = fs.readFileSync(path.join(__dirname, '../sslcert/server.key'), 'utf8')
+const certificate = fs.readFileSync(path.join(__dirname, '../sslcert/server.crt'), 'utf8')
+
+const credentials = { key: privateKey, cert: certificate }
+
 const server = https.createServer(credentials, app)
+
+// const server = http.createServer(app)
 const io = require('socket.io')(server)
 
 io.on('connection', (socket) => {

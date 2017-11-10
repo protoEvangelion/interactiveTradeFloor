@@ -1,13 +1,11 @@
+import bodyParser from 'body-parser'
+import compression from 'compression'
+import cookieParser from 'cookie-parser'
+import { env } from 'config'
 import express from 'express'
 import forceSSL from 'express-force-ssl'
-import compression from 'compression'
 import morgan from 'morgan'
-import cookieParser from 'cookie-parser'
-import bodyParser from 'body-parser'
 import path from 'path'
-import { env } from 'config'
-
-const root = path.join(__dirname, '../../..')
 
 export default (routes) => {
   const app = express()
@@ -26,7 +24,7 @@ export default (routes) => {
     app.use(compression())
     app.use(morgan('dev'))
     app.use(cookieParser())
-    app.use(express.static(path.join(root, env === 'development' ? 'public' : 'dist')))
+    app.use(express.static(path.join(process.cwd(), env === 'development' ? 'public' : 'dist')))
   }
 
   app.use(bodyParser.urlencoded({ extended: false }))
