@@ -54,6 +54,7 @@ const config = {
 }
 
 if (DEBUG) {
+  console.log('DEBUG MODE')
   config.entry.app.unshift(
     `webpack-dev-server/client?http://${ip}:${port}/`,
     'webpack/hot/only-dev-server',
