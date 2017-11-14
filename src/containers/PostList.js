@@ -1,9 +1,10 @@
-import React, { PropTypes, Component } from 'react'
-import { connect } from 'react-redux'
+import { POST_LIST_READ, postListReadRequest } from 'store/actions'
+import React, { Component } from 'react'
 import { fromEntities, fromPost, fromStatus } from 'store/selectors'
-import { postListReadRequest, POST_LIST_READ } from 'store/actions'
 
 import { PostList } from 'components'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
 class PostListContainer extends Component {
   static propTypes = {

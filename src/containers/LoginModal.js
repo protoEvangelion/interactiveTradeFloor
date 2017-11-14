@@ -1,9 +1,11 @@
-import React, { PropTypes, Component } from 'react'
-import { connect } from 'react-redux'
+import React, { Component } from 'react'
 import { fbAppId, googleClientId } from 'config'
-import { fromSocial } from 'store/selectors'
-import { socialLoginPrepare, socialLoginRequest, modalHide } from 'store/actions'
+import { modalHide, socialLoginPrepare, socialLoginRequest } from 'store/actions'
+
 import { LoginModal } from 'components'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { fromSocial } from 'store/selectors'
 
 class LoginModalContainer extends Component {
   static propTypes = {

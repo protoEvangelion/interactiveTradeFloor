@@ -1,5 +1,6 @@
-import { take, put, call, fork } from 'redux-saga/effects'
 import * as actions from './actions'
+
+import { call, fork, put, take } from 'redux-saga/effects'
 
 export const promises = {
   fbLogin: (options) => new Promise((resolve, reject) => {
@@ -76,6 +77,7 @@ export function* loginGoogle({ scope = 'profile', ...options } = {}, emails) {
     const picture = yield call([profile, profile.getImageUrl])
     yield put(actions.socialLoginSuccess({ email, name, picture }, emails))
   } catch (e) {
+    console.log('Error signing into Google', e)
     yield put(actions.socialLoginFailure(e))
   }
 }

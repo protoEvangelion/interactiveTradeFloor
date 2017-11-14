@@ -62,11 +62,10 @@ export const checkAuth = () => {
 export const socialLoginSuccess = user => {
   let authenticated
   const email = user.email
-
   const users = process.env.USERS
 
-  users.map((user) => {
-    if (email === user[0]) {
+  users.map((u) => {
+    if (email === u[0]) {
       authenticated = true
       /* istanbul ignore next */
       if (storageAvailable('localStorage')) {
@@ -94,4 +93,10 @@ export const socialLoginFailure = error => ({
   error,
 })
 
-export const socialLogout = () => ({ type: SOCIAL_LOGOUT })
+export const socialLogout = () => {
+  window.localStorage.removeItem('authorized')
+  window.localStorage.removeItem('email')
+  window.localStorage.removeItem('picture')
+
+  return { type: SOCIAL_LOGOUT }
+}

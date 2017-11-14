@@ -1,6 +1,7 @@
-import { PropTypes } from 'react'
-import styled from 'styled-components'
 import { font, palette } from 'styled-theme'
+
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
 const Paragraph = styled.p`
   font-family: ${font('primary')};

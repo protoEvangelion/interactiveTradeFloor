@@ -18,7 +18,7 @@ class HomePage extends Component {
     const checkEmail = (window) => {
       const email = window.localStorage.getItem('email')
 
-      users.map((user) => {
+      users.forEach((user) => {
         if (email === user[0]) {
           this.setState({ filter: user[1] })
         }

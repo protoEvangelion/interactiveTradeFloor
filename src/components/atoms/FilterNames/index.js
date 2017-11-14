@@ -4,6 +4,8 @@ import PropTypes from 'prop-types'
 import onClickOutside from 'react-onclickoutside'
 import styled from 'styled-components'
 
+require('dotenv').config()
+
 const Names = styled.div`
   position: absolute;
   background: white;
@@ -30,9 +32,11 @@ class FilterNames extends Component {
     return (
       <Names>
         <Name onClick={() => this.props.onSelect('None')}>None</Name>
-        <Name onClick={() => this.props.onSelect('Todd')}>Todd</Name>
-        <Name onClick={() => this.props.onSelect('Richard')}>Richard</Name>
-        <Name onClick={() => this.props.onSelect('Jin')}>Jin</Name>
+        {process.env.USERS.map(user => {
+          const firstName = user[1]
+          return <Name key={firstName} onClick={() => this.props.onSelect(firstName)}>{firstName}</Name>
+        }
+        )}
       </Names>
     )
   }

@@ -4,17 +4,31 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import styled from 'styled-components'
 
+require('dotenv').config()
+
 export const determineColor = (filter, owner, status) => {
   if ((filter !== 'None' && filter !== owner) || status === 'open' || status === 'n/a') {
     return 'black'
-  } else if (owner === 'Todd') {
-    return 'rgb(0, 178, 14)' // green
-  } else if (owner === 'Richard') {
-    return 'rgb(8, 0, 255)' // blue
-  } else if (owner === 'Jin') {
-    return 'rgb(255, 0, 170)' // pink
   }
-  return 'black'
+
+  process.env.USERS.forEach((user, i) => {
+    const firstName = user[1]
+    // console.log(owner, firstName)
+    if (owner === firstName && i === 0) {
+      return 'rgb(0, 178, 14)' // green
+    } else if (owner === firstName && i === 1) {
+      return 'rgb(8, 0, 255)' // blue
+    } else if (owner === firstName && i === 2) {
+      return 'rgb(255, 0, 170)' // pink
+    } else if (owner === firstName && i === 3) {
+      return 'yellow'
+    } else if (owner === firstName && i === 4) {
+      return 'red'
+    } else {
+      return 'black'
+    }
+  })
+
 }
 
 export const determineY = (y, row) => {

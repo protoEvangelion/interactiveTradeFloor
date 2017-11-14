@@ -32,7 +32,7 @@ const nodemailer = require('nodemailer')
 
 require('dotenv').config()
 
-console.log('NODE_ENV', process.env.NODE_ENV)
+console.log('NODE_ENV ===>', process.env.NODE_ENV)
 
 const transporter = nodemailer.createTransport({
   service: 'gmail',
@@ -81,8 +81,6 @@ router.get('/email', (req, res) => {
     res.status(200).send('success')
   })
 })
-
-console.log('mongoURI!', mongo)
 
 mongoose.connect(mongo.uri, {
   useMongoClient: true,
@@ -146,7 +144,7 @@ router.use((req, res, next) => {
         const styles = styleSheet.rules().map(rule => rule.cssText).join('\n')
         const initialState = store.getState()
         const assets = global.webpackIsomorphicTools.assets()
-
+        console.log('assets ===>', assets.javascript)
         const boothsArr = [...booths]
 
         const preState = {

@@ -1,8 +1,9 @@
-import React, { PropTypes, Component } from 'react'
-import styled from 'styled-components'
+import React, { Component } from 'react'
 
 import { IconButton } from 'components'
 import { Modal } from 'containers'
+import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
 const Wrapper = styled.div`
   display: flex;
@@ -21,9 +22,7 @@ class LoginModal extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (!this.props.user && nextProps.user) {
-      this.props.onClose()
-    }
+    this.props.onClose()
   }
 
   render() {

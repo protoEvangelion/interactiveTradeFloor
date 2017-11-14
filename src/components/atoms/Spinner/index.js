@@ -1,5 +1,6 @@
-import { PropTypes } from 'react'
 import styled, { keyframes } from 'styled-components'
+
+import PropTypes from 'prop-types'
 import { palette } from 'styled-theme'
 
 const spin = keyframes`

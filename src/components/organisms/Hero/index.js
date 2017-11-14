@@ -74,7 +74,7 @@ export default class Hero extends Component {
   componentWillMount() /* istanbul ignore next */ {
     const url = process.env.NODE_ENV
       ? 'https://aoatradeshow.herokuapp.com/'
-      : 'http://localhost:3000'
+      : 'https://localhost:3000'
     this.socket = io(url)
     this.socket.on('connect', () => {
       this.socket.on('save', (data) => {
@@ -97,7 +97,6 @@ export default class Hero extends Component {
   }
   /* istanbul ignore next */
   boothClick(num, i, company, description, owner, status) {
-    console.log(num, i, company, description, owner, status)
     this.setState({
       activeBooth: num,
       modalOpen: true,

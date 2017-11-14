@@ -1,7 +1,8 @@
-import { PropTypes } from 'react'
-import styled from 'styled-components'
 import { font, palette } from 'styled-theme'
+
+import PropTypes from 'prop-types'
 import { ifProp } from 'styled-tools'
+import styled from 'styled-components'
 
 const Block = styled.div`
   font-family: ${font('primary')};

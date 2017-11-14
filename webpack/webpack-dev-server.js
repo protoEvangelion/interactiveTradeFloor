@@ -10,6 +10,7 @@ new WebpackDevServer(webpack(config), {
   publicPath: config.output.publicPath,
   hot: true,
   host: ip,
+  https: true,
   stats: false,
   historyApiFallback: true,
   contentBase: 'public',

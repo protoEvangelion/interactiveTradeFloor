@@ -25,7 +25,7 @@ const config = {
   output: {
     path: path.join(__dirname, '../dist'),
     filename: '[name].[hash].js',
-    publicPath: DEBUG ? `http://${ip}:${port}/` : PUBLIC_PATH,
+    publicPath: DEBUG ? `https://${ip}:${port}/` : PUBLIC_PATH,
   },
   node: {
     fs: 'empty',

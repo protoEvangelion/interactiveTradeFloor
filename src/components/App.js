@@ -23,7 +23,6 @@ const App = ({ children, location }) => {
           { name: 'msapplication-TileColor', content: '#ffffff' },
           { name: 'msapplication-TileImage', content: '/ms-icon-144x144.png' },
           { name: 'theme-color', content: '#ffffff' },
-          { property: 'og:image', content: 'https://aoatradeshow.herokuapp.com/pictures/logo.jpg' },
           { property: 'og:image:type', content: 'image/png' },
           { property: 'og:image:width', content: '1200' },
           { property: 'og:image:height', content: '630' },

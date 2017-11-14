@@ -1,6 +1,6 @@
-import { PropTypes } from 'react'
-import styled from 'styled-components'
+import PropTypes from 'prop-types'
 import { palette } from 'styled-theme'
+import styled from 'styled-components'
 
 const HorizontalRule = styled.hr`
   border: 1px solid ${palette(1, true)};

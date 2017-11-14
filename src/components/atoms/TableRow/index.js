@@ -1,6 +1,6 @@
-import { PropTypes } from 'react'
-import styled from 'styled-components'
+import PropTypes from 'prop-types'
 import { palette } from 'styled-theme'
+import styled from 'styled-components'
 
 const backgroundColor = ({ filled }) => palette('grayscale', filled ? 1 : 0, true)
 
