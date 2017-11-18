@@ -38,6 +38,9 @@ const config = {
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
       'process.env.PUBLIC_PATH': JSON.stringify(PUBLIC_PATH),
       'process.env.USERS': process.env.USERS,
+      'process.env.USER_NAMES': process.env.USER_NAMES.split(','),
+      'process.env.USER_EMAILS': process.env.USER_EMAILS.split(','),
+      'process.env.USER_COLORS': process.env.USER_COLORS.split(','),
     }),
     new ProgressBarPlugin(),
   ],
@@ -56,7 +59,7 @@ const config = {
 if (DEBUG) {
   console.log('DEBUG MODE')
   config.entry.app.unshift(
-    `webpack-dev-server/client?http://${ip}:${port}/`,
+    `webpack-dev-server/client?https://${ip}:${port}/`,
     'webpack/hot/only-dev-server',
     'react-hot-loader/patch'
   )

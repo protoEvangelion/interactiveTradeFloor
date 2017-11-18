@@ -8,6 +8,7 @@ import { Provider } from 'react-redux'
 import React from 'react'
 import { Router } from 'express'
 import URL from 'url-parse'
+import _ from 'lodash'
 import api from 'api'
 import configureStore from 'store/configure'
 import cors from 'cors'
@@ -34,11 +35,13 @@ require('dotenv').config()
 
 console.log('NODE_ENV ===>', process.env.NODE_ENV)
 
+const TO = ''
+
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: process.env.GMAILUSER,
-    pass: process.env.GMAILPASS,
+    user: env.GMAIL_USER,
+    pass: env.GMAIL_PASS,
   },
 })
 
@@ -55,9 +58,10 @@ router.get('/email', (req, res) => {
     ${query.description === '' ? '' : `Info: ${query.description}`}
     `,
   }
+
   const mailOptions = {
     from: `${query.status === 'open' ? 'Booth Open' : query.owner} <${query.owner}@aoausa.com>`,
-    to: 'jin@aoausa.com, richard@aoausa.com, todd@aoausa.com',
+    to: 'ryantgarant@gmail.com', // process.env.EMAILS
     subject: `${query.num}=${query.status === 'open' ? 'Open' : query.company}`,
     text: text.data,
     html: `
@@ -201,5 +205,6 @@ server.listen(port, (error) => {
     console.info(`local: http://${ip}:${port}`)
   }
 })
+
 
 export default app

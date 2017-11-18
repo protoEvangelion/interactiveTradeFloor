@@ -32,7 +32,7 @@ class FilterNames extends Component {
     return (
       <Names>
         <Name onClick={() => this.props.onSelect('None')}>None</Name>
-        {process.env.USERS.map(user => {
+        {process.env.USERNAMES.map(user => {
           const firstName = user[1]
           return <Name key={firstName} onClick={() => this.props.onSelect(firstName)}>{firstName}</Name>
         }

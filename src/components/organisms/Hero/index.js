@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 
 import { BoothForm } from 'containers'
 import PropTypes from 'prop-types'
+import _ from 'lodash'
 import axios from 'axios'
 import io from 'socket.io-client'
 import styled from 'styled-components'
@@ -54,19 +55,32 @@ export default class Hero extends Component {
   constructor(props) {
     super(props)
 
+    const userNames = process.env.USER_NAMES.split(',')
+    const userColors = process.env.USER_COLORS.split(',')
+    const colorMap = {}
+
+    userNames.forEach((user, i) => {
+      if (userColors[i]) {
+        colorMap[user] = userColors[i]
+      } else {
+        colorMap[user] = 'black'
+      }
+    })
+
     this.state = {
-      booths: [],
-      email: false,
-      leftMargin: 35,
-      dimension: 55,
-      columns: 20,
       activeBooth: 0,
       boothIndex: 0,
+      booths: [],
+      colorMap: colorMap,
+      columns: 20,
       company: '',
       description: '',
+      dimension: 55,
+      email: false,
+      leftMargin: 35,
+      modalOpen: false,
       owner: '',
       status: '',
-      modalOpen: false,
     }
 
     this.boothClick = this.boothClick.bind(this)
@@ -191,22 +205,23 @@ export default class Hero extends Component {
                   <div key={`ctn_${booth._id}`}>
                     <Booth
                       boothClick={this.boothClick}
+                      co={booth.company}
+                      col={booth.col}
+                      colorMap={this.state.colorMap}
+                      description={booth.description}
+                      dim={dim}
                       filter={this.props.filter}
                       i={i}
-                      tip={`tool_${booth._id}`}
                       key={booth._id}
                       num={booth.num}
-                      co={booth.company}
-                      description={booth.description}
-                      row={booth.row}
-                      col={booth.col}
-                      x={(booth.col * dim) + this.state.leftMargin}
-                      y={(booth.row * dim)}
-                      dim={dim}
-                      status={booth.status}
-                      type={booth.type}
                       owner={booth.owner}
                       path={this.state.path}
+                      row={booth.row}
+                      status={booth.status}
+                      tip={`tool_${booth._id}`}
+                      type={booth.type}
+                      x={(booth.col * dim) + this.state.leftMargin}
+                      y={(booth.row * dim)}
                     />
                     <Tooltip
                       _id={booth._id}

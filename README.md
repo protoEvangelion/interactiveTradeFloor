@@ -49,7 +49,9 @@ GMAILPASS=yourpassword
 USERS=[['fakeemail1@gmail.com', 'FirstName1'], ['fakeemail2@gmail.com', 'FirstName2'], ...]
 ```
 
-* Start up mongo db by running
+* If you want to **change colors **they are in the `src/components/molecules/Booth/index.js` file
+
+* Make sure to install [MongoDB](https://www.mongodb.com/download-center?jmp=nav#community) and start it up by running
 
 ```shell
 mongod

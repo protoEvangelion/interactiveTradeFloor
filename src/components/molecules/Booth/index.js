@@ -11,24 +11,25 @@ export const determineColor = (filter, owner, status) => {
     return 'black'
   }
 
-  process.env.USERS.forEach((user, i) => {
-    const firstName = user[1]
-    // console.log(owner, firstName)
-    if (owner === firstName && i === 0) {
-      return 'rgb(0, 178, 14)' // green
-    } else if (owner === firstName && i === 1) {
-      return 'rgb(8, 0, 255)' // blue
-    } else if (owner === firstName && i === 2) {
-      return 'rgb(255, 0, 170)' // pink
-    } else if (owner === firstName && i === 3) {
-      return 'yellow'
-    } else if (owner === firstName && i === 4) {
-      return 'red'
-    } else {
-      return 'black'
-    }
-  })
+  const users = process.env.USERS
 
+  if (users) {
+    for (let i = 0; i < users.length; i++) {
+      const firstName = users[i][1]
+
+      if (owner === firstName && i === 0) {
+        return 'rgb(0, 178, 14)' // green
+      } else if (owner === firstName && i === 1) {
+        return 'rgb(8, 0, 255)' // blue
+      } else if (owner === firstName && i === 2) {
+        return 'rgb(255, 0, 170)' // pink
+      } else if (owner === firstName && i === 3) {
+        return 'yellow'
+      } else if (owner === firstName && i === 4) {
+        return 'red'
+      }
+    }
+  }
 }
 
 export const determineY = (y, row) => {
