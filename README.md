@@ -108,6 +108,37 @@ use floorplan
 * It should say switched to db floorplan
 
 
+### Changing booth layouts
+
+* Booth locations are computed based on **row**, **column** and **booth type (single or double)**
+
+```javascript
+[  
+  {  
+    "_id":"5910ae25529a13a5bf988a5e",
+    "num":630,
+    "type":"single",
+    "row":1,
+    "col":13,
+    "owner":"Ryan",
+    "status":"holding",
+    "company":"Cool Company",
+    "description":"The most ultra cool co in existence!"
+  },
+  {  
+    "_id":"5910b02a529a13a5bf988af7",
+    "num":531,
+    "type":"single",
+    "row":1,
+    "col":12,
+    "owner":"None",
+    "status":"good",
+    "company":"Another cool co",
+    "description":""
+  },
+```
+
+
 ## License
 
 The MIT License (MIT)

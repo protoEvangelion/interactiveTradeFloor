@@ -9,7 +9,7 @@ import io from 'socket.io-client'
 import styled from 'styled-components'
 
 const logo = require('../../../../public/pictures/aoalogo.jpg')
-const powertalk1 = require('../../../../public/pictures/arena1.jpg')
+// const powertalk1 = require('../../../../public/pictures/arena1.jpg')
 const powertalk2 = require('../../../../public/pictures/arena2.jpg')
 
 const Wrapper = styled.div`
@@ -29,10 +29,10 @@ const Logo = styled.img`
   transform: translate(${props => props.path === 'la' ? 440 : 610}px, ${props => props.dim * 9}px);
 `
 
-const Powertalk1 = styled.img`
-  transform: translate(${props => props.path === 'la' ? -190 : -135}px, 500px);
-  width: 100px;
-`
+// const Powertalk1 = styled.img`
+//   transform: translate(${props => props.path === 'la' ? -190 : -135}px, 500px);
+//   width: 100px;
+// `
 
 const Powertalk2 = styled.img`
   transform: translate(${(props) => props.path === 'la' ? 695 : 700}px, 500px);
@@ -234,7 +234,6 @@ export default class Hero extends Component {
                 )
               })}
               <Logo className="logo" src={logo} alt="AOA logo" dim={dim} path={this.state.path} />
-              <Powertalk1 src={powertalk1} alt="Power Talk 1" dim={dim} path={this.state.path} />
               <Powertalk2 src={powertalk2} alt="Power Talk 2" dim={dim} path={this.state.path} />
             </FloorplanCtn>
           </Wrapper>

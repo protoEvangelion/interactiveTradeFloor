@@ -14,6 +14,7 @@ const Html = ({ styles, assets, state, content }) => {
         {helmet.meta.toComponent()}
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         {helmet.link.toComponent()}
+        {helmet.script.toComponent()}
         <style dangerouslySetInnerHTML={{ __html: styles }} />
       </head>
       <body>

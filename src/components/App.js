@@ -42,6 +42,10 @@ const App = ({ children, location }) => {
           { rel: 'icon', type: 'image/png', sizes: '96x96', href: '/favicon-96x96.png' },
           { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicon-16x16.png' },
           { rel: 'manifest', href: '/manifest.json' },
+          { rel: 'stylesheet', href: '/custom.css' },
+        ]}
+        script={[
+          { src: '/custom.js', type: 'text/javascript' }
         ]}
       />
       <ThemeProvider theme={theme}>{children}</ThemeProvider>
