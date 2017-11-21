@@ -5,14 +5,16 @@ const ip = process.env.IP || 'localhost'
 const port = process.env.PORT || 3000
 const basename = `/${process.env.PUBLIC_PATH || ''}`.replace('//', '/')
 
+require('dotenv').config()
+
 /* istanbul ignore next */
 const config = {
   all: {
     env: process.env.NODE_ENV || 'development',
     baseUrl: `http://${ip}:${port}${basename}`,
     apiUrl: `http://${ip}:${port}/api`,
-    fbAppId: '991453140998882',
-    googleClientId: '574611677035-1ku4apgtmudpr2eeemaf9vff0tsokhrp.apps.googleusercontent.com',
+    fbAppId: process.env.FB_ID,
+    googleClientId: process.env.GOOGLE_ID,
     mongo: {
       options: {
         db: {

@@ -10,11 +10,11 @@
 
 ## Tradeshow Floorplan Manager
 
-This is a project built to simplify the trade show managing process.
+This is a project that's totally dynamic and built to simplify the trade show managing process.
 
 It helps sales people consolidate their efforts and collaborate in real time with team mates.
 
-Rather than track everything by paper, you can use this web app to keep track of all booths that you have sold or still need to collect on.  You can also differentiate between what you have sold along with what your teammates have sold!
+Rather than track everything by paper, you can use this web app to keep track of all booths that you have sold or still need to collect on.  You can also **differentiate** between what you have sold along with what your teammates have sold!
 
 
 ## Features
@@ -39,17 +39,31 @@ Rather than track everything by paper, you can use this web app to keep track of
 
 ## Steps to run in production
 
-* Add a `.env` file to the root of directory
-  * You can add as many emails as you want
-  * It should like this:
+### Environment Variables
+
+* Here is where the dynamic part comes in
+  * Simply add a `.env` file to the root of directory
+  * You can add as many **emails, users, colors** as you want
+  * Dot not use **string** literals or **spaces**
 
 ```
-GMAILUSER=yourgmail
-GMAILPASS=yourpassword
-USERS=[['fakeemail1@gmail.com', 'FirstName1'], ['fakeemail2@gmail.com', 'FirstName2'], ...]
+FB_ID=your_facebook_app_id
+GOOGLE_ID=your_google_app_id
+GMAIL_USER=your_gmail_email
+GMAIL_PASS=your_gmail_password
+USER_EMAILS=email1,email2,...
+USER_NAMES=name1,name2,...
+USER_COLORS=#00B20E,#0800FF,...
 ```
 
-* If you want to **change colors **they are in the `src/components/molecules/Booth/index.js` file
+### Email
+
+* Setting up email functionality is super simple
+  * Just add the config as above
+  * *If you need help setting up your gmail to send emails, we use* [Nodemailer so check out their docs](https://nodemailer.com/about/)
+
+
+### MongoDB
 
 * Make sure to install [MongoDB](https://www.mongodb.com/download-center?jmp=nav#community) and start it up by running
 

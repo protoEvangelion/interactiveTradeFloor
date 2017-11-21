@@ -35,6 +35,8 @@ const config = {
   },
   plugins: [
     new webpack.DefinePlugin({
+      'process.env.FB_ID': JSON.stringify(process.env.FB_ID),
+      'process.env.GOOGLE_ID': JSON.stringify(process.env.GOOGLE_ID),
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
       'process.env.PUBLIC_PATH': JSON.stringify(PUBLIC_PATH),
       'process.env.USER_EMAILS': JSON.stringify(process.env.USER_EMAILS),

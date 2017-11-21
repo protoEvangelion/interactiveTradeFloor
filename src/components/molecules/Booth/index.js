@@ -78,7 +78,7 @@ const Booth = ({ boothClick, colorMap, num, filter, i, co, description, type, ow
     <Wrapper
       className="boothCtn"
       colorMap={colorMap}
-      id="boothCtn"
+      id={type}
       onClick={() => boothClick(num, i, co, description, owner, status)}
       value={num}
       type={type}
