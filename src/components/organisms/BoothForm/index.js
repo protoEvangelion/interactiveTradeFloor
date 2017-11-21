@@ -25,9 +25,9 @@ class BoothForm extends Component {
         <Field name="company" label="Company Name" defaultValue={company} component={ReduxField} />
         <Field name="owner" label="Owner" component={ReduxField} type="select" value={owner}>
           <option value="None">None</option>
-          <option value="Todd">Todd</option>
-          <option value="Richard">Richard</option>
-          <option value="Jin">Jin</option>
+          {process.env.USER_NAMES.split(',').map(user => (
+            <option key={user} value={user}>{user}</option>
+          ))}
         </Field>
         <Field name="status" label="Status" component={ReduxField} type="select" value={status}>
           <option value="n/a">N/A</option>

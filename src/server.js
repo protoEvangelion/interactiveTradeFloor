@@ -40,8 +40,8 @@ const TO = ''
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: env.GMAIL_USER,
-    pass: env.GMAIL_PASS,
+    user: process.env.GMAIL_USER,
+    pass: process.env.GMAIL_PASS,
   },
 })
 
@@ -148,7 +148,7 @@ router.use((req, res, next) => {
         const styles = styleSheet.rules().map(rule => rule.cssText).join('\n')
         const initialState = store.getState()
         const assets = global.webpackIsomorphicTools.assets()
-        console.log('assets ===>', assets.javascript)
+
         const boothsArr = [...booths]
 
         const preState = {
@@ -202,7 +202,7 @@ server.listen(port, (error) => {
   if (error) {
     console.error(error)
   } else {
-    console.info(`local: http://${ip}:${port}`)
+    console.info(`local: https://${ip}:${port}`)
   }
 })
 

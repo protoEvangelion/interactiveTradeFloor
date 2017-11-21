@@ -13,14 +13,14 @@ class HomePage extends Component {
     this.filterOwner = this.filterOwner.bind(this)
   }
   componentDidMount() {
-    const users = process.env.USERS
+    const users = process.env.USER_EMAILS.split(',')
 
     const checkEmail = (window) => {
       const email = window.localStorage.getItem('email')
 
-      users.forEach((user) => {
-        if (email === user[0]) {
-          this.setState({ filter: user[1] })
+      users.forEach(user => {
+        if (email === user) {
+          this.setState({ filter: user })
         }
       })
     }
@@ -32,13 +32,13 @@ class HomePage extends Component {
 
       const mockWindow = {
         localStorage: {
-          getItem: () => process.env.USERS[0][0],
+          getItem: () => process.env.USER_NAMES.split(',')[0],
         },
       }
 
       users.map(user => {
         checkEmail(mockWindow)
-        mockWindow.localStorage.getItem = () => user[0]
+        mockWindow.localStorage.getItem = () => user
       })
 
       mockWindow.localStorage.getItem = () => 'hellow'

@@ -61,16 +61,15 @@ export const checkAuth = () => {
 
 export const socialLoginSuccess = user => {
   let authenticated
-  const email = user.email
-  const users = process.env.USERS
+  const emails = process.env.USER_EMAILS.split(',')
 
-  users.map((u) => {
-    if (email === u[0]) {
+  emails.map(email => {
+    if (user.email === email) {
       authenticated = true
       /* istanbul ignore next */
       if (storageAvailable('localStorage')) {
         window.localStorage.setItem('authorized', 'true')
-        window.localStorage.setItem('email', email)
+        window.localStorage.setItem('email', user.email)
         window.localStorage.setItem('picture', user.picture)
       } else {
         console.log('Local storage is not available')

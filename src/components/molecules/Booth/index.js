@@ -4,31 +4,15 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import styled from 'styled-components'
 
-require('dotenv').config()
-
-export const determineColor = (filter, owner, status) => {
+export const determineColor = (filter, owner, status, colorMap) => {
   if ((filter !== 'None' && filter !== owner) || status === 'open' || status === 'n/a') {
     return 'black'
   }
 
-  const users = process.env.USERS
-
-  if (users) {
-    for (let i = 0; i < users.length; i++) {
-      const firstName = users[i][1]
-
-      if (owner === firstName && i === 0) {
-        return 'rgb(0, 178, 14)' // green
-      } else if (owner === firstName && i === 1) {
-        return 'rgb(8, 0, 255)' // blue
-      } else if (owner === firstName && i === 2) {
-        return 'rgb(255, 0, 170)' // pink
-      } else if (owner === firstName && i === 3) {
-        return 'yellow'
-      } else if (owner === firstName && i === 4) {
-        return 'red'
-      }
-    }
+  if (colorMap[owner]) {
+    return colorMap[owner]
+  } else {
+    return 'black'
   }
 }
 
@@ -84,15 +68,16 @@ const Wrapper = styled.div`
   background-color: ${props => props.status === 'open' ? 'yellow' : 'white'};
   width: ${props => determineWidth(props.type, props.dim)};
   height: ${props => determineHeight(props.type, props.dim, props.path)};
-  border: 2px solid ${props => determineColor(props.filter, props.owner, props.status)};
+  border: 2px solid ${props => determineColor(props.filter, props.owner, props.status, props.colorMap)};
   overflow: hidden;
   transform: translate(${props => determineX(props.x, props.col, props.type, props.dim, props.path)}px, ${props => determineY(props.y, props.row)}px);
 `
 
-const Booth = ({ boothClick, num, filter, i, co, description, type, owner, row, col, x, y, dim, status, tip, path }) => {
+const Booth = ({ boothClick, colorMap, num, filter, i, co, description, type, owner, row, col, x, y, dim, status, tip, path }) => {
   return (
     <Wrapper
       className="boothCtn"
+      colorMap={colorMap}
       id="boothCtn"
       onClick={() => boothClick(num, i, co, description, owner, status)}
       value={num}
