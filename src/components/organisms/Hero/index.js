@@ -3,14 +3,9 @@ import React, { Component } from 'react'
 
 import { BoothForm } from 'containers'
 import PropTypes from 'prop-types'
-import _ from 'lodash'
 import axios from 'axios'
 import io from 'socket.io-client'
 import styled from 'styled-components'
-
-const logo = require('../../../../public/pictures/aoalogo.jpg')
-// const powertalk1 = require('../../../../public/pictures/arena1.jpg')
-const powertalk2 = require('../../../../public/pictures/arena2.jpg')
 
 const Wrapper = styled.div`
   display: flex;
@@ -23,20 +18,6 @@ const Wrapper = styled.div`
 const FloorplanCtn = styled.div`
   width: 1060px;
   margin-left: ${(props) => props.path === 'lb' ? -100 : 0}px;
-`
-
-const Logo = styled.img`
-  transform: translate(${props => props.path === 'la' ? 440 : 610}px, ${props => props.dim * 9}px);
-`
-
-// const Powertalk1 = styled.img`
-//   transform: translate(${props => props.path === 'la' ? -190 : -135}px, 500px);
-//   width: 100px;
-// `
-
-const Powertalk2 = styled.img`
-  transform: translate(${(props) => props.path === 'la' ? 695 : 700}px, 500px);
-  width: 100px;
 `
 
 const StyledSpinner = styled(Spinner) `
@@ -166,7 +147,7 @@ export default class Hero extends Component {
         .then((res) => {
           data.index = this.state.boothIndex
           this.socket.emit('save', data)
-          console.log(res)
+          console.log(`Saved successfully ${res}`)
         })
         .catch((err) => console.log(err))
     } else {
@@ -233,8 +214,6 @@ export default class Hero extends Component {
                   </div>
                 )
               })}
-              <Logo className="logo" src={logo} alt="AOA logo" dim={dim} path={this.state.path} />
-              <Powertalk2 src={powertalk2} alt="Power Talk 2" dim={dim} path={this.state.path} />
             </FloorplanCtn>
           </Wrapper>
         )

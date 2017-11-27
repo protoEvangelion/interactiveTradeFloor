@@ -1,7 +1,8 @@
+import Booth, { determineColor, determineHeight, determineWidth, determineX } from '.'
+
 import React from 'react'
 import { shallow } from 'enzyme'
 import sinon from 'sinon'
-import Booth, { determineColor, determineX, determineWidth, determineHeight } from '.'
 
 const wrap = (props = {}) => shallow(<Booth {...props} />).dive()
 
@@ -45,21 +46,14 @@ describe('<Booth />', () => {
   })
 
   it('determines X coord', () => {
-    expect(determineX(1, 1, 'ptArena1', 1)).toEqual(-6)
+    expect(determineX(1, 1)).toEqual(-6)
   })
 
   it('determines Width', () => {
     expect(determineWidth('double', 1)).toEqual('5px')
-    expect(determineWidth('AOABooth', 1)).toEqual('15px')
-    expect(determineWidth('Seminar', 1)).toEqual('34px')
-    expect(determineWidth('ptArena1', 1)).toEqual('14px')
-    expect(determineWidth('ptArena2', 1)).toEqual('14px')
   })
 
   it('determines Height', () => {
-    expect(determineHeight('AOABooth', 1)).toEqual('9px')
-    expect(determineHeight('Seminar', 1)).toEqual('21px')
-    expect(determineHeight('ptArena1', 1)).toEqual('9px')
-    expect(determineHeight('ptArena2', 1)).toEqual('9px')
+    expect(determineHeight(1)).toEqual('9px')
   })
 })

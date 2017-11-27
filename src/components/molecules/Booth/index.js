@@ -11,55 +11,25 @@ export const determineColor = (filter, owner, status, colorMap) => {
 
   if (colorMap[owner]) {
     return colorMap[owner]
-  } else {
-    return 'black'
   }
+
+  return 'black'
 }
 
-export const determineY = (y, row) => {
-  return y + (row * 3.1)
-}
+export const determineY = (y, row) => y + (row * 3.1)
 
-export const determineX = (x, col, type, dim, path) => {
-  switch (type) {
-    case 'ptArena1':
-      return path === 'la' ? x + 3 : (x - 5) - (dim * 2)
-    default:
-      return x + (col * 3.1)
-  }
-}
+export const determineX = (x, col) => x + (col * 3.1)
 
 export const determineWidth = (type, dim) => {
   switch (type) {
     case 'double':
       return `${(dim * 2) + 3}px`
-    case 'AOABooth':
-      return `${(dim * 5) + 10}px`
-    case 'Seminar':
-      return `${(dim * 9) + 25}px`
-    case 'ptArena1':
-      return `${(dim * 4) + 10}px`
-    case 'ptArena2':
-      return `${(dim * 4) + 10}px`
     default:
       return `${dim}px`
   }
 }
 
-export const determineHeight = (type, dim) => {
-  switch (type) {
-    case 'AOABooth':
-      return `${(dim * 3) + 6}px`
-    case 'Seminar':
-      return `${(dim * 6) + 15}px`
-    case 'ptArena1':
-      return `${(dim * 3) + 6}px`
-    case 'ptArena2':
-      return `${(dim * 3) + 6}px`
-    default:
-      return `${dim}px`
-  }
-}
+export const determineHeight = (dim) => `${dim}px`
 
 const Wrapper = styled.div`
   display: inline-block;
@@ -67,10 +37,10 @@ const Wrapper = styled.div`
   position: absolute;
   background-color: ${props => props.status === 'open' ? 'yellow' : 'white'};
   width: ${props => determineWidth(props.type, props.dim)};
-  height: ${props => determineHeight(props.type, props.dim, props.path)};
+  height: ${props => determineHeight(props.dim)};
   border: 2px solid ${props => determineColor(props.filter, props.owner, props.status, props.colorMap)};
   overflow: hidden;
-  transform: translate(${props => determineX(props.x, props.col, props.type, props.dim, props.path)}px, ${props => determineY(props.y, props.row)}px);
+  transform: translate(${props => determineX(props.x, props.col)}px, ${props => determineY(props.y, props.row)}px);
 `
 
 const Booth = ({ boothClick, colorMap, num, filter, i, co, description, type, owner, row, col, x, y, dim, status, tip, path }) => {
@@ -100,21 +70,22 @@ const Booth = ({ boothClick, colorMap, num, filter, i, co, description, type, ow
 
 Booth.propTypes = {
   boothClick: PropTypes.func.isRequired,
-  num: PropTypes.number,
+  co: PropTypes.string,
+  col: PropTypes.number.isRequired,
+  colorMap: PropTypes.object.isRequired,
+  description: PropTypes.string,
+  dim: PropTypes.number.isRequired,
   filter: PropTypes.string,
   i: PropTypes.number,
-  co: PropTypes.string,
-  description: PropTypes.string,
-  type: PropTypes.string,
+  num: PropTypes.number,
   owner: PropTypes.string,
-  status: PropTypes.string,
+  path: PropTypes.string.isRequired,
   row: PropTypes.number.isRequired,
-  col: PropTypes.number.isRequired,
+  status: PropTypes.string,
+  tip: PropTypes.string.isRequired,
+  type: PropTypes.string,
   x: PropTypes.number.isRequired,
   y: PropTypes.number.isRequired,
-  dim: PropTypes.number.isRequired,
-  tip: PropTypes.string.isRequired,
-  path: PropTypes.string.isRequired,
 }
 
 export default Booth

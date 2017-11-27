@@ -8,7 +8,6 @@ import { Provider } from 'react-redux'
 import React from 'react'
 import { Router } from 'express'
 import URL from 'url-parse'
-import _ from 'lodash'
 import api from 'api'
 import configureStore from 'store/configure'
 import cors from 'cors'
@@ -25,7 +24,7 @@ import styleSheet from 'styled-components/lib/models/StyleSheet'
 import { syncHistoryWithStore } from 'react-router-redux'
 
 const path = require('path')
-// const http = require('http')
+const http = require('http')
 const https = require('https')
 const fs = require('fs')
 
@@ -33,7 +32,7 @@ const nodemailer = require('nodemailer')
 
 require('dotenv').config()
 
-console.log('NODE_ENV ===>', process.env.NODE_ENV)
+console.log('NODE_ENV ===>', env)
 
 const TO = ''
 
@@ -182,14 +181,19 @@ router.use((req, res, next) => {
 
 const app = express(router)
 
-const privateKey = fs.readFileSync(path.join(__dirname, '../sslcert/server.key'), 'utf8')
-const certificate = fs.readFileSync(path.join(__dirname, '../sslcert/server.crt'), 'utf8')
+let server
 
-const credentials = { key: privateKey, cert: certificate }
+if (env === 'production') {
+  const privateKey = fs.readFileSync(path.join(__dirname, '../sslcert/server.key'), 'utf8')
+  const certificate = fs.readFileSync(path.join(__dirname, '../sslcert/server.crt'), 'utf8')
 
-const server = https.createServer(credentials, app)
+  const credentials = { key: privateKey, cert: certificate }
 
-// const server = http.createServer(app)
+  server = https.createServer(credentials, app)
+} else {
+  server = http.createServer(app)
+}
+
 const io = require('socket.io')(server)
 
 io.on('connection', (socket) => {
@@ -202,7 +206,8 @@ server.listen(port, (error) => {
   if (error) {
     console.error(error)
   } else {
-    console.info(`local: https://${ip}:${port}`)
+    console.info(`Live @: http${env === 'development' ? '' : 's'}://${ip}:${port}/la`)
+    console.info(`Live @: http${env === 'development' ? '' : 's'}://${ip}:${port}/lb`)
   }
 })
 

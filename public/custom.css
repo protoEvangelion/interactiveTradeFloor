@@ -1,5 +1,48 @@
-#ptArena1 {
-  background: url(https://localhost:3000/pictures/arena1.jpg);
+:root {
+  --dimension: 55px;
+  --center: 466px;
+}
+
+#AOABoothLA, #AOABoothLB, #ptArena1LA, #ptArena1LB, #ptArena2 {
+  background-position: center;
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: 50%;
+  height: calc((var(--dimension) * 3) + 6px);
+}
+
+#AOABoothLA, #AOABoothLB {
+  background-image: url(/pictures/aoalogo.jpg);
+  width: calc((var(--dimension) * 5) + 15px);
+}
+
+#AOABoothLA {
+  transform: translate(383px, var(--center));
+}
+
+#AOABoothLB {
+  transform: translate(555px, var(--center));
+}
+
+#ptArena1LA, #ptArena1LB {
+  background-image: url(/pictures/arena1.jpg);
+  width: calc((var(--dimension) * 4) + 15px);
+}
+
+#ptArena1LA {
+  transform: translate(-88px, var(--center));
+}
+
+#ptArena1LB {
+  transform: translate(-30px, var(--center));
+}
+
+#ptArena2 {
+  background-image: url(/pictures/arena2.jpg);
+  width: calc((var(--dimension) * 4) + 15px);
+  transform: translate(906px, var(--center));
+}
+
+#Seminar {
+  height: calc((var(--dimension) * 6) + 15px);
+  width: calc((var(--dimension) * 9) + 25px);
 }

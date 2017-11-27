@@ -10,11 +10,11 @@
 
 ## Tradeshow Floorplan Manager
 
-This is a project that's totally dynamic and built to simplify the trade show managing process.
+This is a project that's dynamic and built to simplify the trade show management process.
 
-It helps sales people consolidate their efforts and collaborate in real time with team mates.
+Specifically, it helps sales people consolidate their efforts and collaborate in real time with team mates.
 
-Rather than track everything by paper, you can use this web app to keep track of all booths that you have sold or still need to collect on.  You can also **differentiate** between what you have sold along with what your teammates have sold!
+Rather than track everything by paper, you can use this web app to keep track of all booths that you have **sold** or still need to **collect** on and **color code** it based on who the booth belongs to.
 
 
 ## Features
@@ -37,11 +37,31 @@ Rather than track everything by paper, you can use this web app to keep track of
   - ❤️ Continuous integration with `Travis-CI` and Heroku
 
 
-## Steps to run in production
+## Setup
+
+### Available Scripts
+
+* Scripts are available in the `package.json` file at the root level under the "**scripts**" property
+
+* After making sure your **MongoDB instance** is running you can use the following scripts:
+
+##### Development Mode
+
+```shell
+npm run dev
+```
+
+##### Production Mode
+
+```shell
+npm run build
+npm run start
+```
+
 
 ### Environment Variables
 
-* Here is where the dynamic part comes in
+* Here is where the **dynamic** part comes in
   * Simply add a `.env` file to the root of directory
   * You can add as many **emails, users, colors** as you want
   * Dot not use **string** literals or **spaces**
@@ -52,7 +72,7 @@ GOOGLE_ID=your_google_app_id
 GMAIL_USER=your_gmail_email
 GMAIL_PASS=your_gmail_password
 USER_EMAILS=email1,email2,...
-USER_NAMES=name1,name2,...
+USER_NAMES=firtname1,firstname2,...
 USER_COLORS=#00B20E,#0800FF,...
 ```
 
@@ -137,6 +157,32 @@ use floorplan
     "description":""
   },
 ```
+
+TODO: ensure yarn lock; see if possible to run tests, TOC, emails, node npm mongo install, routes
+
+#### Booth Data Model
+
+### Authentications
+
+### SSL for Production
+
+### Custom JS & CSS
+
+* In the `public` folder, there is a `custom.js` file and a `custom.css` file
+  * Whatever you place in the `type` field for a given booth, will **be injected into the DOM** for each booth's **id attribute**
+  * So practically you can target any booth on the DOM like this
+
+```css
+#myCustomBoothType {
+  ...
+}
+```
+
+* Feel free to modify styles or JavaScript to your heart's content if you don't feel like playing with **React** and **styled-components** 😄
+
+### How to Specify Port
+
+In the `package.json` file, locate the **scripts** section, find the `env` property, and set `PORT` to your desired port (`PORT=3000`)
 
 
 ## License
