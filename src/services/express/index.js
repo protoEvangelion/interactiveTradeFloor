@@ -12,8 +12,6 @@ export default (routes) => {
 
   /* istanbul ignore next */
   if (env === 'production') {
-    console.log('Please verify you have loaded valid ssl certificate in the sslcert folder')
-
     app.set('forceSSLOptions', {
       enable301Redirects: true,
       trustXFPHeader: true,

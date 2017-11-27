@@ -52,7 +52,7 @@ export default class Hero extends Component {
       activeBooth: 0,
       boothIndex: 0,
       booths: [],
-      colorMap: colorMap,
+      colorMap,
       columns: 20,
       company: '',
       description: '',
@@ -144,10 +144,10 @@ export default class Hero extends Component {
       })
 
       axios.put('/api/update', { data })
-        .then((res) => {
+        .then(() => {
           data.index = this.state.boothIndex
           this.socket.emit('save', data)
-          console.log(`Saved successfully ${res}`)
+          console.log('Saved successfully')
         })
         .catch((err) => console.log(err))
     } else {

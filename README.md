@@ -46,13 +46,13 @@ Table of Contents
   - 📀 `MongoDB` as the database.
   - 🚄 `express` with `Node.js` as the server.
   - 🌍 Universal / Server Side Rendering.
-  - 🔥 Client & Server side hot reloading with `react-hot-loader
-  - 👮 Security on the express server using helmet
+  - 🔥 Client & Server side hot reloading with `react-hot-loader`.
+  - 👮 Security with `Snyk` and `react-helmet`.
   - 📦 All source is bundled using `Webpack v2`.
   - 🤖 Optimised Webpack builds via `HappyPack`.
   - 👼 `ESlint` Airbnb configuration.
   - 🎭 `Jest` as the testing framework.
-  - ❤️ Continuous integration with `Travis-CI` and Heroku
+  - ❤️ Continuous integration with `Travis-CI`
 
 
 ## Setup
@@ -90,7 +90,7 @@ GOOGLE_ID=your_google_app_id
 GMAIL_USER=your_gmail_email
 GMAIL_PASS=your_gmail_password
 USER_EMAILS=email1,email2,...
-USER_NAMES=firtname1,firstname2,...
+USER_NAMES=firstname1,firstname2,...
 USER_COLORS=#00B20E,#0800FF,...
 ```
 
@@ -176,7 +176,7 @@ use floorplan
   },
 ```
 
-TODO: ensure yarn lock; see if possible to run tests, TOC, emails, node npm mongo install, routes
+TODO: see if possible to run tests, emails, routes
 
 #### Booth Data Model
 

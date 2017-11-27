@@ -10,7 +10,7 @@ new WebpackDevServer(webpack(config), {
   publicPath: config.output.publicPath,
   hot: true,
   host: ip,
-  https: true,
+  https: false,
   stats: false,
   historyApiFallback: true,
   contentBase: 'public',
@@ -20,5 +20,5 @@ new WebpackDevServer(webpack(config), {
     return console.log(err)
   }
 
-  console.log(`\nwebpack: https://${ip}:${port}`)
+  console.log(`\nwebpack: http://${ip}:${port}`)
 })

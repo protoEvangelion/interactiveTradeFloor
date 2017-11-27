@@ -4,6 +4,7 @@ const WebpackMd5Hash = require('webpack-md5-hash')
 const WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin')
 const webpackIsomorphicToolsConfig = require('./webpack-isomorphic-tools')
 const ProgressBarPlugin = require('progress-bar-webpack-plugin')
+
 require('dotenv').config()
 
 const ip = process.env.IP || 'localhost'
@@ -25,7 +26,7 @@ const config = {
   output: {
     path: path.join(__dirname, '../dist'),
     filename: '[name].[hash].js',
-    publicPath: DEBUG ? `https://${ip}:${port}/` : PUBLIC_PATH,
+    publicPath: DEBUG ? `http://${ip}:${port}/` : PUBLIC_PATH,
   },
   node: {
     fs: 'empty',
@@ -58,12 +59,13 @@ const config = {
 }
 
 if (DEBUG) {
-  console.log('DEBUG MODE')
   config.entry.app.unshift(
-    `webpack-dev-server/client?https://${ip}:${port}/`,
+    `webpack-dev-server/client?http://${ip}:${port}/`,
     'webpack/hot/only-dev-server',
     'react-hot-loader/patch'
   )
+
+  console.log('unshift', config.entry.app)
 
   config.plugins = config.plugins.concat([
     new webpack.NamedModulesPlugin(),

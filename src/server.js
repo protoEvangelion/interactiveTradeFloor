@@ -34,7 +34,17 @@ require('dotenv').config()
 
 console.log('NODE_ENV ===>', env)
 
-const TO = ''
+console.log(`
+Make sure you have a .env file in root dir that looks like:
+
+FB_ID=your_facebook_app_id
+GOOGLE_ID=your_google_app_id
+GMAIL_USER=your_gmail_email
+GMAIL_PASS=your_gmail_password
+USER_EMAILS=email1,email2,...
+USER_NAMES=firstname1,firstname2,...
+USER_COLORS=#00B20E,#0800FF,...
+`)
 
 const transporter = nodemailer.createTransport({
   service: 'gmail',
@@ -60,7 +70,7 @@ router.get('/email', (req, res) => {
 
   const mailOptions = {
     from: `${query.status === 'open' ? 'Booth Open' : query.owner} <${query.owner}@aoausa.com>`,
-    to: 'ryantgarant@gmail.com', // process.env.EMAILS
+    to: process.env.EMAILS,
     subject: `${query.num}=${query.status === 'open' ? 'Open' : query.company}`,
     text: text.data,
     html: `
@@ -184,6 +194,8 @@ const app = express(router)
 let server
 
 if (env === 'production') {
+  console.log('Please verify you have valid ssl certificates named `server.key` & `server.crt` in the `sslcert` folder')
+
   const privateKey = fs.readFileSync(path.join(__dirname, '../sslcert/server.key'), 'utf8')
   const certificate = fs.readFileSync(path.join(__dirname, '../sslcert/server.crt'), 'utf8')
 
