@@ -8,7 +8,7 @@
 
 ![tradeshow](https://cloud.githubusercontent.com/assets/20076677/25107976/6cb4abd6-2387-11e7-8faa-69a684bc3054.gif)
 
-## Tradeshow Floorplan Manager
+# Tradeshow Floorplan Manager
 
 This is a project that's dynamic and built to simplify the trade show management process.
 
@@ -16,6 +16,24 @@ Specifically, it helps sales people consolidate their efforts and collaborate in
 
 Rather than track everything by paper, you can use this web app to keep track of all booths that you have **sold** or still need to **collect** on and **color code** it based on who the booth belongs to.
 
+Table of Contents
+=================
+
+* [Features](#features)
+* [Setup](#setup)
+    * [Available Scripts](#available-scripts)
+      * [Development Mode](#development-mode)
+      * [Production Mode](#production-mode)
+    * [Environment Variables](#environment-variables)
+    * [Email](#email)
+    * [MongoDB](#mongodb)
+    * [Changing booth layouts](#changing-booth-layouts)
+      * [Booth Data Model](#booth-data-model)
+    * [Authentications](#authentications)
+    * [SSL for Production](#ssl-for-production)
+    * [Custom JS &amp; CSS](#custom-js--css)
+    * [How to Specify Port](#how-to-specify-port)
+* [License](#license)
 
 ## Features
 
