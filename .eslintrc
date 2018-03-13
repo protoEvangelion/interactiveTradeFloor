@@ -1,11 +1,7 @@
 {
   "parser": "babel-eslint",
-  "extends": [
-    "airbnb"
-  ],
-  "plugins": [
-    "no-unused-vars-rest"
-  ],
+  "extends": ["airbnb"],
+  "plugins": ["no-unused-vars-rest"],
   "env": {
     "browser": true,
     "jest": true,
@@ -18,22 +14,9 @@
     "__COVERAGE__": true,
     "__BASENAME__": true
   },
-  "settings": {
-    "import/resolver": {
-      "webpack": {
-        "config": "webpack/webpack.config.js"
-      }
-    }
-  },
   "rules": {
-    "semi": [
-      2,
-      "never"
-    ],
-    "comma-dangle": [
-      2,
-      "always-multiline"
-    ],
+    "semi": [2, "never"],
+    "comma-dangle": [2, "always-multiline"],
     "no-console": 0,
     "jsx-a11y/label-has-for": 0,
     "react/prefer-stateless-function": 0,
@@ -63,10 +46,7 @@
     "react/jsx-filename-extension": [
       2,
       {
-        "extensions": [
-          ".js",
-          ".jsx"
-        ]
+        "extensions": [".js", ".jsx"]
       }
     ],
     "no-unused-vars-rest/no-unused-vars": [

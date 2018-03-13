@@ -1,8 +1,7 @@
+.cache/
 .DS_Store
-dist
-.env
 *.log
+public/
+yarn-error.log
 node_modules
 coverage
-webpack/webpack-assets.json
-sslcert
