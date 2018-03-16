@@ -1,8 +1,8 @@
 import { db } from './'
 
-export const preloadLABooths = () =>
+export const getBooths = (city = 'la') =>
   db
-    .ref('la/')
+    .ref(`${city}/`)
     .once('value')
     .then(snapshot => snapshot.val())
-    .catch(err => console.log('Error preloading la booths', err))
+    .catch(err => console.log(`Error preloading ${city} booths`, err))

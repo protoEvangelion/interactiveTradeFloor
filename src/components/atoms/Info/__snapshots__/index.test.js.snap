@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Info /> snapshot renders with holding status 1`] = `
+<div
+  data-for="Hello"
+  data-tip={true}
+>
+  <h3
+    className="kzkpta"
+  />
+  <p
+    className="fAiHFE"
+  />
+</div>
+`;
+
+exports[`<Info /> snapshot renders with open status 1`] = `
+<div
+  data-for="Hello"
+  data-tip={true}
+>
+  <h3
+    className="kzkpta"
+  />
+  <p
+    className="fAiHFE"
+  >
+    open
+  </p>
+</div>
+`;

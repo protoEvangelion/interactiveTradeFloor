@@ -1,9 +1,9 @@
 import { createStore as reduxCreateStore } from 'redux'
-import boothsReducer from './booths/reducer'
+import rootReducer from './reducers'
 
 const createStore = () =>
   reduxCreateStore(
-    boothsReducer,
+    rootReducer,
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   )
 

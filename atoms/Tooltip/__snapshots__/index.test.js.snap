@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Tooltip /> snapshot renders tooltip with holding status 1`] = `
+<div
+  className="__react_component_tooltip place-top type-dark "
+  data-id="tooltip"
+>
+  
+</div>
+`;
+
+exports[`<Tooltip /> snapshot renders tooltip with open status 1`] = `
+<div
+  className="__react_component_tooltip place-top type-dark "
+  data-id="tooltip"
+>
+  
+</div>
+`;

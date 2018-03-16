@@ -8,9 +8,16 @@
     "gatsby": "^1.9.127",
     "gatsby-link": "^1.6.30",
     "gatsby-plugin-react-helmet": "^1.0.8",
+    "gatsby-plugin-styled-components": "^2.0.9",
     "prop-types": "^15.6.0",
+    "react-modal": "^3.3.2",
+    "react-onclickoutside": "^6.7.1",
     "react-redux": "^5.0.7",
-    "redux": "^3.7.2"
+    "react-tooltip": "^3.4.0",
+    "redux": "^3.7.2",
+    "redux-form": "^7.3.0",
+    "styled-components": "^3.2.3",
+    "styled-theme": "^0.3.3"
   },
   "devDependencies": {
     "gatsby-plugin-resolve-src": "^1.0.0",
@@ -24,7 +31,6 @@
   "scripts": {
     "build": "gatsby build",
     "dev": "gatsby develop",
-    "format": "prettier --trailing-comma es5 --no-semi --single-quote --write \"src/**/*.js\"",
-    "test": "echo \"No test specified\" && exit 0"
+    "format": "prettier --trailing-comma es5 --no-semi --single-quote --write \"src/**/*.js\""
   }
 }

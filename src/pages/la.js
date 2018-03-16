@@ -1,14 +1,12 @@
-import React, { Component } from 'react'
-// import { db } from '../firebase-db'
+import React from 'react'
+import { Header, Floorplan } from 'components/organisms'
 
-export default class extends Component {
-  componentWillMount() {
-    // db
-    //   .ref('la')
-    //   .once('value')
-    //   .then(booths => console.log(booths))
-  }
-  render() {
-    return <div>la</div>
-  }
-}
+const USER_NAMES = ['todd', 'richard', 'jin']
+const USER_COLORS = ['#00B20E', '#0800FF', 'red']
+
+export default () => (
+  <div>
+    <Header />
+    <Floorplan colorMap={USER_COLORS} />
+  </div>
+)
