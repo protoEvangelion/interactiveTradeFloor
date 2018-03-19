@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
-import Tooltip from 'react-tooltip'
+import React, { Component, Fragment } from 'react'
 import { getBooths } from 'firebase-db/db'
 import { connect } from 'react-redux'
 
-import { Booth } from 'components/molecules'
+import { Booth, Modal } from 'components/molecules'
 import preload from 'store/actions/preload'
 import loadBooths from 'store/actions/loadBooths'
+import { COLOR_MAP } from 'constants'
 
 class Floorplan extends Component {
   constructor(props) {
@@ -14,16 +14,20 @@ class Floorplan extends Component {
     this.state = {
       activeBooth: 0,
       boothIndex: 0,
+      colorMap: COLOR_MAP,
       columns: 20,
       company: '',
       description: '',
       dimension: 55,
       email: false,
       leftMargin: 35,
-      modalOpen: false,
+      modalIsOpen: false,
       owner: '',
       status: '',
     }
+
+    this.openModal = this.openModal.bind(this)
+    this.closeModal = this.closeModal.bind(this)
   }
   async componentDidMount() {
     console.log('======> DID mount')
@@ -35,17 +39,28 @@ class Floorplan extends Component {
     this.props.preload(false)
   }
 
+  openModal() {
+    this.setState({ modalIsOpen: true })
+  }
+
+  closeModal() {
+    this.setState({ modalIsOpen: false })
+  }
+
   renderBooths() {
     if (!this.props.isPreloading && this.props.booths) {
       return this.props.booths.map((booth, i) => {
         return (
-          <div key={`ctn_${booth._id}`}>
+          <Fragment key={`ctn_${booth._id}`}>
             <Booth
+              _id={booth._id}
+              boothClick={this.openModal}
               co={booth.company}
               col={booth.col}
-              colorMap={this.props.colorMap}
+              colorMap={this.state.colorMap}
               description={booth.description}
               dim={this.state.dimension}
+              filter={this.props.filter}
               i={i}
               key={booth._id}
               num={booth.num}
@@ -57,25 +72,30 @@ class Floorplan extends Component {
               x={booth.col * this.state.dimension + this.state.leftMargin}
               y={booth.row * this.state.dimension}
             />
-            <Tooltip
-              _id={booth._id}
-              co={booth.company}
-              owner={booth.owner}
-              status={booth.status}
-              description={booth.description}
-            />
-          </div>
+          </Fragment>
         )
       })
     }
   }
   render() {
-    return <div>{this.renderBooths()}</div>
+    return (
+      <section>
+        {this.renderBooths()}
+
+        <Modal
+          closeModal={this.closeModal}
+          modalIsOpen={this.state.modalIsOpen}
+        >
+          Hello
+        </Modal>
+      </section>
+    )
   }
 }
 
 const mapStateToProps = state => ({
   booths: state.booths,
+  filter: state.filter,
   isPreloading: state.isPreloading,
 })
 

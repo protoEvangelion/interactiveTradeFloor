@@ -2,10 +2,10 @@ import { auth, provider } from './'
 
 auth.onAuthStateChanged(function(user) {
   if (user) {
-    var displayName = user.displayName
-    var email = user.email
-    var photoURL = user.photoURL
-    var uid = user.uid
+    const displayName = user.displayName
+    const email = user.email
+    const photoURL = user.photoURL
+    const uid = user.uid
     console.log('User is signed in', displayName, email, photoURL)
   } else {
     console.log('No user signed in')

@@ -1,12 +1,12 @@
-import { Info, StatusCircle } from 'components/atoms'
+import { Info, StatusCircle, Tooltip } from 'components/atoms'
 
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, { Fragment } from 'react'
 import styled from 'styled-components'
 
 export const determineColor = (filter, owner, status, colorMap) => {
   if (
-    (filter !== 'None' && filter !== owner) ||
+    (filter !== 'none' && filter !== owner) ||
     status === 'open' ||
     status === 'n/a'
   ) {
@@ -42,62 +42,86 @@ const Wrapper = styled.div`
   background-color: ${props => (props.status === 'open' ? 'yellow' : 'white')};
   width: ${props => determineWidth(props.type, props.dim)};
   height: ${props => determineHeight(props.dim)};
-  border: 2px solid
-    ${props =>
-      determineColor(props.filter, props.owner, props.status, props.colorMap)};
   overflow: hidden;
   transform: translate(
     ${props => determineX(props.x, props.col)}px,
     ${props => determineY(props.y, props.row)}px
   );
+  transition: background 0.5s, border 0.5s;
 `
 
-const Booth = ({
-  boothClick,
-  colorMap,
-  num,
-  i,
-  co,
-  description,
-  type,
-  owner,
-  row,
-  col,
-  x,
-  y,
-  dim,
-  status,
-  tip,
-}) => {
+const Booth = props => {
+  const {
+    _id,
+    boothClick,
+    colorMap,
+    filter,
+    num,
+    i,
+    co,
+    description,
+    type,
+    owner,
+    row,
+    col,
+    x,
+    y,
+    dim,
+    status,
+    tip,
+  } = props
+
   return (
-    <Wrapper
-      className="boothCtn"
-      colorMap={colorMap}
-      id={type}
-      onClick={() => boothClick(num, i, co, description, owner, status)}
-      value={num}
-      type={type}
-      owner={owner}
-      status={status}
-      row={row}
-      col={col}
-      x={x}
-      y={y}
-      dim={dim}
-    >
-      <Info num={num} co={co} status={status} tip={tip} />
-      <StatusCircle owner={owner} status={status} />
-    </Wrapper>
+    <Fragment>
+      <Wrapper
+        className="boothCtn"
+        col={col}
+        colorMap={colorMap}
+        dim={dim}
+        filter={filter}
+        id={type}
+        onClick={() => boothClick(num, i, co, description, owner, status)}
+        owner={owner}
+        row={row}
+        status={status}
+        style={{
+          border: `2px solid ${determineColor(
+            filter,
+            owner,
+            status,
+            colorMap
+          )}`,
+        }}
+        type={type}
+        value={num}
+        x={x}
+        y={y}
+      >
+        <Info num={num} co={co} status={status} tip={tip} />
+
+        <StatusCircle owner={owner} status={status} />
+      </Wrapper>
+
+      <Tooltip
+        _id={_id}
+        co={co}
+        owner={owner}
+        status={status}
+        description={description}
+      />
+    </Fragment>
   )
 }
 
 Booth.propTypes = {
+  _id: PropTypes.string.isRequired,
   boothClick: PropTypes.func.isRequired,
   co: PropTypes.string,
   col: PropTypes.number.isRequired,
   colorMap: PropTypes.object.isRequired,
   description: PropTypes.string,
   dim: PropTypes.number.isRequired,
+  filter: PropTypes.string.isRequired,
   i: PropTypes.number,
   num: PropTypes.number,
   owner: PropTypes.string,
