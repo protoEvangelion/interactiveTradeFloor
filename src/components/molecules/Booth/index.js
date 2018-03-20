@@ -6,7 +6,7 @@ import styled from 'styled-components'
 
 export const determineColor = (filter, owner, status, colorMap) => {
   if (
-    (filter !== 'none' && filter !== owner) ||
+    (filter !== 'None' && filter !== owner) ||
     status === 'open' ||
     status === 'n/a'
   ) {
@@ -80,7 +80,7 @@ const Booth = props => {
         dim={dim}
         filter={filter}
         id={type}
-        onClick={() => boothClick(num, i, co, description, owner, status)}
+        onClick={() => boothClick(num, co, description, i, _id, owner, status)}
         owner={owner}
         row={row}
         status={status}

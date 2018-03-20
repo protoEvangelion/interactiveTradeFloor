@@ -8,7 +8,7 @@ import BoothForm from '.'
 const spy = jest.fn()
 const store = createStore(() => ({}))
 
-const Decorated = reduxForm({ form: 'testForm' })(BoothForm)
+const Decorated = reduxForm({ form: 'boothForm' })(BoothForm)
 
 const props = {
   handleSubmit: spy,
@@ -23,11 +23,13 @@ const props = {
 
 describe('BoothForm snapshot', () => {
   it('should render the snapshot', () => {
-    const tree = renderer.create(
-      <Provider store={store}>
-        <Decorated {...props} />
-      </Provider>
-    ).toJSON()
+    const tree = renderer
+      .create(
+        <Provider store={store}>
+          <Decorated {...props} />
+        </Provider>
+      )
+      .toJSON()
     expect(tree).toMatchSnapshot()
   })
 })

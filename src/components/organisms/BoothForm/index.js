@@ -3,9 +3,14 @@ import { ReduxField } from 'components/molecules'
 
 import React, { Component } from 'react'
 
+import { connect } from 'react-redux'
+import { reduxForm } from 'redux-form'
+import { createValidator, required } from 'validation'
+
 import { Field } from 'redux-form'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import { USER_NAMES } from 'constants'
 
 const Form = styled.form`
   width: 100%;
@@ -14,6 +19,11 @@ const Form = styled.form`
   margin-top: -20px;
 `
 
+const validate = createValidator({
+  title: [required],
+  body: [required],
+})
+
 class BoothForm extends Component {
   constructor() {
     super()
@@ -21,17 +31,17 @@ class BoothForm extends Component {
   }
   render() {
     const {
-      handleSubmit,
+      boothNum,
       email,
       submitting,
       company,
       description,
+      handleSubmit,
       owner,
       status,
     } = this.props
     return (
       <Form method="POST" onSubmit={handleSubmit}>
-        <Field name="_csrf" type="hidden" component="input" />
         <Field
           name="company"
           label="Company Name"
@@ -46,7 +56,7 @@ class BoothForm extends Component {
           value={owner}
         >
           <option value="None">None</option>
-          {process.env.USER_NAMES.split(',').map(user => (
+          {USER_NAMES.map(user => (
             <option key={user} value={user}>
               {user}
             </option>
@@ -73,20 +83,12 @@ class BoothForm extends Component {
         />
         <br />
         <div>
-          <Button
-            style={{ marginRight: '10px' }}
-            type="submit"
-            disabled={submitting}
-          >
+          <Button style={{ marginRight: '10px' }} type="submit">
             Save
           </Button>
-          <Button
-            type="submit"
-            disabled={submitting}
-            palette="secondary"
-            onClick={email}
-          >
-            Save & Email Team
+
+          <Button type="submit" palette="secondary" onClick={email}>
+            Save and Email Team
           </Button>
         </div>
       </Form>
@@ -95,14 +97,29 @@ class BoothForm extends Component {
 }
 
 BoothForm.propTypes = {
-  handleSubmit: PropTypes.func.isRequired,
-  email: PropTypes.func.isRequired,
   submitting: PropTypes.bool,
   boothNum: PropTypes.number.isRequired,
   company: PropTypes.string.isRequired,
   description: PropTypes.string,
+  handleSubmit: PropTypes.func.isRequired,
   owner: PropTypes.string.isRequired,
   status: PropTypes.string.isRequired,
 }
 
-export default BoothForm
+const mapStateToProps = (state, ownProps) => ({
+  initialValues: {
+    company: ownProps.company,
+    owner: ownProps.owner,
+    status: ownProps.status,
+    description: ownProps.description,
+  },
+})
+
+export const config = {
+  form: 'BoothForm',
+  fields: ['company', 'owner', 'status', 'description'],
+  destroyOnUnmount: true,
+  validate,
+}
+
+export default connect(mapStateToProps)(reduxForm(config)(BoothForm))

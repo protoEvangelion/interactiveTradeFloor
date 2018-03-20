@@ -1,8 +1,8 @@
-import { createStore as reduxCreateStore } from 'redux'
+import { createStore as createReduxStore } from 'redux'
 import rootReducer from './reducers'
 
 const createStore = () =>
-  reduxCreateStore(
+  createReduxStore(
     rootReducer,
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   )

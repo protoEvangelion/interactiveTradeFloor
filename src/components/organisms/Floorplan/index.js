@@ -1,11 +1,14 @@
 import React, { Component, Fragment } from 'react'
 import { getBooths } from 'firebase-db/db'
 import { connect } from 'react-redux'
-
-import { Booth, Modal } from 'components/molecules'
+import listenForBoothChanges from 'firebase-db/db'
 import preload from 'store/actions/preload'
 import loadBooths from 'store/actions/loadBooths'
 import { COLOR_MAP } from 'constants'
+import { isEqual } from 'lodash'
+
+import { BoothForm } from 'components/organisms'
+import { Booth, Modal } from 'components/molecules'
 
 class Floorplan extends Component {
   constructor(props) {
@@ -20,41 +23,57 @@ class Floorplan extends Component {
       description: '',
       dimension: 55,
       email: false,
-      leftMargin: 35,
+      leftMargin: 20,
       modalIsOpen: false,
       owner: '',
       status: '',
     }
 
-    this.openModal = this.openModal.bind(this)
+    this.boothClick = this.boothClick.bind(this)
     this.closeModal = this.closeModal.bind(this)
   }
-  async componentDidMount() {
-    console.log('======> DID mount')
 
-    const booths = await getBooths('la')
-
-    this.props.loadBooths(booths)
-
-    this.props.preload(false)
+  componentWillMount() {
+    listenForBoothChanges('la', this.props.loadBooths)
   }
 
-  openModal() {
-    this.setState({ modalIsOpen: true })
+  boothClick(activeBooth, company, description, i, _id, owner, status) {
+    this.setState({
+      activeBooth,
+      company,
+      description,
+      i,
+      _id,
+      owner,
+      status,
+      modalIsOpen: true,
+    })
   }
 
   closeModal() {
     this.setState({ modalIsOpen: false })
   }
 
+  // shouldComponentUpdate(nextProps) {
+  //   if (!this.props.booths) {
+  //     return true
+  //   }
+  //   if (isEqual(this.props.booths.sort(), nextProps.booths.sort())) {
+  //     console.log('NO UPDATE')
+  //     return false
+  //   }
+  //   console.log('YES UPDATE')
+  //   return true
+  // }
+
   renderBooths() {
-    if (!this.props.isPreloading && this.props.booths) {
+    if (this.props.booths) {
       return this.props.booths.map((booth, i) => {
         return (
           <Fragment key={`ctn_${booth._id}`}>
             <Booth
               _id={booth._id}
-              boothClick={this.openModal}
+              boothClick={this.boothClick}
               co={booth.company}
               col={booth.col}
               colorMap={this.state.colorMap}
@@ -78,15 +97,29 @@ class Floorplan extends Component {
     }
   }
   render() {
+    console.log('Rerendering booths')
+
     return (
       <section>
-        {this.renderBooths()}
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <div style={{ width: this.state.columns * this.state.dimension }}>
+            {this.renderBooths()}
+          </div>
+        </div>
 
         <Modal
           closeModal={this.closeModal}
           modalIsOpen={this.state.modalIsOpen}
+          title={this.state.activeBooth}
         >
-          Hello
+          <BoothForm
+            onSubmit={values => console.log('submit', values)}
+            boothNum={this.state.activeBooth}
+            company={this.state.company}
+            description={this.state.description}
+            owner={this.state.owner}
+            status={this.state.status}
+          />
         </Modal>
       </section>
     )

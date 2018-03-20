@@ -13,13 +13,15 @@ const customStyles = {
   },
 }
 
-export default ({ modalIsOpen, children, closeModal }) => (
+export default ({ modalIsOpen, children, closeModal, title }) => (
   <ReactModal
     ariaHideApp={false}
     isOpen={modalIsOpen}
     onRequestClose={closeModal}
     style={customStyles}
   >
+    <h3>Editing Booth {title}</h3>
+
     <Button onClick={closeModal}>close</Button>
 
     {children}
