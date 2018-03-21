@@ -1,6 +1,11 @@
 module.exports = {
   siteMetadata: {
-    title: 'Gatsby Firebase Authentication',
+    title: 'Floorplan Generator',
   },
-  plugins: ['gatsby-plugin-react-helmet', 'gatsby-plugin-resolve-src'],
+  plugins: [
+    'gatsby-plugin-styled-components',
+    'gatsby-plugin-react-helmet',
+    'gatsby-plugin-react-next',
+    'gatsby-plugin-resolve-src',
+  ],
 }

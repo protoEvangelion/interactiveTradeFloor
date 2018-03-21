@@ -13,3 +13,14 @@ export default function listenForBoothChanges(city = 'la', loadBooths) {
     loadBooths(boothsArr)
   })
 }
+
+export function saveBoothData(route, values) {
+  let path = route
+  const firstChar = route.slice(0, 1)
+
+  if (firstChar === '/') {
+    path = route.slice(1)
+  }
+  console.log(path, values)
+  db.ref(path).update(values)
+}

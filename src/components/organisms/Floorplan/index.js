@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { getBooths } from 'firebase-db/db'
 import { connect } from 'react-redux'
-import listenForBoothChanges from 'firebase-db/db'
+import listenForBoothChanges, { saveBoothData } from 'firebase-db/db'
 import preload from 'store/actions/preload'
 import loadBooths from 'store/actions/loadBooths'
 import { COLOR_MAP } from 'constants'
@@ -113,7 +113,9 @@ class Floorplan extends Component {
           title={this.state.activeBooth}
         >
           <BoothForm
-            onSubmit={values => console.log('submit', values)}
+            onSubmit={values =>
+              saveBoothData(`${this.props.path}/${this.state.i}`, values)
+            }
             boothNum={this.state.activeBooth}
             company={this.state.company}
             description={this.state.description}

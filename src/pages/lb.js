@@ -1,12 +1,4 @@
-import React, { Component } from 'react'
-import { getBooths } from 'firebase-db/db'
+import React from 'react'
+import { Floorplan } from 'components/organisms'
 
-export default class extends Component {
-  async componentWillMount() {
-    const booths = await getBooths('la')
-    console.log(booths)
-  }
-  render() {
-    return <div>lb</div>
-  }
-}
+export default ({ location }) => <Floorplan path={location.pathname} />
