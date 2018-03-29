@@ -2,7 +2,6 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 export const determineColor = (filter, owner, status) => {
-	/* istanbul ignore else */
 	if (filter === owner || filter === 'None') {
 		if (status === 'holding') {
 			return 'rgb(255, 216, 0)' // orange
@@ -16,8 +15,8 @@ export const determineColor = (filter, owner, status) => {
 }
 
 const StatusCircle = styled.div`
-	width: 10px;
-	height: 10px;
+	width: 7px;
+	height: 7px;
 	border-radius: 50%;
 	top: 5px;
 	left: 2px;

@@ -99,7 +99,7 @@ const Booth = props => {
 			>
 				<Info num={num} co={co} status={status} tip={tip} />
 
-				<StatusCircle owner={owner} status={status} />
+				<StatusCircle filter={filter} owner={owner} status={status} />
 			</Wrapper>
 
 			<Tooltip
