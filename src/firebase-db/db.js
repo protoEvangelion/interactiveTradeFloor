@@ -1,3 +1,5 @@
+import { isString } from 'lodash'
+
 import { db } from './'
 
 const capFirstLetter = str => str.charAt(0).toUpperCase() + str.substring(1)
@@ -26,4 +28,16 @@ export function saveBoothData(route, values) {
 	}
 	console.log(path, values)
 	db.ref(path).update(values)
+}
+
+export function remapMongoData(booths, path) {
+	if (isString(booths[0]._id)) {
+		console.log('BOOTH ID IS STRING ===> REMAPPING')
+
+		booths.map((booth, i) => {
+			const newBooth = Object.assign({}, booth)
+			newBooth._id = i
+			saveBoothData(`${path}/${i}`, newBooth)
+		})
+	}
 }

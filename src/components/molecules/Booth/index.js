@@ -24,24 +24,35 @@ export const determineY = (y, row) => y + row * 3.1
 
 export const determineX = (x, col) => x + col * 3.1
 
-export const determineWidth = (type, dim) => {
-	switch (type) {
-		case 'double':
-			return `${dim * 2 + 3}px`
-		default:
-			return `${dim}px`
+export const determineWidth = (type, dim, spanWidth, borderWidth) => {
+	const offset = (spanWidth - 1) * 2 * borderWidth - borderWidth
+
+	if (spanWidth) {
+		return `${dim * spanWidth + offset}px`
+	} else if (type === 'double') {
+		return `${dim * 2 + 3}px`
 	}
+	return `${dim}px`
 }
 
-export const determineHeight = dim => `${dim}px`
+export const determineHeight = (dim, spanHeight, borderWidth) => {
+	const offset = (spanHeight - 1) * 2 * borderWidth - borderWidth
+
+	if (spanHeight) {
+		return `${dim * spanHeight + offset}px`
+	}
+	return `${dim}px`
+}
 
 const Wrapper = styled.div`
 	display: inline-block;
 	cursor: pointer;
 	position: absolute;
 	background-color: ${props => (props.status === 'open' ? 'yellow' : 'white')};
-	width: ${props => determineWidth(props.type, props.dim)};
-	height: ${props => determineHeight(props.dim)};
+	width: ${props =>
+		determineWidth(props.type, props.dim, props.spanWidth, props.borderWidth)};
+	height: ${props =>
+		determineHeight(props.dim, props.spanHeight, props.borderWidth)};
 	overflow: hidden;
 	transform: translate(
 		${props => determineX(props.x, props.col)}px,
@@ -54,38 +65,45 @@ const Booth = props => {
 	const {
 		_id,
 		boothClick,
-		colorMap,
-		filter,
-		num,
-		i,
 		co,
+		col,
+		colorMap,
 		description,
-		type,
+		dim,
+		filter,
+		i,
+		num,
 		owner,
 		row,
-		col,
-		x,
-		y,
-		dim,
+		spanHeight,
+		spanWidth,
 		status,
 		tip,
+		type,
+		x,
+		y,
 	} = props
+
+	const borderWidth = 2
 
 	return (
 		<Fragment>
 			<Wrapper
+				borderWidth={borderWidth}
 				className="boothCtn"
 				col={col}
 				colorMap={colorMap}
 				dim={dim}
 				filter={filter}
-				id={type}
+				id={_id}
 				onClick={() => boothClick(num, co, description, i, _id, owner, status)}
 				owner={owner}
 				row={row}
+				spanHeight={spanHeight}
+				spanWidth={spanWidth}
 				status={status}
 				style={{
-					border: `2px solid ${determineColor(
+					border: `${borderWidth}px solid ${determineColor(
 						filter,
 						owner,
 						status,
@@ -114,7 +132,7 @@ const Booth = props => {
 }
 
 Booth.propTypes = {
-	_id: PropTypes.string.isRequired,
+	_id: PropTypes.number.isRequired,
 	boothClick: PropTypes.func.isRequired,
 	co: PropTypes.string,
 	col: PropTypes.number.isRequired,
@@ -126,6 +144,8 @@ Booth.propTypes = {
 	num: PropTypes.number,
 	owner: PropTypes.string,
 	row: PropTypes.number.isRequired,
+	spanHeight: PropTypes.number,
+	spanWidth: PropTypes.number,
 	status: PropTypes.string,
 	tip: PropTypes.string.isRequired,
 	type: PropTypes.string,

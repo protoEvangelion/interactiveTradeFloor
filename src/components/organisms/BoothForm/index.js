@@ -87,7 +87,7 @@ class BoothForm extends Component {
 						Save
 					</Button>
 
-					<Button type="submit" palette="secondary" onClick={email}>
+					<Button type="submit" palette="success" onClick={email}>
 						Save and Email Team
 					</Button>
 				</div>

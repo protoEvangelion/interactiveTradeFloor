@@ -1,6 +1,14 @@
 import React from 'react'
 import ReactModal from 'react-modal'
 import { Button } from 'components/atoms'
+import styled from 'styled-components'
+
+const HeadingWrapper = styled.div`
+	align-items: center;
+	display: flex;
+	justify-content: space-between;
+	padding: 1rem;
+`
 
 const customStyles = {
 	content: {
@@ -13,17 +21,23 @@ const customStyles = {
 	},
 }
 
-export default ({ modalIsOpen, children, closeModal, title }) => (
+const Modal = ({ modalIsOpen, children, closeModal, title }) => (
 	<ReactModal
 		ariaHideApp={false}
 		isOpen={modalIsOpen}
 		onRequestClose={closeModal}
 		style={customStyles}
 	>
-		<h3>Editing Booth {title}</h3>
+		<HeadingWrapper>
+			<h3>Editing Booth {title}</h3>
 
-		<Button onClick={closeModal}>close</Button>
+			<Button onClick={closeModal} palette="grayscale" transparent>
+				X
+			</Button>
+		</HeadingWrapper>
 
 		{children}
 	</ReactModal>
 )
+
+export default Modal

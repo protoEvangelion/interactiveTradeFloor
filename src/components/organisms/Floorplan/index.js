@@ -1,6 +1,9 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
-import listenForBoothChanges, { saveBoothData } from 'firebase-db/db'
+import listenForBoothChanges, {
+	saveBoothData,
+	remapMongoData,
+} from 'firebase-db/db'
 import preload from 'store/actions/preload'
 import loadBooths from 'store/actions/loadBooths'
 import { COLOR_MAP } from 'config'
@@ -66,6 +69,7 @@ class Floorplan extends Component {
 
 	renderBooths() {
 		if (this.props.booths) {
+			// remapMongoData(this.props.booths, this.props.path)
 			return this.props.booths.map((booth, i) => {
 				return (
 					<Fragment key={`ctn_${booth._id}`}>
@@ -83,6 +87,8 @@ class Floorplan extends Component {
 							num={booth.num}
 							owner={booth.owner}
 							row={booth.row}
+							spanHeight={booth.spanHeight || null}
+							spanWidth={booth.spanWidth || null}
 							status={booth.status}
 							tip={`tool_${booth._id}`}
 							type={booth.type}
