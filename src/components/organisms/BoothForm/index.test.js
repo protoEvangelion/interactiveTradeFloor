@@ -11,25 +11,25 @@ const store = createStore(() => ({}))
 const Decorated = reduxForm({ form: 'boothForm' })(BoothForm)
 
 const props = {
-  handleSubmit: spy,
-  email: () => {},
-  submitting: false,
-  boothNum: 110,
-  company: 'AOA',
-  description: 'advertising',
-  owner: 'Jin',
-  status: 'Holding',
+	handleSubmit: spy,
+	email: () => {},
+	submitting: false,
+	boothNum: 110,
+	company: 'AOA',
+	description: 'advertising',
+	owner: 'Jin',
+	status: 'Holding',
 }
 
 describe('BoothForm snapshot', () => {
-  it('should render the snapshot', () => {
-    const tree = renderer
-      .create(
-        <Provider store={store}>
-          <Decorated {...props} />
-        </Provider>
-      )
-      .toJSON()
-    expect(tree).toMatchSnapshot()
-  })
+	it('should render the snapshot', () => {
+		const tree = renderer
+			.create(
+				<Provider store={store}>
+					<Decorated {...props} />
+				</Provider>
+			)
+			.toJSON()
+		expect(tree).toMatchSnapshot()
+	})
 })

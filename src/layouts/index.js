@@ -9,29 +9,29 @@ import { doSignIn } from 'firebase-db/auth'
 import './base.css'
 
 const Nav = styled.nav`
-  display: flex;
-  list-style: none;
-  > :not(:first-child) {
-    margin-left: 1rem;
-  }
-  a {
-    font-weight: 300;
-    color: ${palette('grayscale', 2)};
-    font-size: 1.25rem;
-    &.active {
-      color: ${palette('grayscale', 0)};
-    }
-  }
+	display: flex;
+	list-style: none;
+	> :not(:first-child) {
+		margin-left: 1rem;
+	}
+	a {
+		font-weight: 300;
+		color: ${palette('grayscale', 2)};
+		font-size: 1.25rem;
+		&.active {
+			color: ${palette('grayscale', 0)};
+		}
+	}
 `
 
 export default props => {
-  return (
-    <Fragment>
-      <Nav {...props}>
-        <Header />
-      </Nav>
+	return (
+		<Fragment>
+			<Nav {...props}>
+				<Header />
+			</Nav>
 
-      {props.children()}
-    </Fragment>
-  )
+			{props.children()}
+		</Fragment>
+	)
 }

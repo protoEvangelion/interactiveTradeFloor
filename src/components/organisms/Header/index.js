@@ -9,15 +9,15 @@ import styled from 'styled-components'
 import { doSignIn } from 'firebase-db/auth'
 
 const Wrapper = styled(Block)`
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: 1rem;
-  width: 100%;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	padding: 1rem;
+	width: 100%;
 
-  & > :not(:first-child) {
-    margin-left: 1rem;
-  }
+	& > :not(:first-child) {
+		margin-left: 1rem;
+	}
 `
 
 // const Header = props => {
@@ -32,19 +32,19 @@ const Wrapper = styled(Block)`
 // }
 
 const Header = props => {
-  return (
-    <Wrapper opaque reverse {...props}>
-      <Link to="/">Home</Link>
-      <Link to="/la">LA</Link>
-      <Link to="/lb">LB</Link>
-      <FilterBtn />
-      <Button onClick={doSignIn}>Sign In</Button>
-    </Wrapper>
-  )
+	return (
+		<Wrapper opaque reverse {...props}>
+			<Link to="/">Home</Link>
+			<Link to="/la">LA</Link>
+			<Link to="/lb">LB</Link>
+			<FilterBtn />
+			<Button onClick={doSignIn}>Sign In</Button>
+		</Wrapper>
+	)
 }
 
 Header.propTypes = {
-  filter: PropTypes.func,
+	filter: PropTypes.func,
 }
 
 export default Header

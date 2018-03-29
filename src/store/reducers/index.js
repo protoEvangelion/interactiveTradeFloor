@@ -6,8 +6,8 @@ import filterReducer from './filter'
 import preloadingReducer from './preloading'
 
 export default combineReducers({
-  booths: boothReducer,
-  filter: filterReducer,
-  form: formReducer,
-  isPreloading: preloadingReducer,
+	booths: boothReducer,
+	filter: filterReducer,
+	form: formReducer,
+	isPreloading: preloadingReducer,
 })
