@@ -1,4 +1,4 @@
-import { isString } from 'lodash'
+import { isNumber, values } from 'lodash'
 
 import { db } from './'
 
@@ -6,9 +6,14 @@ const capFirstLetter = str => str.charAt(0).toUpperCase() + str.substring(1)
 
 const firstLetterIsUpper = str => /[A-Z]/.test(str)
 
-export default function listenForBoothChanges(city = 'la', loadBooths) {
+export function listenForBoothChanges(city = 'la', loadBooths) {
+	// db.ref('la/test').set({ thing: 1 })
+	console.log('city =======+>', city)
+
 	db.ref(`${city}/`).on('value', snapshot => {
-		const boothsArr = snapshot.val().map(booth => {
+		console.log('snapshot =======+>', values(snapshot.val()))
+
+		const boothsArr = values(snapshot.val()).map(booth => {
 			if (booth.owner && !firstLetterIsUpper(booth.owner)) {
 				return { ...booth, owner: capFirstLetter(booth.owner) }
 			}
@@ -19,6 +24,10 @@ export default function listenForBoothChanges(city = 'la', loadBooths) {
 	})
 }
 
+export function removeBoothListener(city = 'la') {
+	db.ref(`${city}/`).off()
+}
+
 export function saveBoothData(route, values) {
 	let path = route
 	const firstChar = route.slice(0, 1)
@@ -26,18 +35,18 @@ export function saveBoothData(route, values) {
 	if (firstChar === '/') {
 		path = route.slice(1)
 	}
-	console.log(path, values)
+	console.log('PATH =========>', path, values)
 	db.ref(path).update(values)
 }
 
 export function remapMongoData(booths, path) {
-	if (isString(booths[0]._id)) {
+	if (isNumber(booths[0]._id)) {
 		console.log('BOOTH ID IS STRING ===> REMAPPING')
 
 		booths.map((booth, i) => {
 			const newBooth = Object.assign({}, booth)
 			newBooth._id = i
-			saveBoothData(`${path}/${i}`, newBooth)
+			saveBoothData(`${path}/${booth.num}`, newBooth)
 		})
 	}
 }

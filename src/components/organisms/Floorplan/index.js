@@ -1,13 +1,16 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
-import listenForBoothChanges, {
+import {
 	saveBoothData,
 	remapMongoData,
+	removeBoothListener,
+	listenForBoothChanges,
 } from 'firebase-db/db'
 import preload from 'store/actions/preload'
 import loadBooths from 'store/actions/loadBooths'
 import { COLOR_MAP } from 'config'
 
+import { Spinner } from 'components/atoms'
 import { BoothForm } from 'components/organisms'
 import { Booth, Modal } from 'components/molecules'
 
@@ -32,10 +35,17 @@ class Floorplan extends Component {
 
 		this.boothClick = this.boothClick.bind(this)
 		this.closeModal = this.closeModal.bind(this)
+		this.submitForms = this.submitForms.bind(this)
 	}
 
 	componentWillMount() {
-		listenForBoothChanges('la', this.props.loadBooths)
+		console.log('MOUNTING')
+		listenForBoothChanges(this.props.path, this.props.loadBooths)
+	}
+
+	componentWillUnmount() {
+		console.log('UN---MOUNTIN')
+		removeBoothListener(this.props.path)
 	}
 
 	boothClick(activeBooth, company, description, i, _id, owner, status) {
@@ -67,38 +77,42 @@ class Floorplan extends Component {
 	//   return true
 	// }
 
+	submitForms(values) {
+		this.setState({ modalIsOpen: false })
+		saveBoothData(`${this.props.path}/${this.state.activeBooth}`, values)
+	}
+
 	renderBooths() {
-		if (this.props.booths) {
-			// remapMongoData(this.props.booths, this.props.path)
-			return this.props.booths.map((booth, i) => {
-				return (
-					<Fragment key={`ctn_${booth._id}`}>
-						<Booth
-							_id={booth._id}
-							boothClick={this.boothClick}
-							co={booth.company}
-							col={booth.col}
-							colorMap={this.state.colorMap}
-							description={booth.description}
-							dim={this.state.dimension}
-							filter={this.props.filter}
-							i={i}
-							key={booth._id}
-							num={booth.num}
-							owner={booth.owner}
-							row={booth.row}
-							spanHeight={booth.spanHeight || null}
-							spanWidth={booth.spanWidth || null}
-							status={booth.status}
-							tip={`tool_${booth._id}`}
-							type={booth.type}
-							x={booth.col * this.state.dimension + this.state.leftMargin}
-							y={booth.row * this.state.dimension}
-						/>
-					</Fragment>
-				)
-			})
-		}
+		// remapMongoData(this.props.booths, this.props.path)
+
+		return this.props.booths.map((booth, i) => {
+			return (
+				<Fragment key={`ctn_${booth._id}`}>
+					<Booth
+						_id={booth._id}
+						boothClick={this.boothClick}
+						co={booth.company}
+						col={booth.col}
+						colorMap={this.state.colorMap}
+						description={booth.description}
+						dim={this.state.dimension}
+						filter={this.props.filter}
+						i={i}
+						key={booth._id}
+						num={booth.num}
+						owner={booth.owner}
+						row={booth.row}
+						spanHeight={booth.spanHeight || null}
+						spanWidth={booth.spanWidth || null}
+						status={booth.status}
+						tip={`tool_${booth._id}`}
+						type={booth.type}
+						x={booth.col * this.state.dimension + this.state.leftMargin}
+						y={booth.row * this.state.dimension}
+					/>
+				</Fragment>
+			)
+		})
 	}
 	render() {
 		console.log('Rerendering booths')
@@ -107,7 +121,7 @@ class Floorplan extends Component {
 			<section>
 				<div style={{ display: 'flex', justifyContent: 'center' }}>
 					<div style={{ width: this.state.columns * this.state.dimension }}>
-						{this.renderBooths()}
+						{this.props.booths ? this.renderBooths() : <Spinner />}
 					</div>
 				</div>
 
@@ -117,9 +131,7 @@ class Floorplan extends Component {
 					title={this.state.activeBooth}
 				>
 					<BoothForm
-						onSubmit={values =>
-							saveBoothData(`${this.props.path}/${this.state.i}`, values)
-						}
+						onSubmit={this.submitForms}
 						boothNum={this.state.activeBooth}
 						company={this.state.company}
 						description={this.state.description}

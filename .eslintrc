@@ -45,6 +45,7 @@
 		"no-constant-condition": 0,
 		"no-shadow": 0,
 		"padded-blocks": 0,
+		"react/display-name": 0,
 		"react/forbid-prop-types": 0,
 		"react/no-unused-prop-types": 0,
 		"react/require-default-props": 0,
