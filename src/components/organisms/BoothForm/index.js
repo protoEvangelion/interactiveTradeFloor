@@ -32,29 +32,11 @@ class BoothForm extends Component {
 		this.state = { email: 'false' }
 	}
 	render() {
-		const {
-			company,
-			description,
-			handleSubmit,
-			num,
-			owner,
-			status,
-		} = this.props
+		const { company, description, handleSubmit, num, owner, status } = this.props
 		return (
 			<Form method="POST" onSubmit={handleSubmit}>
-				<Field
-					name="company"
-					label="Company Name"
-					defaultValue={company}
-					component={ReduxField}
-				/>
-				<Field
-					name="owner"
-					label="Owner"
-					component={ReduxField}
-					type="select"
-					value={owner}
-				>
+				<Field name="company" label="Company Name" defaultValue={company} component={ReduxField} />
+				<Field name="owner" label="Owner" component={ReduxField} type="select" value={owner}>
 					<option value="None">None</option>
 					{USER_NAMES.map(user => (
 						<option key={user} value={user}>
@@ -62,13 +44,7 @@ class BoothForm extends Component {
 						</option>
 					))}
 				</Field>
-				<Field
-					name="status"
-					label="Status"
-					component={ReduxField}
-					type="select"
-					value={status}
-				>
+				<Field name="status" label="Status" component={ReduxField} type="select" value={status}>
 					<option value="n/a">N/A</option>
 					<option value="open">Open</option>
 					<option value="holding">Holding</option>

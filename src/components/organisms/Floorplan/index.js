@@ -8,7 +8,7 @@ import {
 } from 'firebase-db/db'
 import preload from 'store/actions/preload'
 import loadBooths from 'store/actions/loadBooths'
-import { COLOR_MAP } from 'appConfig'
+import { USER_MAP } from 'appConfig'
 
 import { Spinner } from 'components/atoms'
 import { BoothForm } from 'components/organisms'
@@ -21,7 +21,7 @@ class Floorplan extends Component {
 		this.state = {
 			activeBooth: 0,
 			boothIndex: 0,
-			colorMap: COLOR_MAP,
+			colorMap: USER_MAP,
 			columns: 20,
 			company: '',
 			description: '',

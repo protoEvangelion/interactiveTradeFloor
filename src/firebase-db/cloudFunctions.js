@@ -1,4 +1,4 @@
-import { AUTHENTICATED_USER_EMAILS } from '../../functions/secretVariables'
+import { AUTHENTICATED_USER_EMAILS } from 'appConfig'
 import { auth, functions } from './'
 
 const emailTeam = functions.httpsCallable('emailTeam')

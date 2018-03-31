@@ -5,16 +5,12 @@ import React, { Fragment } from 'react'
 import styled from 'styled-components'
 
 export const determineColor = (filter, owner, status, colorMap) => {
-	if (
-		(filter !== 'None' && filter !== owner) ||
-		status === 'open' ||
-		status === 'n/a'
-	) {
+	if ((filter !== 'None' && filter !== owner) || status === 'open' || status === 'n/a') {
 		return 'black'
 	}
 
 	if (colorMap[owner]) {
-		return colorMap[owner]
+		return colorMap[owner].color
 	}
 
 	return 'black'
@@ -49,10 +45,8 @@ const Wrapper = styled.div`
 	cursor: pointer;
 	position: absolute;
 	background-color: ${props => (props.status === 'open' ? 'yellow' : 'white')};
-	width: ${props =>
-		determineWidth(props.type, props.dim, props.spanWidth, props.borderWidth)};
-	height: ${props =>
-		determineHeight(props.dim, props.spanHeight, props.borderWidth)};
+	width: ${props => determineWidth(props.type, props.dim, props.spanWidth, props.borderWidth)};
+	height: ${props => determineHeight(props.dim, props.spanHeight, props.borderWidth)};
 	overflow: hidden;
 	transform: translate(
 		${props => determineX(props.x, props.col)}px,
@@ -103,12 +97,7 @@ const Booth = props => {
 				spanWidth={spanWidth}
 				status={status}
 				style={{
-					border: `${borderWidth}px solid ${determineColor(
-						filter,
-						owner,
-						status,
-						colorMap
-					)}`,
+					border: `${borderWidth}px solid ${determineColor(filter, owner, status, colorMap)}`,
 				}}
 				type={type}
 				value={num}
@@ -120,13 +109,7 @@ const Booth = props => {
 				<StatusCircle filter={filter} owner={owner} status={status} />
 			</Wrapper>
 
-			<Tooltip
-				_id={_id}
-				co={co}
-				owner={owner}
-				status={status}
-				description={description}
-			/>
+			<Tooltip _id={_id} co={co} owner={owner} status={status} description={description} />
 		</Fragment>
 	)
 }
