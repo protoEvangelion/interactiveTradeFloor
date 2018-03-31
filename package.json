@@ -1,9 +1,11 @@
 {
 	"name": "floorplan",
-	"description": "Helps you create a simple, scalable, modern floorplan",
+	"description":
+		"A complete boilerplate for a serverless & static tradeshow floorplan web app that is blazingly fast, simple & secure",
 	"version": "2.0.0",
 	"author": "Ryan Garant",
 	"dependencies": {
+		"@firebase/functions": "^0.1.0",
 		"firebase": "^4.11.0",
 		"gatsby": "^1.9.127",
 		"gatsby-link": "^1.6.30",
@@ -35,9 +37,7 @@
 		"prettier": "^1.8.2",
 		"prettier-eslint-cli": "^4.7.1"
 	},
-	"keywords": [
-		"gatsby"
-	],
+	"keywords": ["gatsby"],
 	"license": "MIT",
 	"main": "n/a",
 	"scripts": {

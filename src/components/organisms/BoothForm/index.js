@@ -12,6 +12,8 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { USER_NAMES } from 'config'
 
+import { emailTeamCloudFunction } from 'firebase-db/cloudFunctions'
+
 const Form = styled.form`
 	width: 100%;
 	box-sizing: border-box;
@@ -32,7 +34,6 @@ class BoothForm extends Component {
 	render() {
 		const {
 			boothNum,
-			email,
 			submitting,
 			company,
 			description,
@@ -87,7 +88,11 @@ class BoothForm extends Component {
 						Save
 					</Button>
 
-					<Button type="submit" palette="success" onClick={email}>
+					<Button
+						type="submit"
+						palette="success"
+						onClick={() => emailTeamCloudFunction()}
+					>
 						Save and Email Team
 					</Button>
 				</div>

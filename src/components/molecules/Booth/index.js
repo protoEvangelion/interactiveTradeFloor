@@ -132,7 +132,7 @@ const Booth = props => {
 }
 
 Booth.propTypes = {
-	_id: PropTypes.number.isRequired,
+	_id: PropTypes.string.isRequired,
 	boothClick: PropTypes.func.isRequired,
 	co: PropTypes.string,
 	col: PropTypes.number.isRequired,

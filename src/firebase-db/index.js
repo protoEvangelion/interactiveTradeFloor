@@ -1,4 +1,5 @@
 import * as firebase from 'firebase'
+import '@firebase/functions'
 
 const prodConfig = {
 	apiKey: 'AIzaSyBaZ-rCxkURyyMtj1nlc8URhOS4UMI1URs',
@@ -24,9 +25,10 @@ if (!firebase.apps.length) {
 	firebase.initializeApp(config)
 }
 
-const db = firebase.database()
 const auth = firebase.auth()
+const db = firebase.database()
+const functions = firebase.functions()
 
 const provider = new firebase.auth.GoogleAuthProvider()
 
-export { db, auth, provider }
+export { auth, db, functions, provider }

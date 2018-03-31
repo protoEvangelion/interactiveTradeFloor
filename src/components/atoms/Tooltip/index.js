@@ -50,7 +50,7 @@ const Tooltip = ({ _id, co, owner, status, description }) => {
 }
 
 Tooltip.propTypes = {
-	_id: PropTypes.number.isRequired,
+	_id: PropTypes.string.isRequired,
 	co: PropTypes.string,
 	owner: PropTypes.string,
 	status: PropTypes.string,
