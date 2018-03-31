@@ -19,6 +19,7 @@
 	"globals": {
 		"__dirname": true,
 		"document": true,
+		"exports": true,
 		"module": true,
 		"process": true,
 		"window": true

@@ -5,4 +5,4 @@ public/
 yarn-error.log
 node_modules
 coverage
-secretVariables.js
+appConfig.js

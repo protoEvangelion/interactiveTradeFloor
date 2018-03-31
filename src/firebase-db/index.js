@@ -1,7 +1,7 @@
 import * as firebase from 'firebase'
 import '@firebase/functions'
 
-import { FIREBASE_CONFIG } from '../../secretVariables'
+import { FIREBASE_CONFIG } from 'appConfig'
 
 if (!firebase.apps.length) {
 	firebase.initializeApp(FIREBASE_CONFIG)

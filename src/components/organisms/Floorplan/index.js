@@ -8,7 +8,7 @@ import {
 } from 'firebase-db/db'
 import preload from 'store/actions/preload'
 import loadBooths from 'store/actions/loadBooths'
-import { COLOR_MAP } from 'config'
+import { COLOR_MAP } from 'appConfig'
 
 import { Spinner } from 'components/atoms'
 import { BoothForm } from 'components/organisms'
@@ -132,7 +132,7 @@ class Floorplan extends Component {
 				>
 					<BoothForm
 						onSubmit={this.submitForms}
-						boothNum={this.state.activeBooth}
+						num={this.state.activeBooth}
 						company={this.state.company}
 						description={this.state.description}
 						owner={this.state.owner}

@@ -1,9 +1,12 @@
-import { AUTHENTICATED_USER_EMAILS } from '../../secretVariables'
+import { AUTHENTICATED_USER_EMAILS } from '../../functions/secretVariables'
 import { auth, functions } from './'
 
 const emailTeam = functions.httpsCallable('emailTeam')
 
-export function emailTeamCloudFunction() {
+/*
+	Client side validation for google cloud function
+*/
+export function callEmailTeamCloudFunction(data) {
 	let isApprovedUser = false
 	const userEmail = auth.currentUser.email
 
@@ -14,6 +17,6 @@ export function emailTeamCloudFunction() {
 	})
 
 	if (isApprovedUser) {
-		emailTeam().then(result => console.log(result))
+		emailTeam(data).then(result => console.log(result))
 	}
 }

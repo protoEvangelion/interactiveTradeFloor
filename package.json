@@ -41,8 +41,14 @@
 	"license": "MIT",
 	"main": "n/a",
 	"scripts": {
-		"build": "gatsby build",
 		"dev": "gatsby develop",
-		"format": "prettier-eslint --write \"src/**/*.js\""
+		"build": "gatsby build",
+		"format": "prettier-eslint --write \"src/**/*.js\"",
+		"copy": "copyfiles -f src/appConfig.js functions",
+		"deploy": "firebase deploy",
+		"deploy:functions": "npm run copy && firebase deploy --only functions:emailTeam",
+		"serve": "firebase serve",
+		"serve:functions": "npm run copy && firebase serve --only functions:emailTeam",
+		"logs": "firebase functions:log"
 	}
 }

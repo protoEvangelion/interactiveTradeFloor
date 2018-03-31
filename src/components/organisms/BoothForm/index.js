@@ -10,9 +10,9 @@ import { createValidator, required } from 'validation'
 import { Field } from 'redux-form'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { USER_NAMES } from 'config'
+import { USER_NAMES } from 'appConfig'
 
-import { emailTeamCloudFunction } from 'firebase-db/cloudFunctions'
+import { callEmailTeamCloudFunction } from 'firebase-db/cloudFunctions'
 
 const Form = styled.form`
 	width: 100%;
@@ -33,11 +33,10 @@ class BoothForm extends Component {
 	}
 	render() {
 		const {
-			boothNum,
-			submitting,
 			company,
 			description,
 			handleSubmit,
+			num,
 			owner,
 			status,
 		} = this.props
@@ -91,7 +90,15 @@ class BoothForm extends Component {
 					<Button
 						type="submit"
 						palette="success"
-						onClick={() => emailTeamCloudFunction()}
+						onClick={() =>
+							callEmailTeamCloudFunction({
+								company,
+								description,
+								num,
+								owner,
+								status,
+							})
+						}
 					>
 						Save and Email Team
 					</Button>
@@ -103,11 +110,11 @@ class BoothForm extends Component {
 
 BoothForm.propTypes = {
 	submitting: PropTypes.bool,
-	boothNum: PropTypes.number.isRequired,
 	company: PropTypes.string.isRequired,
 	description: PropTypes.string,
 	handleSubmit: PropTypes.func.isRequired,
 	owner: PropTypes.string.isRequired,
+	num: PropTypes.number.isRequired,
 	status: PropTypes.string.isRequired,
 }
 
@@ -120,11 +127,11 @@ const mapStateToProps = (state, ownProps) => ({
 	},
 })
 
-export const config = {
+export const formConfig = {
 	form: 'BoothForm',
 	fields: ['company', 'owner', 'status', 'description'],
 	destroyOnUnmount: true,
 	validate,
 }
 
-export default connect(mapStateToProps)(reduxForm(config)(BoothForm))
+export default connect(mapStateToProps)(reduxForm(formConfig)(BoothForm))

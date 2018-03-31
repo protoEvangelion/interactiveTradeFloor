@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import onClickOutside from 'react-onclickoutside'
 import styled from 'styled-components'
-import { USER_NAMES } from 'config'
+import { USER_NAMES } from 'appConfig'
 
 const Names = styled.div`
 	position: absolute;
