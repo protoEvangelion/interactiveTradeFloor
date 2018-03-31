@@ -1,28 +1,10 @@
 import * as firebase from 'firebase'
 import '@firebase/functions'
 
-const prodConfig = {
-	apiKey: 'AIzaSyBaZ-rCxkURyyMtj1nlc8URhOS4UMI1URs',
-	authDomain: 'tradeshow-163804.firebaseapp.com',
-	databaseURL: 'https://tradeshow-163804.firebaseio.com/',
-	projectId: 'tradeshow-163804',
-	storageBucket: '',
-	messagingSenderId: '574611677035',
-}
-
-const devConfig = {
-	apiKey: 'AIzaSyBaZ-rCxkURyyMtj1nlc8URhOS4UMI1URs',
-	authDomain: 'tradeshow-163804.firebaseapp.com',
-	databaseURL: 'https://tradeshow-163804.firebaseio.com/',
-	projectId: 'tradeshow-163804',
-	storageBucket: '',
-	messagingSenderId: '574611677035',
-}
-
-const config = process.env.NODE_ENV === 'production' ? prodConfig : devConfig
+import { FIREBASE_CONFIG } from '../../secretVariables'
 
 if (!firebase.apps.length) {
-	firebase.initializeApp(config)
+	firebase.initializeApp(FIREBASE_CONFIG)
 }
 
 const auth = firebase.auth()
