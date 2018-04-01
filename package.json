@@ -47,8 +47,6 @@
 		"copy": "copyfiles -f src/appConfig.js functions",
 		"deploy": "firebase deploy",
 		"deploy:functions": "npm run copy && firebase deploy --only functions:emailTeam",
-		"serve": "firebase serve",
-		"serve:functions": "npm run copy && firebase serve --only functions:emailTeam",
 		"logs": "firebase functions:log"
 	}
 }

@@ -1,12 +1,11 @@
 import { AUTHENTICATED_USER_EMAILS } from 'appConfig'
 import { auth, functions } from './'
 
-const emailTeam = functions.httpsCallable('emailTeam')
-
 /*
-	Client side validation for google cloud function
+Client side validation for google cloud function
 */
-export function callEmailTeamCloudFunction(data) {
+export async function callEmailTeamCloudFunction(data) {
+	const emailTeam = functions.httpsCallable('emailTeam')
 	let isApprovedUser = false
 	const userEmail = auth.currentUser.email
 
@@ -17,6 +16,7 @@ export function callEmailTeamCloudFunction(data) {
 	})
 
 	if (isApprovedUser) {
-		emailTeam(data).then(result => console.log(result))
+		const result = await emailTeam(data)
+		console.log('result', result)
 	}
 }

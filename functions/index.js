@@ -1,7 +1,12 @@
 const functions = require('firebase-functions')
 const nodemailer = require('nodemailer')
 
-const { AUTHENTICATED_USER_EMAILS, GMAIL_SETTINGS, RECIPIENT_EMAILS } = require('./appConfig')
+const {
+	AUTHENTICATED_USER_EMAILS,
+	GMAIL_SETTINGS,
+	RECIPIENT_EMAILS,
+	USER_MAP,
+} = require('./appConfig')
 
 exports.emailTeam = functions.https.onCall((data, context) => {
 	let isApprovedUser = false
@@ -16,7 +21,7 @@ exports.emailTeam = functions.https.onCall((data, context) => {
 	if (isApprovedUser) {
 		const { company, description, num, owner, status } = data
 
-		console.log('function side approved ======>', company, description, num, owner, status)
+		console.log('updated ======>', company, description, num, owner, status)
 
 		const transporter = nodemailer.createTransport({
 			service: 'gmail',
@@ -35,7 +40,7 @@ exports.emailTeam = functions.https.onCall((data, context) => {
 		}
 
 		const mailOptions = {
-			from: `${owner} <${owner}@aoausa.com>`,
+			from: `${owner} <${USER_MAP[owner].email}>`,
 			to: RECIPIENT_EMAILS.join(','),
 			subject: `${num}=${status === 'open' ? 'Open' : company}`,
 			text: text.data,
@@ -51,16 +56,20 @@ exports.emailTeam = functions.https.onCall((data, context) => {
 			`,
 		}
 
-		transporter.sendMail(mailOptions, (error, info) => {
-			if (error) {
+		console.log('transporter ===>')
+
+		return transporter
+			.sendMail(mailOptions)
+			.then(result => {
+				const message = `Message ${result.messageId} sent: ${result.response}`
+				console.log(`SUCCESS Result of send mail call ===> ${message}`)
+				return { status: 'success', message }
+			})
+			.catch(error => {
 				const message = `Error sending email ${error}`
-				console.log(message)
+				console.log(`FAILURE Result of send mail call ====> ${message}`)
 				return { status: 'failure', message }
-			}
-			const message = `Message ${info.messageId} sent: ${info.response}`
-			console.log(message)
-			return { status: 'success', message }
-		})
+			})
 	} else {
 		const message = `You are not an approved user: ${userEmail}`
 		console.log(message)
