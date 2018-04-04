@@ -4,7 +4,7 @@ import { auth, functions } from './'
 /*
 Client side validation for google cloud function
 */
-export async function callEmailTeamCloudFunction(data) {
+async function callEmailTeamCloudFunction(data) {
 	const emailTeam = functions.httpsCallable('emailTeam')
 	let isApprovedUser = false
 	const userEmail = auth.currentUser.email
@@ -17,6 +17,11 @@ export async function callEmailTeamCloudFunction(data) {
 
 	if (isApprovedUser) {
 		const result = await emailTeam(data)
-		console.log('result', result)
+		console.log('is approved =', result)
+		return result
 	}
+
+	return { status: 'blocked', message: 'You are not an approved user' }
 }
+
+export { callEmailTeamCloudFunction }

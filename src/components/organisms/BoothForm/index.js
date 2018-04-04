@@ -14,6 +14,8 @@ import { USER_NAMES } from 'appConfig'
 
 import { callEmailTeamCloudFunction } from 'firebase-db/cloudFunctions'
 
+import { toast } from 'react-toastify'
+
 const Form = styled.form`
 	width: 100%;
 	box-sizing: border-box;
@@ -31,12 +33,45 @@ class BoothForm extends Component {
 		super()
 		this.state = { email: 'false' }
 	}
+	async emailTeam(company, description, num, owner, status) {
+		const response = await callEmailTeamCloudFunction({
+			company,
+			description,
+			num,
+			owner,
+			status,
+		})
+
+		if (response.data.status == 'success') {
+			toast.success('Sent email successfully', {
+				position: toast.POSITION.BOTTOM_RIGHT,
+			})
+		} else {
+			console.log(`Failed to send email ==> ${JSON.stringify(response)}`)
+
+			toast.error('Failed to send email', {
+				position: toast.POSITION.BOTTOM_RIGHT,
+			})
+		}
+	}
 	render() {
 		const { company, description, handleSubmit, num, owner, status } = this.props
 		return (
 			<Form method="POST" onSubmit={handleSubmit}>
-				<Field name="company" label="Company Name" defaultValue={company} component={ReduxField} />
-				<Field name="owner" label="Owner" component={ReduxField} type="select" value={owner}>
+				<Field
+					name="company"
+					label="Company Name"
+					defaultValue={company}
+					component={ReduxField}
+				/>
+
+				<Field
+					name="owner"
+					label="Owner"
+					component={ReduxField}
+					type="select"
+					value={owner}
+				>
 					<option value="None">None</option>
 					{USER_NAMES.map(user => (
 						<option key={user} value={user}>
@@ -44,20 +79,30 @@ class BoothForm extends Component {
 						</option>
 					))}
 				</Field>
-				<Field name="status" label="Status" component={ReduxField} type="select" value={status}>
+
+				<Field
+					name="status"
+					label="Status"
+					component={ReduxField}
+					type="select"
+					value={status}
+				>
 					<option value="n/a">N/A</option>
 					<option value="open">Open</option>
 					<option value="holding">Holding</option>
 					<option value="collect">Need to Collect</option>
 					<option value="good">Good to go</option>
 				</Field>
+
 				<Field
 					name="description"
 					label="Description"
 					component={ReduxField}
 					defaultValue={description}
 				/>
+
 				<br />
+
 				<div>
 					<Button style={{ marginRight: '10px' }} type="submit">
 						Save
@@ -66,15 +111,7 @@ class BoothForm extends Component {
 					<Button
 						type="submit"
 						palette="success"
-						onClick={() =>
-							callEmailTeamCloudFunction({
-								company,
-								description,
-								num,
-								owner,
-								status,
-							})
-						}
+						onClick={() => this.emailTeam(company, description, num, owner, status)}
 					>
 						Save and Email Team
 					</Button>

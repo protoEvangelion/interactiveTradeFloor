@@ -1,7 +1,6 @@
 {
 	"name": "floorplan",
-	"description":
-		"A complete boilerplate for a serverless & static tradeshow floorplan web app that is blazingly fast, simple & secure",
+	"description": "A complete boilerplate for a serverless & static tradeshow floorplan web app that is blazingly fast, simple & secure",
 	"version": "2.0.0",
 	"author": "Ryan Garant",
 	"dependencies": {
@@ -18,6 +17,7 @@
 		"react-modal": "^3.3.2",
 		"react-onclickoutside": "^6.7.1",
 		"react-redux": "^5.0.7",
+		"react-toastify": "^3.4.3",
 		"react-tooltip": "^3.4.0",
 		"redux": "^3.7.2",
 		"redux-form": "^7.3.0",
@@ -37,7 +37,9 @@
 		"prettier": "^1.8.2",
 		"prettier-eslint-cli": "^4.7.1"
 	},
-	"keywords": ["gatsby"],
+	"keywords": [
+		"gatsby"
+	],
 	"license": "MIT",
 	"main": "n/a",
 	"scripts": {

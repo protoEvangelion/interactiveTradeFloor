@@ -13,6 +13,7 @@ import { USER_MAP } from 'appConfig'
 import { Spinner } from 'components/atoms'
 import { BoothForm } from 'components/organisms'
 import { Booth, Modal } from 'components/molecules'
+import { ToastContainer, toast } from 'react-toastify'
 
 class Floorplan extends Component {
 	constructor(props) {
@@ -79,7 +80,20 @@ class Floorplan extends Component {
 
 	submitForms(values) {
 		this.setState({ modalIsOpen: false })
+
 		saveBoothData(`${this.props.path}/${this.state.activeBooth}`, values)
+			.then(() =>
+				toast.success('Booth saved successfully', {
+					position: toast.POSITION.BOTTOM_RIGHT,
+				})
+			)
+			.catch(err => {
+				console.log('Error saving booth ===> ', err)
+
+				toast.error('Failed to save', {
+					position: toast.POSITION.BOTTOM_RIGHT,
+				})
+			})
 	}
 
 	renderBooths() {
@@ -124,6 +138,8 @@ class Floorplan extends Component {
 						{this.props.booths ? this.renderBooths() : <Spinner />}
 					</div>
 				</div>
+
+				<ToastContainer />
 
 				<Modal
 					closeModal={this.closeModal}

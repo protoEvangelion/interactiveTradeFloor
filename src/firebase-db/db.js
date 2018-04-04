@@ -31,7 +31,7 @@ export function saveBoothData(route, values) {
 		path = route.slice(1)
 	}
 	console.log('PATH =========>', path, values)
-	db.ref(path).update(values)
+	return db.ref(path).update(values)
 }
 
 export function remapMongoData(booths, path) {
