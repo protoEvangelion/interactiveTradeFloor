@@ -1,12 +1,29 @@
 import { auth, provider } from './'
+import { AUTHENTICATED_USER_EMAILS } from 'appConfig'
+
+export function isApprovedUser() {
+	let isApprovedUser = false
+
+	AUTHENTICATED_USER_EMAILS.map(email => {
+		const currentUser = auth.currentUser
+
+		if (currentUser) {
+			if (email === currentUser.email) {
+				isApprovedUser = true
+			}
+		}
+	})
+
+	return isApprovedUser
+}
 
 auth.onAuthStateChanged(function(user) {
 	if (user) {
-		const displayName = user.displayName
-		const email = user.email
-		const photoURL = user.photoURL
-		const uid = user.uid
-		console.log('User is signed in', displayName, email, photoURL)
+		// const displayName = user.displayName
+		// const email = user.email
+		// const photoURL = user.photoURL
+		// const uid = user.uid
+		console.log('User is signed in')
 	} else {
 		console.log('No user signed in')
 	}

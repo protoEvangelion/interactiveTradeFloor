@@ -2,13 +2,14 @@ import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import {
 	saveBoothData,
-	remapMongoData,
+	// remapMongoData,
 	removeBoothListener,
 	listenForBoothChanges,
 } from 'firebase-db/db'
 import preload from 'store/actions/preload'
 import loadBooths from 'store/actions/loadBooths'
 import { USER_MAP } from 'appConfig'
+import { isApprovedUser } from 'firebase-db/auth'
 
 import { Spinner } from 'components/atoms'
 import { BoothForm } from 'components/organisms'
@@ -79,21 +80,35 @@ class Floorplan extends Component {
 	// }
 
 	submitForms(values) {
-		this.setState({ modalIsOpen: false })
+		console.log('values ===>', values)
 
-		saveBoothData(`${this.props.path}/${this.state.activeBooth}`, values)
-			.then(() =>
-				toast.success('Booth saved successfully', {
-					position: toast.POSITION.BOTTOM_RIGHT,
-				})
-			)
-			.catch(err => {
-				console.log('Error saving booth ===> ', err)
+		this.setState({
+			company: values.company,
+			description: values.description,
+			owner: values.owner,
+			status: values.status,
+			modalIsOpen: false,
+		})
 
-				toast.error('Failed to save', {
-					position: toast.POSITION.BOTTOM_RIGHT,
+		if (isApprovedUser()) {
+			saveBoothData(`${this.props.path}/${this.state.activeBooth}`, values)
+				.then(() =>
+					toast.success('Booth saved successfully', {
+						position: toast.POSITION.BOTTOM_RIGHT,
+					})
+				)
+				.catch(err => {
+					console.log('Error saving booth ===> ', err)
+
+					toast.error('Failed to save booth', {
+						position: toast.POSITION.BOTTOM_RIGHT,
+					})
 				})
+		} else {
+			toast.error('You are not an approved user', {
+				position: toast.POSITION.BOTTOM_RIGHT,
 			})
+		}
 	}
 
 	renderBooths() {
