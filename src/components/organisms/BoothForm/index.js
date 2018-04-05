@@ -73,6 +73,7 @@ class BoothForm extends Component {
 					value={owner}
 				>
 					<option value="None">None</option>
+
 					{USER_NAMES.map(user => (
 						<option key={user} value={user}>
 							{user}

@@ -8,9 +8,10 @@ import {
 } from 'firebase-db/db'
 import preload from 'store/actions/preload'
 import loadBooths from 'store/actions/loadBooths'
+import updateBooths from 'store/actions/updateBooths'
 import { USER_MAP } from 'appConfig'
 import { isApprovedUser } from 'firebase-db/auth'
-
+updateBooths
 import { Spinner } from 'components/atoms'
 import { BoothForm } from 'components/organisms'
 import { Booth, Modal } from 'components/molecules'
@@ -82,30 +83,29 @@ class Floorplan extends Component {
 	submitForms(values) {
 		console.log('values ===>', values)
 
-		this.setState({
-			company: values.company,
-			description: values.description,
-			owner: values.owner,
-			status: values.status,
-			modalIsOpen: false,
-		})
+		this.setState({ modalIsOpen: false })
+
+		this.props.updateBooths(this.state.i, values)
 
 		if (isApprovedUser()) {
 			saveBoothData(`${this.props.path}/${this.state.activeBooth}`, values)
 				.then(() =>
-					toast.success('Booth saved successfully', {
+					toast.success('Booth saved successfully!', {
 						position: toast.POSITION.BOTTOM_RIGHT,
 					})
 				)
 				.catch(err => {
 					console.log('Error saving booth ===> ', err)
+					const { company, owner, status, description } = this.state
 
-					toast.error('Failed to save booth', {
+					this.props.updateBooths(this.state.i, { company, owner, status, description })
+
+					toast.error('Failed to save booth. Reverting now.', {
 						position: toast.POSITION.BOTTOM_RIGHT,
 					})
 				})
 		} else {
-			toast.error('You are not an approved user', {
+			toast.error('You are not an approved user. Booth saves will be temporary.', {
 				position: toast.POSITION.BOTTOM_RIGHT,
 			})
 		}
@@ -181,4 +181,4 @@ const mapStateToProps = state => ({
 	isPreloading: state.isPreloading,
 })
 
-export default connect(mapStateToProps, { preload, loadBooths })(Floorplan)
+export default connect(mapStateToProps, { preload, loadBooths, updateBooths })(Floorplan)
