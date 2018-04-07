@@ -54,8 +54,8 @@ const Wrapper = styled.div`
 	${(ifProp('image'),
 	css`
 		background-image: ${props => `url(${props.image})`};
-		background-repeat: no-repeat;
 		background-position: center;
+		background-repeat: no-repeat;
 	`)};
 `
 
@@ -120,13 +120,15 @@ const Booth = props => {
 				<StatusCircle filter={filter} owner={owner} status={status} />
 			</Wrapper>
 
-			<Tooltip
-				_id={_id}
-				co={co}
-				owner={owner}
-				status={status}
-				description={description}
-			/>
+			{num && (
+				<Tooltip
+					_id={_id}
+					co={co}
+					owner={owner}
+					status={status}
+					description={description}
+				/>
+			)}
 		</Fragment>
 	)
 }
