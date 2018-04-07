@@ -2,7 +2,8 @@ import { Info, StatusCircle, Tooltip } from 'components/atoms'
 
 import PropTypes from 'prop-types'
 import React, { Fragment } from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
+import { ifProp } from 'styled-tools'
 
 export const determineColor = (filter, owner, status, colorMap) => {
 	if ((filter !== 'None' && filter !== owner) || status === 'open' || status === 'n/a') {
@@ -49,6 +50,13 @@ const Wrapper = styled.div`
 	);
 	transition: background 0.5s, border 0.5s;
 	width: ${props => determineWidth(props.type, props.dim, props.customSize)};
+
+	${(ifProp('image'),
+	css`
+		background-image: ${props => `url(${props.image})`};
+		background-repeat: no-repeat;
+		background-position: center;
+	`)};
 `
 
 const Booth = props => {
@@ -64,6 +72,7 @@ const Booth = props => {
 		dim,
 		filter,
 		i,
+		image,
 		num,
 		owner,
 		row,
@@ -91,6 +100,7 @@ const Booth = props => {
 				dim={dim}
 				filter={filter}
 				id={_id}
+				image={image}
 				owner={owner}
 				row={row}
 				status={status}
@@ -133,6 +143,7 @@ Booth.propTypes = {
 	dim: PropTypes.number.isRequired,
 	filter: PropTypes.string,
 	i: PropTypes.number,
+	image: PropTypes.string,
 	num: PropTypes.number,
 	owner: PropTypes.string,
 	row: PropTypes.number.isRequired,

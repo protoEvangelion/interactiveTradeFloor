@@ -125,6 +125,7 @@ class Floorplan extends Component {
 						dim={BOOTH_LAYOUT.dimension}
 						filter={this.props.filter}
 						i={i}
+						image={booth.image}
 						key={booth._id}
 						num={booth.num}
 						owner={booth.owner}
@@ -134,8 +135,6 @@ class Floorplan extends Component {
 						status={booth.status}
 						tip={`tool_${booth._id}`}
 						type={booth.type}
-						x={booth.col}
-						y={booth.row * BOOTH_LAYOUT.dimension}
 					/>
 				</Fragment>
 			)
@@ -150,6 +149,7 @@ class Floorplan extends Component {
 					<div
 						style={{
 							height: BOOTH_LAYOUT.rows * BOOTH_LAYOUT.dimension,
+							margin: '3rem 0',
 							width: BOOTH_LAYOUT.columns * BOOTH_LAYOUT.dimension,
 						}}
 					>
