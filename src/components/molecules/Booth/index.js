@@ -16,52 +16,50 @@ export const determineColor = (filter, owner, status, colorMap) => {
 	return 'black'
 }
 
-export const determineY = (y, row) => y + row * 3.1
+export const determineWidth = (type, dim, customSize) => {
+	if (customSize) {
+		const width = customSize.slice(0, customSize.indexOf('x'))
 
-export const determineX = (x, col) => x + col * 3.1
-
-export const determineWidth = (type, dim, spanWidth, borderWidth) => {
-	const offset = (spanWidth - 1) * 2 * borderWidth - borderWidth
-
-	if (spanWidth) {
-		return `${dim * spanWidth + offset}px`
-	} else if (type === 'double') {
-		return `${dim * 2 + 3}px`
+		return `${dim * width}px`
 	}
+
 	return `${dim}px`
 }
 
-export const determineHeight = (dim, spanHeight, borderWidth) => {
-	const offset = (spanHeight - 1) * 2 * borderWidth - borderWidth
+export const determineHeight = (dim, customSize) => {
+	if (customSize) {
+		const height = customSize.slice(customSize.indexOf('x') + 1, customSize.length)
 
-	if (spanHeight) {
-		return `${dim * spanHeight + offset}px`
+		return `${dim * height}px`
 	}
 	return `${dim}px`
 }
 
 const Wrapper = styled.div`
-	display: inline-block;
-	cursor: pointer;
-	position: absolute;
 	background-color: ${props => (props.status === 'open' ? 'yellow' : 'white')};
-	width: ${props => determineWidth(props.type, props.dim, props.spanWidth, props.borderWidth)};
-	height: ${props => determineHeight(props.dim, props.spanHeight, props.borderWidth)};
+	box-sizing: border-box;
+	cursor: ${props => (props.noClick ? 'auto' : 'pointer')};
+	display: inline-block;
+	height: ${props => determineHeight(props.dim, props.customSize)};
 	overflow: hidden;
+	position: absolute;
 	transform: translate(
-		${props => determineX(props.x, props.col)}px,
-		${props => determineY(props.y, props.row)}px
+		${props => (props.col - 1) * props.dim}px,
+		${props => (props.row - 1) * props.dim}px
 	);
 	transition: background 0.5s, border 0.5s;
+	width: ${props => determineWidth(props.type, props.dim, props.customSize)};
 `
 
 const Booth = props => {
 	const {
 		_id,
 		boothClick,
+		borderWidth,
 		co,
 		col,
 		colorMap,
+		customSize,
 		description,
 		dim,
 		filter,
@@ -69,47 +67,56 @@ const Booth = props => {
 		num,
 		owner,
 		row,
-		spanHeight,
-		spanWidth,
 		status,
 		tip,
 		type,
-		x,
-		y,
 	} = props
 
-	const borderWidth = 2
+	let click
+
+	if (num) {
+		click = { onClick: () => boothClick(num, co, description, i, _id, owner, status) }
+	} else {
+		click = { noClick: true }
+	}
 
 	return (
 		<Fragment>
 			<Wrapper
-				borderWidth={borderWidth}
+				{...click}
 				className="boothCtn"
 				col={col}
 				colorMap={colorMap}
+				customSize={customSize}
 				dim={dim}
 				filter={filter}
 				id={_id}
-				onClick={() => boothClick(num, co, description, i, _id, owner, status)}
 				owner={owner}
 				row={row}
-				spanHeight={spanHeight}
-				spanWidth={spanWidth}
 				status={status}
 				style={{
-					border: `${borderWidth}px solid ${determineColor(filter, owner, status, colorMap)}`,
+					border: `${borderWidth}px solid ${determineColor(
+						filter,
+						owner,
+						status,
+						colorMap
+					)}`,
 				}}
 				type={type}
 				value={num}
-				x={x}
-				y={y}
 			>
 				<Info num={num} co={co} status={status} tip={tip} />
 
 				<StatusCircle filter={filter} owner={owner} status={status} />
 			</Wrapper>
 
-			<Tooltip _id={_id} co={co} owner={owner} status={status} description={description} />
+			<Tooltip
+				_id={_id}
+				co={co}
+				owner={owner}
+				status={status}
+				description={description}
+			/>
 		</Fragment>
 	)
 }
@@ -117,23 +124,21 @@ const Booth = props => {
 Booth.propTypes = {
 	_id: PropTypes.string.isRequired,
 	boothClick: PropTypes.func.isRequired,
+	borderWidth: PropTypes.number.isRequired,
 	co: PropTypes.string,
 	col: PropTypes.number.isRequired,
 	colorMap: PropTypes.object.isRequired,
+	customSize: PropTypes.string,
 	description: PropTypes.string,
 	dim: PropTypes.number.isRequired,
-	filter: PropTypes.string.isRequired,
+	filter: PropTypes.string,
 	i: PropTypes.number,
 	num: PropTypes.number,
 	owner: PropTypes.string,
 	row: PropTypes.number.isRequired,
-	spanHeight: PropTypes.number,
-	spanWidth: PropTypes.number,
 	status: PropTypes.string,
 	tip: PropTypes.string.isRequired,
 	type: PropTypes.string,
-	x: PropTypes.number.isRequired,
-	y: PropTypes.number.isRequired,
 }
 
 export default Booth

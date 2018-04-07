@@ -9,7 +9,7 @@ import {
 import preload from 'store/actions/preload'
 import loadBooths from 'store/actions/loadBooths'
 import updateBooths from 'store/actions/updateBooths'
-import { USER_MAP } from 'appConfig'
+import { BOOTH_LAYOUT, USER_MAP } from 'appConfig'
 import { isApprovedUser } from 'firebase-db/auth'
 updateBooths
 import { Spinner } from 'components/atoms'
@@ -25,12 +25,9 @@ class Floorplan extends Component {
 			activeBooth: 0,
 			boothIndex: 0,
 			colorMap: USER_MAP,
-			columns: 20,
 			company: '',
 			description: '',
-			dimension: 55,
 			email: false,
-			leftMargin: 20,
 			modalIsOpen: false,
 			owner: '',
 			status: '',
@@ -113,18 +110,19 @@ class Floorplan extends Component {
 
 	renderBooths() {
 		// remapMongoData(this.props.booths, this.props.path)
-
 		return this.props.booths.map((booth, i) => {
 			return (
 				<Fragment key={`ctn_${booth._id}`}>
 					<Booth
 						_id={booth._id}
 						boothClick={this.boothClick}
+						borderWidth={BOOTH_LAYOUT.borderWidth}
 						co={booth.company}
 						col={booth.col}
 						colorMap={this.state.colorMap}
+						customSize={booth.size}
 						description={booth.description}
-						dim={this.state.dimension}
+						dim={BOOTH_LAYOUT.dimension}
 						filter={this.props.filter}
 						i={i}
 						key={booth._id}
@@ -136,8 +134,8 @@ class Floorplan extends Component {
 						status={booth.status}
 						tip={`tool_${booth._id}`}
 						type={booth.type}
-						x={booth.col * this.state.dimension + this.state.leftMargin}
-						y={booth.row * this.state.dimension}
+						x={booth.col}
+						y={booth.row * BOOTH_LAYOUT.dimension}
 					/>
 				</Fragment>
 			)
@@ -149,7 +147,12 @@ class Floorplan extends Component {
 		return (
 			<section>
 				<div style={{ display: 'flex', justifyContent: 'center' }}>
-					<div style={{ width: this.state.columns * this.state.dimension }}>
+					<div
+						style={{
+							height: BOOTH_LAYOUT.rows * BOOTH_LAYOUT.dimension,
+							width: BOOTH_LAYOUT.columns * BOOTH_LAYOUT.dimension,
+						}}
+					>
 						{this.props.booths ? this.renderBooths() : <Spinner />}
 					</div>
 				</div>
