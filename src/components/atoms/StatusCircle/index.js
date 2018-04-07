@@ -18,11 +18,10 @@ const StatusCircle = styled.div`
 	width: 7px;
 	height: 7px;
 	border-radius: 50%;
-	top: 5px;
-	left: 2px;
+	top: 3px;
+	left: 3px;
 	position: absolute;
-	background-color: ${props =>
-		determineColor(props.filter, props.owner, props.status)};
+	background-color: ${props => determineColor(props.filter, props.owner, props.status)};
 `
 
 StatusCircle.propTypes = {
