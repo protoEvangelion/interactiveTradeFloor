@@ -1,29 +1,21 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import {
-	saveBoothData,
-	// remapMongoData,
-	removeBoothListener,
-	listenForBoothChanges,
-} from 'firebase-db/db'
-import preload from 'store/actions/preload'
-import loadBooths from 'store/actions/loadBooths'
-import updateBooths from 'store/actions/updateBooths'
-import { BOOTH_LAYOUT, USER_MAP } from 'appConfig'
-import { isApprovedUser } from 'firebase-db/auth'
-import { Spinner } from 'components/atoms'
-import { BoothForm } from 'components/organisms'
-import { Booth, GridLines, Modal } from 'components/molecules'
+import PropTypes from 'prop-types'
 import { ToastContainer, toast } from 'react-toastify'
 
+import { Modal } from 'components/molecules'
+import { BoothForm, Booths } from 'components/organisms'
+import { isApprovedUser } from 'firebase-db/auth'
+import { saveBoothData } from 'firebase-db/db'
+import updateBooths from 'store/actions/updateBooths'
+
 class Floorplan extends Component {
-	constructor(props) {
-		super(props)
+	constructor() {
+		super()
 
 		this.state = {
 			activeBooth: 0,
 			boothIndex: 0,
-			colorMap: USER_MAP,
 			company: '',
 			description: '',
 			email: false,
@@ -37,26 +29,18 @@ class Floorplan extends Component {
 		this.submitForms = this.submitForms.bind(this)
 	}
 
-	componentWillMount() {
-		console.log('MOUNTING')
-		listenForBoothChanges(this.props.path, this.props.loadBooths)
-	}
-
-	componentWillUnmount() {
-		console.log('UN---MOUNTIN')
-		removeBoothListener(this.props.path)
-	}
-
 	boothClick(activeBooth, company, description, i, _id, owner, status) {
+		console.log('BOOTH CLICK', this.state)
+
 		this.setState({
 			activeBooth,
 			company,
 			description,
 			i,
 			_id,
+			modalIsOpen: true,
 			owner,
 			status,
-			modalIsOpen: true,
 		})
 	}
 
@@ -64,22 +48,10 @@ class Floorplan extends Component {
 		this.setState({ modalIsOpen: false })
 	}
 
-	// shouldComponentUpdate(nextProps) {
-	//   if (!this.props.booths) {
-	//     return true
-	//   }
-	//   if (isEqual(this.props.booths.sort(), nextProps.booths.sort())) {
-	//     console.log('NO UPDATE')
-	//     return false
-	//   }
-	//   console.log('YES UPDATE')
-	//   return true
-	// }
-
 	submitForms(values) {
 		console.log('values ===>', values)
 
-		this.setState({ modalIsOpen: false })
+		this.closeModal()
 
 		this.props.updateBooths(this.state.i, values)
 
@@ -107,59 +79,10 @@ class Floorplan extends Component {
 		}
 	}
 
-	renderBooths() {
-		// remapMongoData(this.props.booths, this.props.path)
-		return this.props.booths.map((booth, i) => {
-			return (
-				<Fragment key={`ctn_${booth._id}`}>
-					<Booth
-						_id={booth._id}
-						boothClick={this.boothClick}
-						borderWidth={BOOTH_LAYOUT.borderWidth}
-						co={booth.company}
-						col={booth.col}
-						colorMap={this.state.colorMap}
-						customSize={booth.size}
-						description={booth.description}
-						dim={BOOTH_LAYOUT.dimension}
-						filter={this.props.filter}
-						i={i}
-						image={booth.image}
-						key={booth._id}
-						num={booth.num}
-						owner={booth.owner}
-						row={booth.row}
-						spanHeight={booth.spanHeight || null}
-						spanWidth={booth.spanWidth || null}
-						status={booth.status}
-						tip={`tool_${booth._id}`}
-						type={booth.type}
-					/>
-				</Fragment>
-			)
-		})
-	}
 	render() {
-		console.log('Rerendering booths')
-
 		return (
 			<section>
-				<div style={{ display: 'flex', justifyContent: 'center' }}>
-					<div
-						style={{
-							height: BOOTH_LAYOUT.rows * BOOTH_LAYOUT.dimension,
-							margin: '3rem 0',
-							position: 'relative',
-							width: BOOTH_LAYOUT.columns * BOOTH_LAYOUT.dimension,
-						}}
-					>
-						{this.props.booths ? this.renderBooths() : <Spinner />}
-
-						<GridLines />
-					</div>
-				</div>
-
-				<ToastContainer />
+				<Booths boothClick={this.boothClick} path={this.props.path} />
 
 				<Modal
 					closeModal={this.closeModal}
@@ -175,15 +98,16 @@ class Floorplan extends Component {
 						status={this.state.status}
 					/>
 				</Modal>
+
+				<ToastContainer />
 			</section>
 		)
 	}
 }
 
-const mapStateToProps = state => ({
-	booths: state.booths,
-	filter: state.filter,
-	isPreloading: state.isPreloading,
-})
+Floorplan.propTypes = {
+	path: PropTypes.string.isRequired,
+	updateBooths: PropTypes.func.isRequired,
+}
 
-export default connect(mapStateToProps, { preload, loadBooths, updateBooths })(Floorplan)
+export default connect(null, { updateBooths })(Floorplan)

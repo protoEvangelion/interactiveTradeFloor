@@ -1,22 +1,27 @@
 import React, { Fragment } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { BOOTH_LAYOUT } from 'appConfig'
 
-const ColumnGrid = styled.div`
-	border-right: 1px solid black;
-	border-left: 1px solid black;
+const CommonGrid = styled.div`
+	border: 1px solid grey;
 	box-sizing: border-box;
 	display: inline-block;
+	z-index: 3;
+`
+
+const ColumnGrid = styled(CommonGrid)`
+	border-top: none;
+	border-bottom: none;
 	height: 100%;
+	position: relative;
 	width: ${BOOTH_LAYOUT.dimension}px;
 `
 
-const RowGrid = styled.div`
-	border-bottom: 1px solid black;
-	border-top: 1px solid black;
-	box-sizing: border-box;
-	display: inline-block;
+const RowGrid = styled(CommonGrid)`
+	border-left: none;
+	border-right: none;
 	height: ${BOOTH_LAYOUT.dimension}px;
 	left: 0;
 	position: absolute;
@@ -60,10 +65,12 @@ const GridLines = props => {
 		<Fragment>
 			{props.isGridVisible ? renderColumns() : ''}
 			{props.isGridVisible ? renderRows() : ''}
-			{/* {renderColumns()} */}
-			{/* {renderRows()} */}
 		</Fragment>
 	)
+}
+
+GridLines.propTypes = {
+	isGridVisible: PropTypes.bool.isRequired,
 }
 
 function mapStateToProps(state) {
