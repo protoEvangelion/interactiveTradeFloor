@@ -1,10 +1,10 @@
-// import { Block, Button, FilterBtn, PrintBtn, Modal } from 'components'
+import { connect } from 'react-redux'
+import toggleGrid from 'store/actions/toggleGrid'
 import { Block, Button, Link } from 'components/atoms'
 import { FilterBtn } from 'components/molecules'
 
 import PropTypes from 'prop-types'
 import React from 'react'
-// import { UserButton } from 'containers'
 import styled from 'styled-components'
 import { doSignIn } from 'firebase-db/auth'
 
@@ -20,24 +20,21 @@ const Wrapper = styled(Block)`
 	}
 `
 
-// const Header = props => {
-//   return (
-//     <Wrapper opaque reverse {...props}>
-//       <PrintBtn />
-//       <FilterBtn filter={props.filter} />
-//       {/* <UserButton reverse transparent /> */}
-//       <Button onClick={doSignIn}>Sign In</Button>
-//     </Wrapper>
-//   )
-// }
-
 const Header = props => {
 	return (
 		<Wrapper opaque reverse {...props}>
 			<Link to="/">Home</Link>
+
 			<Link to="/la">LA</Link>
+
 			<Link to="/lb">LB</Link>
+
 			<FilterBtn />
+
+			<Button onClick={props.toggleGrid} palette="success">
+				#
+			</Button>
+
 			<Button onClick={doSignIn}>Sign In</Button>
 		</Wrapper>
 	)
@@ -45,6 +42,7 @@ const Header = props => {
 
 Header.propTypes = {
 	filter: PropTypes.func,
+	toggleGrid: PropTypes.func.isRequired,
 }
 
-export default Header
+export default connect(null, { toggleGrid })(Header)

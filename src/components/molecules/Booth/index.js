@@ -56,6 +56,7 @@ const Wrapper = styled.div`
 		background-image: ${props => `url(${props.image})`};
 		background-position: center;
 		background-repeat: no-repeat;
+		background-size: 50%;
 	`)};
 `
 

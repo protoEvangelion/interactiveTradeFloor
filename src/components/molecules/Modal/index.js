@@ -31,7 +31,7 @@ const Modal = ({ modalIsOpen, children, closeModal, title }) => (
 		<HeadingWrapper>
 			<h3>Editing Booth {title}</h3>
 
-			<Button onClick={closeModal} palette="grayscale" transparent>
+			<Button onClick={closeModal} palette="danger">
 				X
 			</Button>
 		</HeadingWrapper>

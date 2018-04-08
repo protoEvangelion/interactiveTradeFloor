@@ -21,10 +21,7 @@ class FilterBtn extends Component {
 	}
 	showFilter() {
 		return this.state.showFilter ? (
-			<FilterNames
-				onSelect={this.onSelect}
-				toggleFilter={() => this.toggleFilter()}
-			/>
+			<FilterNames onSelect={this.onSelect} toggleFilter={() => this.toggleFilter()} />
 		) : (
 			''
 		)
@@ -32,7 +29,9 @@ class FilterBtn extends Component {
 	render() {
 		return (
 			<div>
-				<Button onClick={() => this.toggleFilter()}>Filter</Button>
+				<Button palette="secondary" onClick={() => this.toggleFilter()}>
+					Filter
+				</Button>
 
 				{this.showFilter()}
 			</div>

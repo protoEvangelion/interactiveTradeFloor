@@ -20,25 +20,25 @@ const hoverForegroundColor = ({ disabled, transparent }) =>
 	!disabled && transparent && palette(0)
 
 const styles = css`
+	align-items: center;
+	appearance: none;
+	background-color: ${backgroundColor};
+	border-radius: 0.125em;
+	border: 0.0625em solid ${ifProp('transparent', 'currentcolor', 'transparent')};
+	box-sizing: border-box;
+	color: ${foregroundColor};
+	cursor: ${ifProp('disabled', 'default', 'pointer')};
 	display: inline-flex;
 	font-family: ${font('primary')};
-	align-items: center;
-	white-space: nowrap;
 	font-size: ${fontSize};
-	border: 0.0625em solid ${ifProp('transparent', 'currentcolor', 'transparent')};
 	height: 2.5em;
 	justify-content: center;
-	text-decoration: none;
-	cursor: ${ifProp('disabled', 'default', 'pointer')};
-	appearance: none;
 	padding: 0 1em;
-	border-radius: 0.125em;
-	box-sizing: border-box;
 	pointer-events: ${ifProp('disabled', 'none', 'auto')};
+	text-decoration: none;
 	transition: background-color 250ms ease-out, color 250ms ease-out,
 		border-color 250ms ease-out;
-	background-color: ${backgroundColor};
-	color: ${foregroundColor};
+	white-space: nowrap;
 
 	&:hover,
 	&:focus,

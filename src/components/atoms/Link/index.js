@@ -6,13 +6,15 @@ import React from 'react'
 import RouterLink from 'gatsby-link'
 
 const styles = css`
+	color: white;
 	font-family: ${font('primary')};
-	text-decoration: none;
 	font-weight: 500;
-	color: ${palette({ grayscale: 0 }, 1)};
+	text-decoration: none;
+	transition: color 0.5s;
 
 	&:hover {
-		text-decoration: underline;
+		color: ${palette({ grayscale: 0 }, 1)};
+		transition: color 0.5s;
 	}
 `
 
@@ -39,7 +41,7 @@ Link.propTypes = {
 }
 
 Link.defaultProps = {
-	palette: 'primary',
+	palette: 'white',
 }
 
 export default Link

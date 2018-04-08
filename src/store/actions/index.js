@@ -1,4 +1,5 @@
 export const IS_PRELOADING = 'IS_PRELOADING'
 export const LOAD_BOOTHS = 'LOAD_BOOTHS'
 export const SET_FILTER = 'SET_FILTER'
+export const TOGGLE_GRID = 'TOGGLE_GRID'
 export const UPDATE_BOOTHS = 'UPDATE_BOOTHS'

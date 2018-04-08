@@ -105,7 +105,7 @@ class BoothForm extends Component {
 				<br />
 
 				<div>
-					<Button style={{ marginRight: '10px' }} type="submit">
+					<Button palette="primary" style={{ marginRight: '10px' }} type="submit">
 						Save
 					</Button>
 

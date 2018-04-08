@@ -11,10 +11,9 @@ import loadBooths from 'store/actions/loadBooths'
 import updateBooths from 'store/actions/updateBooths'
 import { BOOTH_LAYOUT, USER_MAP } from 'appConfig'
 import { isApprovedUser } from 'firebase-db/auth'
-updateBooths
 import { Spinner } from 'components/atoms'
 import { BoothForm } from 'components/organisms'
-import { Booth, Modal } from 'components/molecules'
+import { Booth, GridLines, Modal } from 'components/molecules'
 import { ToastContainer, toast } from 'react-toastify'
 
 class Floorplan extends Component {
@@ -150,10 +149,13 @@ class Floorplan extends Component {
 						style={{
 							height: BOOTH_LAYOUT.rows * BOOTH_LAYOUT.dimension,
 							margin: '3rem 0',
+							position: 'relative',
 							width: BOOTH_LAYOUT.columns * BOOTH_LAYOUT.dimension,
 						}}
 					>
 						{this.props.booths ? this.renderBooths() : <Spinner />}
+
+						<GridLines />
 					</div>
 				</div>
 
