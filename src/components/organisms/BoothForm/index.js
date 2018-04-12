@@ -1,39 +1,37 @@
-import { Button } from 'components/atoms'
-import { ReduxField } from 'components/molecules'
-
-import React, { Component } from 'react'
-
-import { connect } from 'react-redux'
-import { reduxForm } from 'redux-form'
-import { createValidator, required } from 'validation'
-
-import { Field } from 'redux-form'
+import React from 'react'
+import { toast } from 'react-toastify'
+import { Formik } from 'formik'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import yup from 'yup'
+
 import { USER_NAMES } from 'appConfig'
-
 import { callEmailTeamCloudFunction } from 'firebase-db/cloudFunctions'
+import { Button } from 'components/atoms'
+import { Field } from 'components/molecules'
+import showFormSpinner from 'store/actions/showFormSpinner'
 
-import { toast } from 'react-toastify'
-
-const Form = styled.form`
-	width: 100%;
+const StyledForm = styled.form`
 	box-sizing: border-box;
-	padding: 1rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 	margin-top: -20px;
+	max-width: 100%;
+	min-height: 350px;
+	min-width: 320px;
+	padding: 1rem;
 `
 
-const validate = createValidator({
-	title: [required],
-	body: [required],
-})
+const Form = ({ num, company, description, owner, status, submitForm }) => {
+	const schema = yup.object().shape({
+		company: yup.string().required(),
+		description: yup.string(),
+		owner: yup.string().required(),
+		status: yup.string().required(),
+	})
 
-class BoothForm extends Component {
-	constructor() {
-		super()
-		this.state = { email: 'false' }
-	}
-	async emailTeam(company, description, num, owner, status) {
+	async function emailTeam(company, description, owner, status) {
 		const response = await callEmailTeamCloudFunction({
 			company,
 			description,
@@ -54,98 +52,73 @@ class BoothForm extends Component {
 			})
 		}
 	}
-	render() {
-		const { company, description, handleSubmit, num, owner, status } = this.props
-		return (
-			<Form method="POST" onSubmit={handleSubmit}>
-				<Field
-					name="company"
-					label="Company Name"
-					defaultValue={company}
-					component={ReduxField}
-				/>
 
-				<Field
-					name="owner"
-					label="Owner"
-					component={ReduxField}
-					type="select"
-					value={owner}
-				>
-					<option value="None">None</option>
+	return (
+		<Formik
+			initialValues={{ company, description, owner, status }}
+			validationSchema={schema}
+			onSubmit={submitForm}
+			render={({ values, errors, touched, handleSubmit, isSubmitting }) => (
+				<StyledForm onSubmit={handleSubmit}>
+					<Field name="company" touched={touched} error={errors} />
 
-					{USER_NAMES.map(user => (
-						<option key={user} value={user}>
-							{user}
-						</option>
-					))}
-				</Field>
+					<Field component="select" name="owner" touched={touched} error={errors}>
+						<option value="None">None</option>
 
-				<Field
-					name="status"
-					label="Status"
-					component={ReduxField}
-					type="select"
-					value={status}
-				>
-					<option value="n/a">N/A</option>
-					<option value="open">Open</option>
-					<option value="holding">Holding</option>
-					<option value="collect">Need to Collect</option>
-					<option value="good">Good to go</option>
-				</Field>
+						{USER_NAMES.map(user => (
+							<option key={user} value={user}>
+								{user}
+							</option>
+						))}
+					</Field>
 
-				<Field
-					name="description"
-					label="Description"
-					component={ReduxField}
-					defaultValue={description}
-				/>
+					<Field component="select" name="status" touched={touched} error={errors}>
+						<option value="n/a">N/A</option>
+						<option value="open">Open</option>
+						<option value="holding">Holding</option>
+						<option value="collect">Need to Collect</option>
+						<option value="good">Good to go</option>
+					</Field>
 
-				<br />
+					<Field name="description" touched={touched} error={errors} />
 
-				<div>
-					<Button palette="primary" style={{ marginRight: '10px' }} type="submit">
-						Save
-					</Button>
+					<div style={{ display: 'flex', justifyContent: 'space-between' }}>
+						<Button
+							disabled={isSubmitting || Object.keys(errors).length > 0}
+							onClick={() => {
+								console.log('SHOWING!!!!!!!!!!!!')
+								showFormSpinner()
+							}}
+							palette="primary"
+							type="submit"
+						>
+							Save
+						</Button>
 
-					<Button
-						type="submit"
-						palette="success"
-						onClick={() => this.emailTeam(company, description, num, owner, status)}
-					>
-						Save and Email Team
-					</Button>
-				</div>
-			</Form>
-		)
-	}
+						<Button
+							disabled={isSubmitting || Object.keys(errors).length > 0}
+							type="submit"
+							palette="success"
+							onClick={() =>
+								emailTeam(values.company, values.description, values.owner, values.status)
+							}
+						>
+							Save and Email Team
+						</Button>
+					</div>
+				</StyledForm>
+			)}
+		/>
+	)
 }
 
-BoothForm.propTypes = {
-	submitting: PropTypes.bool,
-	company: PropTypes.string.isRequired,
-	description: PropTypes.string,
-	handleSubmit: PropTypes.func.isRequired,
-	owner: PropTypes.string.isRequired,
+Form.propTypes = {
 	num: PropTypes.number.isRequired,
+	company: PropTypes.string.isRequired,
+	description: PropTypes.string.isRequired,
+	owner: PropTypes.string.isRequired,
 	status: PropTypes.string.isRequired,
+	submitForm: PropTypes.func.isRequired,
 }
 
-const mapStateToProps = (state, ownProps) => ({
-	initialValues: {
-		company: ownProps.company,
-		owner: ownProps.owner,
-		status: ownProps.status,
-		description: ownProps.description,
-	},
-})
-
-export const formConfig = {
-	form: 'BoothForm',
-	fields: ['company', 'owner', 'status', 'description'],
-	destroyOnUnmount: true,
-	validate,
-}
-
-export default connect(mapStateToProps)(reduxForm(formConfig)(BoothForm))
+export default Form

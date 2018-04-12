@@ -3,11 +3,13 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { ToastContainer, toast } from 'react-toastify'
 
+import { Spinner } from 'components/atoms'
 import { Modal } from 'components/molecules'
 import { BoothForm, Booths } from 'components/organisms'
 import { isApprovedUser } from 'firebase-db/auth'
 import { saveBoothData } from 'firebase-db/db'
 import updateBooths from 'store/actions/updateBooths'
+import showFormSpinner from 'store/actions/showFormSpinner'
 
 class Floorplan extends Component {
 	constructor() {
@@ -18,7 +20,6 @@ class Floorplan extends Component {
 			boothIndex: 0,
 			company: '',
 			description: '',
-			email: false,
 			modalIsOpen: false,
 			owner: '',
 			status: '',
@@ -26,7 +27,7 @@ class Floorplan extends Component {
 
 		this.boothClick = this.boothClick.bind(this)
 		this.closeModal = this.closeModal.bind(this)
-		this.submitForms = this.submitForms.bind(this)
+		this.submitForm = this.submitForm.bind(this)
 	}
 
 	boothClick(activeBooth, company, description, i, _id, owner, status) {
@@ -48,8 +49,10 @@ class Floorplan extends Component {
 		this.setState({ modalIsOpen: false })
 	}
 
-	submitForms(values) {
+	submitForm(values, { setSubmitting }) {
 		console.log('values ===>', values)
+
+		setSubmitting(false)
 
 		this.closeModal()
 
@@ -66,6 +69,7 @@ class Floorplan extends Component {
 					console.log('Error saving booth ===> ', err)
 					const { company, owner, status, description } = this.state
 
+					// Revert booths to previous statate if error
 					this.props.updateBooths(this.state.i, { company, owner, status, description })
 
 					toast.error('Failed to save booth. Reverting now.', {
@@ -77,6 +81,8 @@ class Floorplan extends Component {
 				position: toast.POSITION.BOTTOM_RIGHT,
 			})
 		}
+
+		this.props.showFormSpinner(false)
 	}
 
 	render() {
@@ -90,7 +96,7 @@ class Floorplan extends Component {
 					title={this.state.activeBooth}
 				>
 					<BoothForm
-						onSubmit={this.submitForms}
+						submitForm={this.submitForm}
 						num={this.state.activeBooth}
 						company={this.state.company}
 						description={this.state.description}
@@ -107,7 +113,8 @@ class Floorplan extends Component {
 
 Floorplan.propTypes = {
 	path: PropTypes.string.isRequired,
+	showFormSpinner: PropTypes.func.isRequired,
 	updateBooths: PropTypes.func.isRequired,
 }
 
-export default connect(null, { updateBooths })(Floorplan)
+export default connect(null, { showFormSpinner, updateBooths })(Floorplan)

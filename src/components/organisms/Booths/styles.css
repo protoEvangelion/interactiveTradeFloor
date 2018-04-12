@@ -1,0 +1,17 @@
+.boothsAnimate-enter {
+	opacity: 0.01;
+}
+
+.boothsAnimate-enter.boothsAnimate-enter-active {
+	opacity: 1;
+	transition: opacity 500ms ease-in;
+}
+
+.boothsAnimate-leave {
+	opacity: 1;
+}
+
+.boothsAnimate-leave.boothsAnimate-leave-active {
+	opacity: 0.01;
+	transition: opacity 300ms ease-in;
+}

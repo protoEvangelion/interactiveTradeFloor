@@ -1,5 +1,4 @@
 import { Block, Input, Label } from 'components/atoms'
-
 import PropTypes from 'prop-types'
 import React from 'react'
 import styled from 'styled-components'
@@ -10,34 +9,39 @@ const Error = styled(Block)`
 
 const Wrapper = styled.div`
 	margin-bottom: 1rem;
-	input[type='checkbox'],
-	input[type='radio'] {
-		margin-right: 0.5rem;
-	}
 	label {
 		vertical-align: middle;
 	}
 `
 
-const Field = ({ error, name, invalid, label, type, ...props }) => {
+const Field = ({ error, component, name, touched, ...props }) => {
+	let invalid = false
+
+	if (error) {
+		if (error[name]) {
+			invalid = true
+		}
+	}
+
 	const inputProps = {
 		id: name,
-		name,
-		type,
 		invalid,
+		component,
+		name,
 		'aria-describedby': `${name}Error`,
 		...props,
 	}
-	const renderInputFirst = type === 'checkbox' || type === 'radio'
+
+	const label = name.slice(0, 1).toUpperCase() + name.slice(1)
+
 	return (
 		<Wrapper>
-			{renderInputFirst && <Input {...inputProps} />}
-			{label && <Label htmlFor={inputProps.id}>{label}</Label>}
-			{renderInputFirst || <Input {...inputProps} />}
-			{invalid &&
-				error && (
+			{<Label htmlFor={inputProps.id}>{label}</Label>}
+			{<Input {...inputProps} />}
+			{touched[name] &&
+				error[name] && (
 					<Error id={`${name}Error`} role="alert" palette="danger">
-						{error}
+						{error[name]}
 					</Error>
 				)}
 		</Wrapper>
@@ -45,11 +49,10 @@ const Field = ({ error, name, invalid, label, type, ...props }) => {
 }
 
 Field.propTypes = {
+	component: PropTypes.string,
+	error: PropTypes.object,
 	name: PropTypes.string.isRequired,
-	invalid: PropTypes.bool,
-	error: PropTypes.string,
-	label: PropTypes.string,
-	type: PropTypes.string,
+	touched: PropTypes.object,
 }
 
 Field.defaultProps = {
