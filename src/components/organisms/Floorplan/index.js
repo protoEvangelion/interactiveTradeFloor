@@ -3,13 +3,11 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { ToastContainer, toast } from 'react-toastify'
 
-import { Spinner } from 'components/atoms'
 import { Modal } from 'components/molecules'
 import { BoothForm, Booths } from 'components/organisms'
 import { isApprovedUser } from 'firebase-db/auth'
 import { saveBoothData } from 'firebase-db/db'
 import updateBooths from 'store/actions/updateBooths'
-import showFormSpinner from 'store/actions/showFormSpinner'
 
 class Floorplan extends Component {
 	constructor() {
@@ -81,13 +79,12 @@ class Floorplan extends Component {
 				position: toast.POSITION.BOTTOM_RIGHT,
 			})
 		}
-
-		this.props.showFormSpinner(false)
 	}
 
 	render() {
 		return (
 			<section>
+				<h1>{this.props.isFormSpinnerVisible ? 'HIIIIIIIIIIIIII' : 'BYEEEEEEEE'}</h1>
 				<Booths boothClick={this.boothClick} path={this.props.path} />
 
 				<Modal
@@ -113,8 +110,7 @@ class Floorplan extends Component {
 
 Floorplan.propTypes = {
 	path: PropTypes.string.isRequired,
-	showFormSpinner: PropTypes.func.isRequired,
 	updateBooths: PropTypes.func.isRequired,
 }
 
-export default connect(null, { showFormSpinner, updateBooths })(Floorplan)
+export default connect(null, { updateBooths })(Floorplan)

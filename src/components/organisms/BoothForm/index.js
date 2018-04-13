@@ -9,7 +9,6 @@ import { USER_NAMES } from 'appConfig'
 import { callEmailTeamCloudFunction } from 'firebase-db/cloudFunctions'
 import { Button } from 'components/atoms'
 import { Field } from 'components/molecules'
-import showFormSpinner from 'store/actions/showFormSpinner'
 
 const StyledForm = styled.form`
 	box-sizing: border-box;
@@ -87,7 +86,6 @@ const Form = ({ num, company, description, owner, status, submitForm }) => {
 							disabled={isSubmitting || Object.keys(errors).length > 0}
 							onClick={() => {
 								console.log('SHOWING!!!!!!!!!!!!')
-								showFormSpinner()
 							}}
 							palette="primary"
 							type="submit"

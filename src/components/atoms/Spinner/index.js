@@ -26,7 +26,7 @@ const StyledSpinner = styled.div`
 `
 
 const ScreenOverlay = styled.div`
-	background: rgba(0, 0, 0, 0.1);
+	background: rgba(68, 0, 0, 0.7);
 	position: fixed;
 	width: 100%;
 	height: 100%;

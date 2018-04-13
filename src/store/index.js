@@ -5,8 +5,7 @@ const createStore = () => {
 	if (typeof window !== 'undefined') {
 		return createReduxStore(
 			rootReducer,
-			window.__REDUX_DEVTOOLS_EXTENSION__ &&
-				window.__REDUX_DEVTOOLS_EXTENSION__()
+			window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 		)
 	}
 	return createReduxStore(rootReducer)

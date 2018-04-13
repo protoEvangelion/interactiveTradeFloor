@@ -29,19 +29,6 @@ class Booths extends Component {
 		removeBoothListener(this.props.path)
 	}
 
-	shouldComponentUpdate(nextProps) {
-		console.log('UPDATING')
-		if (!this.props.booths) {
-			return true
-		}
-		if (isEqual(this.props.booths.sort(), nextProps.booths.sort())) {
-			console.log('NO UPDATE')
-			return false
-		}
-		// console.log('YES UPDATE')
-		return true
-	}
-
 	renderBooths() {
 		// remapMongoData(this.props.booths, this.props.path)
 		return this.props.booths.map((booth, i) => {
