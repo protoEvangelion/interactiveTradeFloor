@@ -7,7 +7,6 @@ const HeadingWrapper = styled.div`
 	align-items: center;
 	display: flex;
 	justify-content: space-between;
-	padding: 1rem;
 `
 
 const customStyles = {
@@ -17,6 +16,7 @@ const customStyles = {
 		right: 'auto',
 		bottom: 'auto',
 		marginRight: '-50%',
+		minWidth: '300px',
 		transform: 'translate(-50%, -50%)',
 	},
 }
@@ -29,9 +29,9 @@ const Modal = ({ modalIsOpen, children, closeModal, title }) => (
 		style={customStyles}
 	>
 		<HeadingWrapper>
-			<h3>Editing Booth {title}</h3>
+			{title && <h3>{title}</h3>}
 
-			<Button onClick={closeModal} palette="danger">
+			<Button onClick={closeModal} palette="white" transparent>
 				X
 			</Button>
 		</HeadingWrapper>

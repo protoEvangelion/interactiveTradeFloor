@@ -1,12 +1,12 @@
 import { connect } from 'react-redux'
 import toggleGrid from 'store/actions/toggleGrid'
 import { Block, Button, Link } from 'components/atoms'
-import { FilterBtn } from 'components/molecules'
+import { FilterBtn, Modal } from 'components/molecules'
 
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, { Component } from 'react'
 import styled from 'styled-components'
-import { doSignIn } from 'firebase-db/auth'
+import { doSignIn, doSignOut } from 'firebase-db/auth'
 
 const Wrapper = styled(Block)`
 	display: flex;
@@ -23,36 +23,79 @@ const Wrapper = styled(Block)`
 const Avatar = styled.img`
 	border-radius: 50%;
 	cursor: pointer;
+	flex-grow: 0;
+	margin-right: 0.5rem;
+	height: 2.5rem;
 	width: 2.5rem;
 `
 
-const Header = props => {
-	function renderSignInButton() {
-		if (props.user) {
-			if (props.user.photo) {
-				return <Avatar src={props.user.photo} />
-			}
-		} else {
-			return <Button onClick={doSignIn}>Sign In</Button>
-		}
+const UserContainer = styled.div`
+	align-items: flex-start;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	min-height: 10rem;
+`
+
+class Header extends Component {
+	constructor() {
+		super()
+
+		this.state = { modalIsOpen: false }
+
+		this.toggleModal = this.toggleModal.bind(this)
 	}
-	return (
-		<Wrapper opaque reverse {...props}>
-			<Link to="/">Home</Link>
+	toggleModal() {
+		this.setState({ modalIsOpen: !this.state.modalIsOpen })
+	}
+	render() {
+		const user = this.props.user
 
-			<Link to="/la">LA</Link>
+		if (user) {
+			var { displayName, email, photo } = user
+		}
 
-			<Link to="/lb">LB</Link>
+		return (
+			<Wrapper opaque reverse {...this.props}>
+				<Link to="/">Home</Link>
 
-			<FilterBtn />
+				<Link to="/la">LA</Link>
 
-			<Button onClick={props.toggleGrid} palette="success">
-				#
-			</Button>
+				<Link to="/lb">LB</Link>
 
-			{renderSignInButton()}
-		</Wrapper>
-	)
+				<FilterBtn />
+
+				<Button onClick={this.props.toggleGrid} palette="success">
+					#
+				</Button>
+
+				{user ? (
+					<Avatar onClick={this.toggleModal} src={photo} />
+				) : (
+					<Button onClick={doSignIn}>Sign In</Button>
+				)}
+
+				{user && (
+					<Modal
+						closeModal={this.toggleModal}
+						modalIsOpen={this.state.modalIsOpen}
+						title="User Info:"
+					>
+						<UserContainer>
+							<div style={{ alignItems: 'center', display: 'flex', margin: '1rem 0' }}>
+								<Avatar src={photo} />
+								<span>{displayName}</span>
+							</div>
+
+							<span>{email}</span>
+
+							<Button onClick={() => doSignOut()}>Sign Out</Button>
+						</UserContainer>
+					</Modal>
+				)}
+			</Wrapper>
+		)
+	}
 }
 
 Header.propTypes = {

@@ -89,7 +89,7 @@ class Floorplan extends Component {
 				<Modal
 					closeModal={this.closeModal}
 					modalIsOpen={this.state.modalIsOpen}
-					title={this.state.activeBooth}
+					title={`Editing Booth: ${this.state.activeBooth}`}
 				>
 					<BoothForm
 						submitForm={this.submitForm}
