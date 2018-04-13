@@ -84,7 +84,6 @@ class Floorplan extends Component {
 	render() {
 		return (
 			<section>
-				<h1>{this.props.isFormSpinnerVisible ? 'HIIIIIIIIIIIIII' : 'BYEEEEEEEE'}</h1>
 				<Booths boothClick={this.boothClick} path={this.props.path} />
 
 				<Modal

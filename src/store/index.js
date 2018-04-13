@@ -1,14 +1,15 @@
 import { createStore as createReduxStore } from 'redux'
 import rootReducer from './reducers'
 
-const createStore = () => {
-	if (typeof window !== 'undefined') {
-		return createReduxStore(
-			rootReducer,
-			window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-		)
-	}
-	return createReduxStore(rootReducer)
+let store
+
+if (typeof window !== 'undefined') {
+	store = createReduxStore(
+		rootReducer,
+		window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+	)
+} else {
+	store = createReduxStore(rootReducer)
 }
 
-export default createStore
+export default store

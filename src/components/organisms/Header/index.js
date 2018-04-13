@@ -20,7 +20,22 @@ const Wrapper = styled(Block)`
 	}
 `
 
+const Avatar = styled.img`
+	border-radius: 50%;
+	cursor: pointer;
+	width: 2.5rem;
+`
+
 const Header = props => {
+	function renderSignInButton() {
+		if (props.user) {
+			if (props.user.photo) {
+				return <Avatar src={props.user.photo} />
+			}
+		} else {
+			return <Button onClick={doSignIn}>Sign In</Button>
+		}
+	}
 	return (
 		<Wrapper opaque reverse {...props}>
 			<Link to="/">Home</Link>
@@ -35,7 +50,7 @@ const Header = props => {
 				#
 			</Button>
 
-			<Button onClick={doSignIn}>Sign In</Button>
+			{renderSignInButton()}
 		</Wrapper>
 	)
 }
@@ -45,4 +60,6 @@ Header.propTypes = {
 	toggleGrid: PropTypes.func.isRequired,
 }
 
-export default connect(null, { toggleGrid })(Header)
+const mapStateToProps = state => ({ user: state.user })
+
+export default connect(mapStateToProps, { toggleGrid })(Header)

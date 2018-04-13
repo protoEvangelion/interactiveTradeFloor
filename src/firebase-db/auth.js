@@ -1,5 +1,7 @@
 import { auth, provider } from './'
 import { AUTHENTICATED_USER_EMAILS } from 'appConfig'
+import store from 'store'
+import setUser from 'store/actions/setUser'
 
 export function isApprovedUser() {
 	let isApprovedUser = false
@@ -19,13 +21,15 @@ export function isApprovedUser() {
 
 auth.onAuthStateChanged(function(user) {
 	if (user) {
-		// const displayName = user.displayName
-		// const email = user.email
-		// const photoURL = user.photoURL
+		const displayName = user.displayName
+		const email = user.email
+		const photo = user.photoURL
 		// const uid = user.uid
 		console.log('User is signed in')
+		store.dispatch(setUser({ displayName, email, photo }))
 	} else {
 		console.log('No user signed in')
+		store.dispatch(setUser(null))
 	}
 })
 

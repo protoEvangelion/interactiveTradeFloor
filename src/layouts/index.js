@@ -34,8 +34,4 @@ const BaseLayout = props => {
 	)
 }
 
-BaseLayout.propTypes = {
-	isFormSpinnerVisible: PropTypes.bool.isRequired,
-}
-
 export default BaseLayout
