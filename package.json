@@ -1,6 +1,7 @@
 {
 	"name": "floorplan",
-	"description": "A complete boilerplate for a serverless & static tradeshow floorplan web app that is blazingly fast, simple & secure",
+	"description":
+		"A complete boilerplate for a serverless & static tradeshow floorplan web app that is blazingly fast, simple & secure",
 	"version": "2.0.0",
 	"author": "Ryan Garant",
 	"dependencies": {
@@ -38,9 +39,7 @@
 		"prettier": "^1.8.2",
 		"prettier-eslint-cli": "^4.7.1"
 	},
-	"keywords": [
-		"gatsby"
-	],
+	"keywords": ["gatsby"],
 	"license": "MIT",
 	"main": "n/a",
 	"scripts": {
@@ -49,7 +48,7 @@
 		"format": "prettier-eslint --write \"src/**/*.js\"",
 		"copy": "copyfiles -f src/appConfig.js functions",
 		"deploy": "firebase deploy",
-		"deploy:functions": "npm run copy && firebase deploy --only functions:emailTeam",
+		"deploy:functions": "npm run copy && firebase deploy --only functions:backupDB",
 		"logs": "firebase functions:log"
 	}
 }

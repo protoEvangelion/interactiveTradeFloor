@@ -36,7 +36,7 @@ auth.onAuthStateChanged(function(user) {
 // Sign In
 export const doSignIn = () =>
 	auth
-		.signInWithPopup(provider)
+		.signInWithRedirect(provider)
 		.then(result => {
 			// const token = result.credential.accessToken
 			const user = result.user

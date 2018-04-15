@@ -80,6 +80,8 @@ class Header extends Component {
 						closeModal={this.toggleModal}
 						modalIsOpen={this.state.modalIsOpen}
 						title="User Info:"
+						opaque
+						reverse
 					>
 						<UserContainer>
 							<div style={{ alignItems: 'center', display: 'flex', margin: '1rem 0' }}>
@@ -87,7 +89,7 @@ class Header extends Component {
 								<span>{displayName}</span>
 							</div>
 
-							<span>{email}</span>
+							<span style={{ marginBottom: '1rem' }}>{email}</span>
 
 							<Button onClick={() => doSignOut()}>Sign Out</Button>
 						</UserContainer>

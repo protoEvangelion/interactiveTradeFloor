@@ -5,7 +5,7 @@ import styled from 'styled-components'
 
 const Label = styled.label`
 	font-family: ${font('primary')};
-	color: ${palette('grayscale', 1)};
+	color: ${palette('grayscale', 4)};
 	font-size: 1rem;
 	line-height: 2em;
 `

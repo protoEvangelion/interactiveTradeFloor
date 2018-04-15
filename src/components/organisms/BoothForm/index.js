@@ -19,7 +19,7 @@ const StyledForm = styled.form`
 	max-width: 100%;
 	min-height: 350px;
 	min-width: 320px;
-	padding: 1rem;
+	padding-top: 1rem;
 `
 
 const Form = ({ num, company, description, owner, status, submitForm }) => {
@@ -81,7 +81,13 @@ const Form = ({ num, company, description, owner, status, submitForm }) => {
 
 					<Field name="description" touched={touched} error={errors} />
 
-					<div style={{ display: 'flex', justifyContent: 'space-between' }}>
+					<div
+						style={{
+							display: 'flex',
+							justifyContent: 'space-between',
+							paddingTop: '0.5rem',
+						}}
+					>
 						<Button
 							disabled={isSubmitting || Object.keys(errors).length > 0}
 							onClick={() => {
