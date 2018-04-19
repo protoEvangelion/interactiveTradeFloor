@@ -8,7 +8,9 @@ const firstLetterIsUpper = str => /[A-Z]/.test(str)
 
 export function listenForBoothChanges(city = 'la', loadBooths) {
 	db.ref(`${city}/`).on('value', snapshot => {
-		const boothsArr = values(snapshot.val()).map(booth => {
+		const booths = snapshot.val()
+
+		const boothsArr = values(booths).map(booth => {
 			if (booth.owner && !firstLetterIsUpper(booth.owner)) {
 				return { ...booth, owner: capFirstLetter(booth.owner) }
 			}

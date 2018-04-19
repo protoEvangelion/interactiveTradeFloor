@@ -3,6 +3,7 @@ import { Header } from 'components/organisms'
 import PropTypes from 'prop-types'
 import { palette } from 'styled-theme'
 import styled from 'styled-components'
+import Helmet from 'react-helmet'
 
 import './base.css'
 
@@ -25,6 +26,14 @@ const Nav = styled.nav`
 const BaseLayout = props => {
 	return (
 		<Fragment>
+			<Helmet
+				title="Gatsby Default Starter"
+				meta={[
+					{ name: `description`, content: `Sample` },
+					{ name: `keywords`, content: `sample, something` },
+				]}
+			/>
+
 			<Nav {...props}>
 				<Header />
 			</Nav>

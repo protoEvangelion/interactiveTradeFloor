@@ -1,4 +1,6 @@
 import { connect } from 'react-redux'
+import logo from './logo.png'
+
 import toggleGrid from 'store/actions/toggleGrid'
 import { Block, Button, Link } from 'components/atoms'
 import { FilterBtn, Modal } from 'components/molecules'
@@ -25,6 +27,11 @@ const Avatar = styled.img`
 	cursor: pointer;
 	flex-grow: 0;
 	margin-right: 0.5rem;
+	height: 2.5rem;
+	width: 2.5rem;
+`
+
+const Img = styled.img`
 	height: 2.5rem;
 	width: 2.5rem;
 `
@@ -57,7 +64,9 @@ class Header extends Component {
 
 		return (
 			<Wrapper opaque reverse {...this.props}>
-				<Link to="/">Home</Link>
+				<Link to="/">
+					<Img alt="logo" src={logo} />
+				</Link>
 
 				<Link to="/la">LA</Link>
 

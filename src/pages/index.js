@@ -4,7 +4,7 @@ import Link from 'gatsby-link'
 export default class DefaultLayout extends React.Component {
 	render() {
 		return (
-			<div>
+			<div style={this.props.transition && this.props.transition.style}>
 				<Link to="/la">
 					<h3>LA</h3>
 				</Link>

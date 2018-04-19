@@ -1,57 +1,12 @@
-const firebase = require('firebase/app')
-require('firebase/database')
-require('firebase/storage')
 const functions = require('firebase-functions')
 const nodemailer = require('nodemailer')
 
 const {
 	AUTHENTICATED_USER_EMAILS,
-	FIREBASE_CONFIG,
 	GMAIL_SETTINGS,
 	RECIPIENT_EMAILS,
 	USER_MAP,
 } = require('./appConfig')
-
-if (!firebase.apps.length) {
-	firebase.initializeApp(FIREBASE_CONFIG)
-}
-
-exports.backupDB = functions.https.onRequest((req, res) => {
-	const db = firebase.database()
-	const storage = firebase.storage()
-
-	db
-		.ref('/')
-		.once('value')
-		.then(snapshot => {
-			console.log('Received booth data attempting JSON file upload to storage bucket')
-
-			var message = 'This is my message.'
-
-			storage
-				.ref()
-				.child('something.txt')
-				.putString(message)
-				.then(function(snapshot) {
-					console.log('Uploaded a raw string!')
-				})
-
-			// const boothsJSON = snapshot.val()
-
-			// const today = new Date(Date.now()).toLocaleString().replace(/\/| |,/g, '-')
-
-			// const fileName = `${today}.json`
-
-			// const storageRef = firebase
-			// 	.storage()
-			// 	.ref()
-			// 	.child(`backups/${fileName}`)
-
-			// storageRef.put(boothsJSON).then(() => console.log('Uploaded Booths json db!'))
-		})
-
-	res.redirect(200)
-})
 
 exports.emailTeam = functions.https.onCall((data, context) => {
 	let isApprovedUser = false

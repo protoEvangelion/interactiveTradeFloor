@@ -7,6 +7,7 @@ import { Modal } from 'components/molecules'
 import { BoothForm, Booths } from 'components/organisms'
 import { isApprovedUser } from 'firebase-db/auth'
 import { saveBoothData } from 'firebase-db/db'
+import { backupBooths } from 'firebase-db/storage'
 import updateBooths from 'store/actions/updateBooths'
 
 class Floorplan extends Component {
@@ -26,6 +27,10 @@ class Floorplan extends Component {
 		this.boothClick = this.boothClick.bind(this)
 		this.closeModal = this.closeModal.bind(this)
 		this.submitForm = this.submitForm.bind(this)
+	}
+
+	componentDidMount() {
+		backupBooths()
 	}
 
 	boothClick(activeBooth, company, description, i, _id, owner, status) {

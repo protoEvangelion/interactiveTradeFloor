@@ -10,7 +10,8 @@ if (!firebase.apps.length) {
 const auth = firebase.auth()
 const db = firebase.database()
 const functions = firebase.functions()
+const storage = firebase.storage()
 
 const provider = new firebase.auth.GoogleAuthProvider()
 
-export { auth, db, functions, provider }
+export { auth, db, functions, provider, storage }
