@@ -1,5 +1,6 @@
 import * as firebase from 'firebase'
 import '@firebase/functions'
+import 'firebase/storage'
 
 import { FIREBASE_CONFIG } from 'appConfig'
 

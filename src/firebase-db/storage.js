@@ -3,9 +3,9 @@ import { db, storage } from './'
 const uploadBooths = (snapshot, location) => {
 	const booths = snapshot.val()
 
-	const today = new Date(Date.now()).toDateString().replace(/\/| |,/g, '-')
+	const today = new Date().toISOString().slice(0, 10)
 
-	const file = `${location}__${today}.json`
+	const file = `${today}__${location}.json`
 
 	const fileRef = storage.ref().child(file)
 

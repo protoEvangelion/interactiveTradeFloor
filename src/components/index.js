@@ -2,10 +2,10 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import { Floorplan } from 'components/organisms'
 
-const LB = ({ location }) => <Floorplan path={location.pathname.slice(1)} />
+const Main = ({ location }) => <Floorplan path={location.pathname.slice(1)} />
 
-LB.propTypes = {
+Main.propTypes = {
 	location: PropTypes.object.isRequired,
 }
 
-export default LB
+export default Main
