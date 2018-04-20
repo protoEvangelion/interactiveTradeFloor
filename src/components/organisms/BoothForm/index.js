@@ -1,3 +1,4 @@
+import 'regenerator-runtime/runtime'
 import React from 'react'
 import { toast } from 'react-toastify'
 import { Formik } from 'formik'

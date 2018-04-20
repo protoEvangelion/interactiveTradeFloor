@@ -1,8 +1,11 @@
+import 'regenerator-runtime/runtime'
 import { functions } from './'
 import { isApprovedUser } from './auth'
+
 /*
 Client side validation for google cloud function
 */
+
 async function callEmailTeamCloudFunction(data) {
 	const emailTeam = functions.httpsCallable('emailTeam')
 
