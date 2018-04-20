@@ -1,12 +1,8 @@
 const functions = require('firebase-functions')
 const nodemailer = require('nodemailer')
 
-const {
-	AUTHENTICATED_USER_EMAILS,
-	GMAIL_SETTINGS,
-	RECIPIENT_EMAILS,
-	USER_MAP,
-} = require('./appConfig')
+const { AUTHENTICATED_USER_EMAILS, USER_MAP } = require('./appConfig')
+const { GMAIL_SETTINGS, RECIPIENT_EMAILS } = require('./emailConfig')
 
 exports.emailTeam = functions.https.onCall((data, context) => {
 	let isApprovedUser = false

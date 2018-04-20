@@ -16,44 +16,42 @@ Specifically, it helps sales people consolidate their efforts and collaborate in
 
 Rather than track everything by paper, you can use this web app to keep track of all booths that you have **sold** or still need to **collect** on and **color code** it based on who the booth belongs to.
 
-Table of Contents
-=================
+# Table of Contents
 
 * [Features](#features)
 * [Setup](#setup)
-    * [Available Scripts](#available-scripts)
-      * [Development Mode](#development-mode)
-      * [Production Mode](#production-mode)
-    * [Environment Variables](#environment-variables)
-    * [Email](#email)
-    * [MongoDB](#mongodb)
-    * [Changing booth layouts](#changing-booth-layouts)
-      * [Booth Data Model](#booth-data-model)
-    * [Authentications](#authentications)
-    * [SSL for Production](#ssl-for-production)
-    * [Custom JS &amp; CSS](#custom-js--css)
-    * [How to Specify Port](#how-to-specify-port)
+  * [Available Scripts](#available-scripts)
+    * [Development Mode](#development-mode)
+    * [Production Mode](#production-mode)
+  * [Environment Variables](#environment-variables)
+  * [Email](#email)
+  * [MongoDB](#mongodb)
+  * [Changing booth layouts](#changing-booth-layouts)
+    * [Booth Data Model](#booth-data-model)
+  * [Authentications](#authentications)
+  * [SSL for Production](#ssl-for-production)
+  * [Custom JS &amp; CSS](#custom-js--css)
+  * [How to Specify Port](#how-to-specify-port)
 * [License](#license)
 
 ## Features
 
-  - 🚀 ES6 Javascript
-  - 🔩 Socket.io for live updating between users.
-  - 👀 `react` as the view.
-  - 🔀 `react-router` v4 as the router.
-  - 🏪 `redux` as the central store for state management.
-  - 💅  Styling: `Styled Components`
-  - 📀 `MongoDB` as the database.
-  - 🚄 `express` with `Node.js` as the server.
-  - 🌍 Universal / Server Side Rendering.
-  - 🔥 Client & Server side hot reloading with `react-hot-loader`.
-  - 👮 Security with `Snyk` and `react-helmet`.
-  - 📦 All source is bundled using `Webpack v2`.
-  - 🤖 Optimised Webpack builds via `HappyPack`.
-  - 👼 `ESlint` Airbnb configuration.
-  - 🎭 `Jest` as the testing framework.
-  - ❤️ Continuous integration with `Travis-CI`
-
+* 🚀 ES6 Javascript
+* 🔩 Socket.io for live updating between users.
+* 👀 `react` as the view.
+* 🔀 `react-router` v4 as the router.
+* 🏪 `redux` as the central store for state management.
+* 💅 Styling: `Styled Components`
+* 📀 `MongoDB` as the database.
+* 🚄 `express` with `Node.js` as the server.
+* 🌍 Universal / Server Side Rendering.
+* 🔥 Client & Server side hot reloading with `react-hot-loader`.
+* 👮 Security with `Snyk` and `react-helmet`.
+* 📦 All source is bundled using `Webpack v2`.
+* 🤖 Optimised Webpack builds via `HappyPack`.
+* 👼 `ESlint` Airbnb configuration.
+* 🎭 `Jest` as the testing framework.
+* ❤️ Continuous integration with `Travis-CI`
 
 ## Setup
 
@@ -76,7 +74,6 @@ npm run build
 npm run start
 ```
 
-
 ### Environment Variables
 
 * Here is where the **dynamic** part comes in
@@ -98,8 +95,7 @@ USER_COLORS=#00B20E,#0800FF,...
 
 * Setting up email functionality is super simple
   * Just add the config as above
-  * *If you need help setting up your gmail to send emails, we use* [Nodemailer so check out their docs](https://nodemailer.com/about/)
-
+  * _If you need help setting up your gmail to send emails, we use_ [Nodemailer so check out their docs](https://nodemailer.com/about/) \* [Article on sending with a simple Gmail account](https://medium.com/@manojsinghnegi/sending-an-email-using-nodemailer-gmail-7cfa0712a799)
 
 ### MongoDB
 
@@ -112,8 +108,7 @@ mongod
 * It should start up and say listening on port `27017`
   * If it shows a different port specify it in the `package.json` file in the root of this project under the `mongo:port` script
 
-
-* Then restore the backups into the database
+- Then restore the backups into the database
   * Navigate to `backup` directory and restore each of the two collections
 
 ```shell
@@ -144,7 +139,6 @@ use floorplan
 ```
 
 * It should say switched to db floorplan
-
 
 ### Changing booth layouts
 
@@ -192,7 +186,7 @@ TODO: see if possible to run tests, emails, routes
 
 ```css
 #myCustomBoothType {
-  ...
+	...;
 }
 ```
 
@@ -201,7 +195,6 @@ TODO: see if possible to run tests, emails, routes
 ### How to Specify Port
 
 In the `package.json` file, locate the **scripts** section, find the `env` property, and set `PORT` to your desired port (`PORT=3000`)
-
 
 ## License
 

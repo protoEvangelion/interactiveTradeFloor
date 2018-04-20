@@ -1,4 +1,3 @@
-import 'regenerator-runtime/runtime'
 import { functions } from './'
 import { isApprovedUser } from './auth'
 

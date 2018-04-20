@@ -1,9 +1,9 @@
 .cache/
 .DS_Store
 *.log
+appConfig.js
+coverage
+emailConfig.js
+node_modules
 public/
 yarn-error.log
-node_modules
-coverage
-appConfig.js
-serviceAccountKey.json
