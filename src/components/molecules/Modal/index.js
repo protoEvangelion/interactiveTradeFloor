@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import React from 'react'
 import ReactModal from 'react-modal'
 import { Block, Button } from 'components/atoms'
@@ -24,7 +25,7 @@ const customStyles = {
 	},
 }
 
-const Modal = ({ opaque, reverse, modalIsOpen, children, closeModal, title }) => (
+const Modal = ({ modalIsOpen, children, closeModal, title }) => (
 	<ReactModal
 		ariaHideApp={false}
 		isOpen={modalIsOpen}
@@ -44,5 +45,12 @@ const Modal = ({ opaque, reverse, modalIsOpen, children, closeModal, title }) =>
 		</Block>
 	</ReactModal>
 )
+
+Modal.propTypes = {
+	modalIsOpen: PropTypes.bool.isRequired,
+	children: PropTypes.node.isRequired,
+	closeModal: PropTypes.func,
+	title: PropTypes.string,
+}
 
 export default Modal

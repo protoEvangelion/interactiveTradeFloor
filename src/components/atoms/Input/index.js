@@ -1,10 +1,9 @@
-import { font, palette } from 'styled-theme'
-import styled from 'styled-components'
 import { Field as FormikField } from 'formik'
-
 import PropTypes from 'prop-types'
 import React from 'react'
+import styled from 'styled-components'
 import { ifProp } from 'styled-tools'
+import { font, palette } from 'styled-theme'
 
 export const fontSize = ({ height }) => `${height / 35.5555555556}rem`
 
@@ -21,9 +20,9 @@ const Input = styled(FormikField)`
 	background-color: ${palette('grayscale', 0, true)};
 	border: 1px solid ${ifProp('invalid', palette('danger', 2), palette('grayscale', 3))};
 	border-radius: 2px;
-`.withComponent(({ error, touched, invalid, height, reverse, ...rest }) => (
-	<FormikField {...rest} />
-))
+`.withComponent((
+	{ error, touched, invalid, height, reverse, ...rest } // eslint-disable-line
+) => <FormikField {...rest} />)
 
 Input.propTypes = {
 	reverse: PropTypes.bool,

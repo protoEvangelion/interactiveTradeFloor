@@ -1,7 +1,8 @@
-import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
+import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
+
 import { BOOTH_LAYOUT } from 'appConfig'
 
 const CommonGrid = styled.div`

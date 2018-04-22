@@ -1,19 +1,18 @@
-import { connect } from 'react-redux'
 import { navigateTo } from 'gatsby-link'
+import PropTypes from 'prop-types'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import styled from 'styled-components'
 
-import logo from './logo.png'
-
+import { FLOORPLAN_PAGES, USER_NAMES } from 'appConfig'
+import { Block, Button, Link } from 'components/atoms'
+import { Modal } from 'components/molecules'
+import { doSignIn, doSignOut } from 'firebase-db/auth'
 import toggleGrid from 'store/actions/toggleGrid'
 import loadBooths from 'store/actions/loadBooths'
 import setFilter from 'store/actions/setFilter'
-import { Block, Button, Link } from 'components/atoms'
-import { Modal } from 'components/molecules'
 
-import PropTypes from 'prop-types'
-import React, { Component } from 'react'
-import styled from 'styled-components'
-import { doSignIn, doSignOut } from 'firebase-db/auth'
-import { FLOORPLAN_PAGES, USER_NAMES } from 'appConfig'
+import logo from './logo.png'
 
 const Wrapper = styled(Block)`
 	display: flex;
@@ -165,8 +164,11 @@ class Header extends Component {
 }
 
 Header.propTypes = {
-	filter: PropTypes.func,
+	path: PropTypes.string.isRequired,
 	toggleGrid: PropTypes.func.isRequired,
+	setFilter: PropTypes.func.isRequired,
+	loadBooths: PropTypes.func.isRequired,
+	user: PropTypes.oneOfType([null, PropTypes.object]).isRequired,
 }
 
 const mapStateToProps = state => ({ user: state.user })

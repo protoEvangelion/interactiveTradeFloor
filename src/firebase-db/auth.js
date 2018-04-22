@@ -24,7 +24,6 @@ auth.onAuthStateChanged(function(user) {
 		const displayName = user.displayName
 		const email = user.email
 		const photo = user.photoURL
-		// const uid = user.uid
 		console.log('User is signed in')
 		store.dispatch(setUser({ displayName, email, photo }))
 	} else {
@@ -33,24 +32,17 @@ auth.onAuthStateChanged(function(user) {
 	}
 })
 
-// Sign In
 export const doSignIn = () =>
 	auth
 		.signInWithRedirect(provider)
 		.then(result => {
-			// const token = result.credential.accessToken
 			const user = result.user
 			console.log('got user from google sign in ====>', user)
 		})
 		.catch(error => {
 			console.log('error during google sign in', error)
-			// const errorCode = error.code
-			// const errorMessage = error.message
-			// const email = error.email
-			// const credential = error.credential
 		})
 
-// Sign Out
 export const doSignOut = () =>
 	auth
 		.signOut()

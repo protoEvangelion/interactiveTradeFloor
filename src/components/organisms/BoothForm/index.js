@@ -1,7 +1,7 @@
-import React from 'react'
-import { toast } from 'react-toastify'
 import { Formik } from 'formik'
 import PropTypes from 'prop-types'
+import React from 'react'
+import { toast } from 'react-toastify'
 import styled from 'styled-components'
 import yup from 'yup'
 
@@ -44,8 +44,6 @@ const Form = ({ num, company, description, owner, status, submitForm }) => {
 				position: toast.POSITION.BOTTOM_RIGHT,
 			})
 		} else {
-			console.log(`Failed to send email ==> ${JSON.stringify(response)}`)
-
 			toast.error('Failed to send email', {
 				position: toast.POSITION.BOTTOM_RIGHT,
 			})

@@ -1,6 +1,6 @@
 import React from 'react'
-import { Provider } from 'react-redux'
 import { renderToString } from 'react-dom/server'
+import { Provider } from 'react-redux'
 import { ServerStyleSheet } from 'styled-components'
 
 import store from './src/store'

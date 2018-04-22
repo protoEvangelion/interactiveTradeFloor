@@ -1,9 +1,10 @@
-import React, { Fragment } from 'react'
-import { Header } from 'components/organisms'
 import PropTypes from 'prop-types'
+import React, { Fragment } from 'react'
+import Helmet from 'react-helmet'
 import { palette } from 'styled-theme'
 import styled from 'styled-components'
-import Helmet from 'react-helmet'
+
+import { Header } from 'components/organisms'
 
 import './base.css'
 
@@ -41,6 +42,11 @@ const BaseLayout = props => {
 			{props.children()}
 		</Fragment>
 	)
+}
+
+BaseLayout.propTypes = {
+	location: PropTypes.object,
+	children: PropTypes.node,
 }
 
 export default BaseLayout

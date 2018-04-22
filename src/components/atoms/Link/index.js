@@ -1,9 +1,8 @@
-import { font, palette } from 'styled-theme'
-import styled, { css } from 'styled-components'
-
+import RouterLink from 'gatsby-link'
 import PropTypes from 'prop-types'
 import React from 'react'
-import RouterLink from 'gatsby-link'
+import styled, { css } from 'styled-components'
+import { font, palette } from 'styled-theme'
 
 const styles = css`
 	color: white;
@@ -18,6 +17,7 @@ const styles = css`
 	}
 `
 
+// eslint-disable-next-line
 const StyledLink = styled(({ theme, reverse, palette, ...props }) => (
 	<RouterLink {...props} />
 ))`

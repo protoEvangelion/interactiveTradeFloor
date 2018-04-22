@@ -21,7 +21,6 @@ const hoverForegroundColor = ({ disabled, transparent }) =>
 
 const styles = css`
 	align-items: center;
-	appearance: none;
 	background-color: ${backgroundColor};
 	border-radius: 0.125em;
 	border: 0.0625em solid ${ifProp('transparent', 'currentcolor', 'transparent')};
@@ -53,6 +52,7 @@ const styles = css`
 `
 
 const StyledLink = styled(
+	// eslint-disable-next-line
 	({ disabled, transparent, reverse, palette, height, theme, ...props }) => (
 		<Link {...props} />
 	)

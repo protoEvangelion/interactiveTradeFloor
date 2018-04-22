@@ -1,7 +1,6 @@
 import React from 'react'
-import styled, { keyframes } from 'styled-components'
-
 import PropTypes from 'prop-types'
+import styled, { keyframes } from 'styled-components'
 import { palette } from 'styled-theme'
 
 const spin = keyframes`
@@ -46,6 +45,7 @@ const Spinner = props => {
 }
 
 Spinner.propTypes = {
+	fullscreen: PropTypes.bool,
 	palette: PropTypes.string,
 	reverse: PropTypes.bool,
 	visible: PropTypes.bool,

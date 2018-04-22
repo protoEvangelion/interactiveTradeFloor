@@ -1,23 +1,10 @@
-import { isNumber, values } from 'lodash'
+import { isNumber } from 'lodash'
 
 import { db } from './'
 
-const capFirstLetter = str => str.charAt(0).toUpperCase() + str.substring(1)
-
-const firstLetterIsUpper = str => /[A-Z]/.test(str)
-
 export function listenForBoothChanges(city = 'la', loadBooths) {
 	db.ref(`${city}/`).on('value', snapshot => {
-		const booths = snapshot.val()
-
-		const boothsArr = values(booths).map(booth => {
-			if (booth.owner && !firstLetterIsUpper(booth.owner)) {
-				return { ...booth, owner: capFirstLetter(booth.owner) }
-			}
-			return booth
-		})
-
-		loadBooths(boothsArr)
+		loadBooths(snapshot.val())
 	})
 }
 

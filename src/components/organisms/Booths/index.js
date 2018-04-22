@@ -2,15 +2,16 @@ import PropTypes from 'prop-types'
 import React, { Component, Fragment } from 'react'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import { connect } from 'react-redux'
+
+import { BOOTH_LAYOUT, USER_MAP } from 'appConfig'
+import { Spinner } from 'components/atoms'
+import { Booth, GridLines } from 'components/molecules'
 import {
 	// remapMongoData,
 	removeBoothListener,
 	listenForBoothChanges,
 } from 'firebase-db/db'
 import loadBooths from 'store/actions/loadBooths'
-import { BOOTH_LAYOUT, USER_MAP } from 'appConfig'
-import { Spinner } from 'components/atoms'
-import { Booth, GridLines } from 'components/molecules'
 import './styles.css'
 
 class Booths extends Component {

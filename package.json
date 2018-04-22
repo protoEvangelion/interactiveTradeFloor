@@ -1,6 +1,7 @@
 {
 	"name": "floorplan",
-	"description": "A complete boilerplate for a serverless & static tradeshow floorplan web app that is blazingly fast, simple & secure",
+	"description":
+		"A complete boilerplate for a serverless & static tradeshow floorplan web app that is blazingly fast, simple & secure",
 	"version": "2.0.0",
 	"author": "Ryan Garant",
 	"dependencies": {
@@ -14,7 +15,6 @@
 		"react-helmet": "^5.2.0",
 		"react-measure": "^2.0.2",
 		"react-modal": "^3.3.2",
-		"react-onclickoutside": "^6.7.1",
 		"react-redux": "^5.0.7",
 		"react-toastify": "^3.4.3",
 		"react-tooltip": "^3.4.0",
@@ -43,16 +43,14 @@
 		"prettier": "^1.8.2",
 		"prettier-eslint-cli": "^4.7.1"
 	},
-	"keywords": [
-		"gatsby"
-	],
+	"keywords": ["gatsby"],
 	"license": "MIT",
 	"main": "n/a",
 	"scripts": {
 		"dev": "gatsby develop",
 		"build": "gatsby build",
 		"format": "prettier-eslint --write \"src/**/*.js\"",
-		"copy": "copyfiles -f src/appConfig.js functions",
+		"copy": "copyfiles config.js functions",
 		"deploy": "firebase deploy",
 		"deploy:functions": "npm run copy && firebase deploy --only functions",
 		"deploy:hosting": "firebase deploy --only hosting",

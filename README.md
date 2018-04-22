@@ -1,3 +1,8 @@
+make sure owner names are first letter captalized in db and config
+Ondemand client side db backup max 1 backup per day
+How to deploy functions and app
+package.json scripts
+
 <p align="center">
   <a href="https://travis-ci.org/protoEvangelion/interactiveTradeFloor"><img src="https://img.shields.io/travis/protoEvangelion/interactiveTradeFloor/master.svg?style=flat-square" alt="Build Status" /></a>
   <a href="https://codecov.io/gh/protoEvangelion/interactiveTradeFloor"><img src="https://img.shields.io/codecov/c/github/protoEvangelion/interactiveTradeFloor.svg?style=flat-square" alt="Build Status" /></a>

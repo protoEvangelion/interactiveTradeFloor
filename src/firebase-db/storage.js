@@ -1,6 +1,9 @@
 import { db, storage } from './'
 import { isApprovedUser } from './auth'
 
+/*
+** Ondemand client side db backup max 1 backup per day
+*/
 const uploadBooths = (snapshot, location) => {
 	if (isApprovedUser()) {
 		const booths = snapshot.val()

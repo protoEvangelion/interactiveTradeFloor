@@ -1,9 +1,9 @@
-import { Info, StatusCircle, Tooltip } from 'components/atoms'
-
 import PropTypes from 'prop-types'
 import React, { Fragment } from 'react'
 import styled, { css } from 'styled-components'
 import { ifProp } from 'styled-tools'
+
+import { Info, StatusCircle, Tooltip } from 'components/atoms'
 
 export const determineColor = (filter, owner, status, colorMap) => {
 	if ((filter !== 'None' && filter !== owner) || status === 'open' || status === 'n/a') {

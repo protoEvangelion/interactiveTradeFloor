@@ -1,7 +1,7 @@
 const functions = require('firebase-functions')
 const nodemailer = require('nodemailer')
 
-const { AUTHENTICATED_USER_EMAILS, USER_MAP } = require('./appConfig')
+const { AUTHENTICATED_USER_EMAILS, USER_MAP } = require('./config')
 const { GMAIL_SETTINGS, RECIPIENT_EMAILS } = require('./emailConfig')
 
 exports.emailTeam = functions.https.onCall((data, context) => {
@@ -16,8 +16,6 @@ exports.emailTeam = functions.https.onCall((data, context) => {
 
 	if (isApprovedUser) {
 		const { company, description, num, owner, status } = data
-
-		console.log('updated ======>', company, description, num, owner, status)
 
 		const transporter = nodemailer.createTransport({
 			service: 'gmail',
@@ -51,8 +49,6 @@ exports.emailTeam = functions.https.onCall((data, context) => {
 					Info: </strong> ${status === 'open' ? 'n/a' : description}</br>
 			`,
 		}
-
-		console.log('transporter ===>')
 
 		return transporter
 			.sendMail(mailOptions)
