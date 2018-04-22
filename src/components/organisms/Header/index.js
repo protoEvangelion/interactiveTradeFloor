@@ -1,7 +1,10 @@
 import { connect } from 'react-redux'
+import { navigateTo } from 'gatsby-link'
+
 import logo from './logo.png'
 
 import toggleGrid from 'store/actions/toggleGrid'
+import loadBooths from 'store/actions/loadBooths'
 import { Block, Button, Link } from 'components/atoms'
 import { FilterBtn, Modal } from 'components/molecules'
 
@@ -9,6 +12,7 @@ import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import { doSignIn, doSignOut } from 'firebase-db/auth'
+import { FLOORPLAN_PAGES } from 'appConfig'
 
 const Wrapper = styled(Block)`
 	display: flex;
@@ -36,6 +40,10 @@ const Img = styled.img`
 	width: 2.5rem;
 `
 
+const Select = styled.select`
+	height: 100%;
+`
+
 const UserContainer = styled.div`
 	align-items: flex-start;
 	display: flex;
@@ -45,12 +53,36 @@ const UserContainer = styled.div`
 `
 
 class Header extends Component {
-	constructor() {
-		super()
+	constructor(props) {
+		super(props)
 
-		this.state = { modalIsOpen: false }
+		let activeSelectOption = ''
 
+		FLOORPLAN_PAGES.map(page => {
+			if (props.path == page.path) {
+				activeSelectOption = page.path
+			}
+		})
+
+		this.state = {
+			modalIsOpen: false,
+			activeSelectOption,
+		}
+
+		this.handleChange = this.handleChange.bind(this)
 		this.toggleModal = this.toggleModal.bind(this)
+	}
+	handleChange(e) {
+		console.log('Select changed', e.target.value)
+
+		// Purge booths before rerouting
+		this.props.loadBooths(null)
+
+		navigateTo(e.target.value)
+
+		this.setState({
+			activeSelectOption: e.target.value,
+		})
 	}
 	toggleModal() {
 		this.setState({ modalIsOpen: !this.state.modalIsOpen })
@@ -68,9 +100,13 @@ class Header extends Component {
 					<Img alt="logo" src={logo} />
 				</Link>
 
-				<Link to="/la">LA</Link>
-
-				<Link to="/lb">LB</Link>
+				<Select value={this.state.activeSelectOption} onChange={this.handleChange}>
+					{FLOORPLAN_PAGES.map(page => (
+						<option key={page.path} value={page.path}>
+							{page.name}
+						</option>
+					))}
+				</Select>
 
 				<FilterBtn />
 
@@ -116,4 +152,4 @@ Header.propTypes = {
 
 const mapStateToProps = state => ({ user: state.user })
 
-export default connect(mapStateToProps, { toggleGrid })(Header)
+export default connect(mapStateToProps, { loadBooths, toggleGrid })(Header)

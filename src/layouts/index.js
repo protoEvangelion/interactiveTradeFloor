@@ -35,7 +35,7 @@ const BaseLayout = props => {
 			/>
 
 			<Nav {...props}>
-				<Header />
+				<Header path={props.location.pathname} />
 			</Nav>
 
 			{props.children()}
