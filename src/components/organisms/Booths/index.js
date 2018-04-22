@@ -2,13 +2,11 @@ import PropTypes from 'prop-types'
 import React, { Component, Fragment } from 'react'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import { connect } from 'react-redux'
-import { isEqual } from 'lodash'
 import {
 	// remapMongoData,
 	removeBoothListener,
 	listenForBoothChanges,
 } from 'firebase-db/db'
-import preload from 'store/actions/preload'
 import loadBooths from 'store/actions/loadBooths'
 import { BOOTH_LAYOUT, USER_MAP } from 'appConfig'
 import { Spinner } from 'components/atoms'
@@ -105,13 +103,11 @@ Booths.propTypes = {
 	filter: PropTypes.string.isRequired,
 	loadBooths: PropTypes.func.isRequired,
 	path: PropTypes.string.isRequired,
-	preload: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
 	booths: state.booths,
 	filter: state.filter,
-	isPreloading: state.isPreloading,
 })
 
-export default connect(mapStateToProps, { preload, loadBooths })(Booths)
+export default connect(mapStateToProps, { loadBooths })(Booths)
