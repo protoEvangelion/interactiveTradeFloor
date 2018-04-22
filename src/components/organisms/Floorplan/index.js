@@ -86,6 +86,14 @@ class Floorplan extends Component {
 		}
 	}
 
+	componentWillMount() {
+		console.log('Floorplan MOUNTING')
+	}
+
+	componentWillUnmount() {
+		console.log('Floorplan unmounting')
+	}
+
 	render() {
 		return (
 			<section>

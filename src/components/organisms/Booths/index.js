@@ -20,12 +20,12 @@ class Booths extends Component {
 		super()
 	}
 	componentWillMount() {
-		console.log('MOUNTING')
+		console.log('BOOTHS MOUNTING')
 		listenForBoothChanges(this.props.path, this.props.loadBooths)
 	}
 
 	componentWillUnmount() {
-		console.log('UN---MOUNTIN')
+		console.log('BOOTHS unmounting')
 		removeBoothListener(this.props.path)
 	}
 

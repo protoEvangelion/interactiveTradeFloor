@@ -74,7 +74,7 @@ class Header extends Component {
 
 				<FilterBtn />
 
-				<Button onClick={this.props.toggleGrid} palette="success">
+				<Button onClick={this.props.toggleGrid} palette="primary" transparent>
 					#
 				</Button>
 
