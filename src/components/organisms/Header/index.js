@@ -5,14 +5,15 @@ import logo from './logo.png'
 
 import toggleGrid from 'store/actions/toggleGrid'
 import loadBooths from 'store/actions/loadBooths'
+import setFilter from 'store/actions/setFilter'
 import { Block, Button, Link } from 'components/atoms'
-import { FilterBtn, Modal } from 'components/molecules'
+import { Modal } from 'components/molecules'
 
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import { doSignIn, doSignOut } from 'firebase-db/auth'
-import { FLOORPLAN_PAGES } from 'appConfig'
+import { FLOORPLAN_PAGES, USER_NAMES } from 'appConfig'
 
 const Wrapper = styled(Block)`
 	display: flex;
@@ -66,13 +67,20 @@ class Header extends Component {
 
 		this.state = {
 			modalIsOpen: false,
+			activeFilterOption: 'None',
 			activeSelectOption,
 		}
 
-		this.handleChange = this.handleChange.bind(this)
+		this.handleFilterChange = this.handleFilterChange.bind(this)
+		this.handleFloorplanChange = this.handleFloorplanChange.bind(this)
 		this.toggleModal = this.toggleModal.bind(this)
 	}
-	handleChange(e) {
+	handleFilterChange(e) {
+		this.props.setFilter(e.target.value)
+
+		this.setState({ activeFilterOption: e.target.value })
+	}
+	handleFloorplanChange(e) {
 		console.log('Select changed', e.target.value)
 
 		// Purge booths before rerouting
@@ -100,7 +108,10 @@ class Header extends Component {
 					<Img alt="logo" src={logo} />
 				</Link>
 
-				<Select value={this.state.activeSelectOption} onChange={this.handleChange}>
+				<Select
+					value={this.state.activeSelectOption}
+					onChange={this.handleFloorplanChange}
+				>
 					{FLOORPLAN_PAGES.map(page => (
 						<option key={page.path} value={page.path}>
 							{page.name}
@@ -108,7 +119,15 @@ class Header extends Component {
 					))}
 				</Select>
 
-				<FilterBtn />
+				<Select value={this.state.activeFilterOption} onChange={this.handleFilterChange}>
+					<option value="None">No Filter</option>
+
+					{USER_NAMES.map(user => (
+						<option key={user} value={user}>
+							{user}
+						</option>
+					))}
+				</Select>
 
 				<Button onClick={this.props.toggleGrid} palette="primary" transparent>
 					#
@@ -152,4 +171,4 @@ Header.propTypes = {
 
 const mapStateToProps = state => ({ user: state.user })
 
-export default connect(mapStateToProps, { loadBooths, toggleGrid })(Header)
+export default connect(mapStateToProps, { loadBooths, setFilter, toggleGrid })(Header)
