@@ -1,3 +1,9 @@
+## Prerequisites:
+
+1.  [Nodejs & NPM](https://nodejs.org/)
+2.  [Firebase](https://firebase.google.com/)
+3.  [Firebase tools](https://www.npmjs.com/package/firebase-tools)
+
 make sure owner names are first letter captalized in db and config
 Ondemand client side db backup max 1 backup per day
 How to deploy functions and app
@@ -11,40 +17,19 @@ Once you have completed those steps successfully, you can set up each of these s
 
 Make sure `.firebaserc` in the root of this project has your project id.
 
-## Firebase Authentication:
-
-* Only google auth is currently set up as provider
-
-  ![Firebase Auth](https://user-images.githubusercontent.com/20076677/39107467-4c5c5fc8-4677-11e8-83d7-3461887f9e13.png)
-
-## Firebase Database Rules:
-
-[Firebase DB Docs](https://firebase.google.com/docs/database/web/start?authuser=1)
+With `firebase-tools` installed you can run firebase from the command line
 
 ```
-{
-  "rules": {
-    ".read": true,
-    ".write": "auth.token.email == 'email1@gmail.com' || auth.token.email == 'email2@yahoo.com'"
-  }
-}
+firebase login
 ```
 
-## Firebase Storage Rules:
+* To get all your credentials
 
 ```
-service firebase.storage {
-  match /b/{bucket}/o {
-    match /{allPaths=**} {
-      allow read: if false;
-      allow write: if request.auth.token.email == 'email1@gmail.com' || request.auth.token.email == 'email2@yahoo.com';
-    }
-  }
-}
+firebase setup:web
 ```
 
-### Create a `config.js` file in the root of your repo
-
+* Add the credentials this command prints out in a new file called `config.js`
 * This file is in `.gitignore`
 
 ```js
@@ -111,8 +96,41 @@ module.exports = {
 }
 ```
 
-### Create a `emailConfig.js` file in your functions directory
+## Firebase Authentication:
 
+* Only google auth is currently set up as provider
+
+  ![Firebase Auth](https://user-images.githubusercontent.com/20076677/39107467-4c5c5fc8-4677-11e8-83d7-3461887f9e13.png)
+
+## Firebase Database Rules:
+
+[Firebase DB Docs](https://firebase.google.com/docs/database/web/start?authuser=1)
+
+```
+{
+  "rules": {
+    ".read": true,
+    ".write": "auth.token.email == 'email1@gmail.com' || auth.token.email == 'email2@yahoo.com'"
+  }
+}
+```
+
+## Firebase Storage Rules:
+
+```
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /{allPaths=**} {
+      allow read: if false;
+      allow write: if request.auth.token.email == 'email1@gmail.com' || request.auth.token.email == 'email2@yahoo.com';
+    }
+  }
+}
+```
+
+### Setting up email
+
+* Create a `emailConfig.js` file in your functions directory
 * This is to set up email
 * This file is in `.gitignore`
 
