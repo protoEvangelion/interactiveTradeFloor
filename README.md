@@ -45,7 +45,9 @@ service firebase.storage {
 
 ### Create a `config.js` file in the root of your repo
 
-````js
+* This file is in `.gitignore`
+
+```js
 const AUTHENTICATED_USER_EMAILS = [
 	'email1@gmail.com',
 	'email2@yahoo.com',
@@ -106,6 +108,29 @@ module.exports = {
 	FIREBASE_CONFIG,
 	FLOORPLAN_PAGES,
 	USER_MAP,
+}
+```
+
+### Create a `emailConfig.js` file in your functions directory
+
+* This is to set up email
+* This file is in `.gitignore`
+
+```js
+const GMAIL_SETTINGS = {
+	email: 'theEmailThatWillSendEmails@gmail.com',
+	pass: 'password',
+}
+
+const RECIPIENT_EMAILS = [
+	'email1@gmail.com',
+	'email2@yahoo.com',
+	...
+]
+
+module.exports = {
+	GMAIL_SETTINGS,
+	RECIPIENT_EMAILS,
 }
 ```
 
@@ -176,7 +201,7 @@ Rather than track everything by paper, you can use this web app to keep track of
 
 ```shell
 npm run dev
-````
+```
 
 ##### Production Mode
 
