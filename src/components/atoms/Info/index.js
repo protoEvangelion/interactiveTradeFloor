@@ -2,12 +2,13 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import styled from 'styled-components'
 
-const BoothNum = styled.h3`
+const BoothNum = styled.span`
 	color: black;
+	display: block;
 	font-size: 1em;
+	font-weight: 600;
 	margin: 0;
 	text-align: center;
-	padding-top: 4px;
 `
 
 const BoothCo = styled.p`

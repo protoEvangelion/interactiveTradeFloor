@@ -41,7 +41,12 @@ const BaseLayout = props => {
 							'gatsby, firebase, react, redux, floorplan, dynamic, interactive, es6, serverless',
 					},
 				]}
-			/>
+			>
+				<link
+					href="https://fonts.googleapis.com/css?family=Open+Sans:400,600"
+					rel="stylesheet"
+				/>
+			</Helmet>
 
 			<Nav {...props}>
 				<Header path={props.location.pathname} />

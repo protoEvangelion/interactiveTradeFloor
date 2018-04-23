@@ -111,6 +111,8 @@ class Header extends Component {
 					value={this.state.activeSelectOption}
 					onChange={this.handleFloorplanChange}
 				>
+					<option value="/">Floorplan</option>
+
 					{FLOORPLAN_PAGES.map(page => (
 						<option key={page.path} value={page.path}>
 							{page.name}
@@ -128,7 +130,7 @@ class Header extends Component {
 					))}
 				</Select>
 
-				<Button onClick={this.props.toggleGrid} palette="primary" transparent>
+				<Button onClick={this.props.toggleGrid} palette="success" transparent>
 					#
 				</Button>
 

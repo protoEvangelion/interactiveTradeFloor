@@ -3,6 +3,112 @@ Ondemand client side db backup max 1 backup per day
 How to deploy functions and app
 package.json scripts
 
+To Set up Firebase head to: https://console.firebase.google.com
+
+Proceed through the instructions to set up a new project.
+
+Once you have completed those steps successfully, you can set up each of these sections below:
+
+Make sure `.firebaserc` in the root of this project has your project id.
+
+## Firebase Authentication:
+
+* Only google auth is currently set up as provider
+
+  ![Firebase Auth](https://user-images.githubusercontent.com/20076677/39107467-4c5c5fc8-4677-11e8-83d7-3461887f9e13.png)
+
+## Firebase Database Rules:
+
+[Firebase DB Docs](https://firebase.google.com/docs/database/web/start?authuser=1)
+
+```
+{
+  "rules": {
+    ".read": true,
+    ".write": "auth.token.email == 'email1@gmail.com' || auth.token.email == 'email2@yahoo.com'"
+  }
+}
+```
+
+## Firebase Storage Rules:
+
+```
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /{allPaths=**} {
+      allow read: if false;
+      allow write: if request.auth.token.email == 'email1@gmail.com' || request.auth.token.email == 'email2@yahoo.com';
+    }
+  }
+}
+```
+
+### Create a `config.js` file in the root of your repo
+
+````js
+const AUTHENTICATED_USER_EMAILS = [
+	'email1@gmail.com',
+	'email2@yahoo.com',
+	...
+]
+
+const BOOTH_LAYOUT = {
+	borderWidth: 2,
+	columns: 18,
+	dimension: 60,
+	rows: 26,
+}
+
+// Click around your console.firebase.google to gather these values
+const FIREBASE_CONFIG = {
+	apiKey: 'your api key',
+	authDomain: 'tradeshow-floorplan.firebaseapp.com',
+	databaseURL: 'https://tradeshow-floorplan.firebaseio.com/ ',
+	projectId: 'tradeshow-floorplan',
+	storageBucket: 'gs://tradeshow-floorplan.appspot.com',
+}
+
+/**
+ * Allows you to create programmatic routes
+ * You can pass a custom BOOTH_LAYOUT object for each page if you would like
+ * https://www.gatsbyjs.org/docs/bound-action-creators/#createPage
+ */
+const FLOORPLAN_PAGES = [
+	{
+		name: 'Los Angeles',
+		path: '/la',
+		context: BOOTH_LAYOUT,
+	},
+	{
+		name: 'Long Beach',
+		path: '/lb',
+		context: Object.assign({}, BOOTH_LAYOUT, { columns: 15, rows: 27 }),
+	},
+]
+
+const USER_MAP = {
+	Jin: {
+		color: '#ff00aa',
+		email: 'email1@gmail.com',
+	},
+	Richard: {
+		color: '#0800FF',
+		email: 'email2@yahoo.com',
+	},
+	Todd: {
+		color: '#00B20E',
+		email: 'email3@gmail.com',
+	},
+}
+
+module.exports = {
+	AUTHENTICATED_USER_EMAILS,
+	FIREBASE_CONFIG,
+	FLOORPLAN_PAGES,
+	USER_MAP,
+}
+```
+
 <p align="center">
   <a href="https://travis-ci.org/protoEvangelion/interactiveTradeFloor"><img src="https://img.shields.io/travis/protoEvangelion/interactiveTradeFloor/master.svg?style=flat-square" alt="Build Status" /></a>
   <a href="https://codecov.io/gh/protoEvangelion/interactiveTradeFloor"><img src="https://img.shields.io/codecov/c/github/protoEvangelion/interactiveTradeFloor.svg?style=flat-square" alt="Build Status" /></a>
@@ -70,7 +176,7 @@ Rather than track everything by paper, you can use this web app to keep track of
 
 ```shell
 npm run dev
-```
+````
 
 ##### Production Mode
 

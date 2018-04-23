@@ -4,13 +4,13 @@ import { isApprovedUser } from './auth'
 /*
 ** Ondemand client side db backup max 1 backup per day
 */
-const uploadBooths = (snapshot, location) => {
+const uploadBooths = snapshot => {
 	if (isApprovedUser()) {
 		const booths = snapshot.val()
 
 		const today = new Date().toISOString().slice(0, 10)
 
-		const file = `${today}__${location}.json`
+		const file = `${today}.json`
 
 		const fileRef = storage.ref().child(file)
 
@@ -31,12 +31,7 @@ const uploadBooths = (snapshot, location) => {
 
 export const backupBooths = () => {
 	db
-		.ref('la/')
+		.ref('/')
 		.once('value')
-		.then(snapshot => uploadBooths(snapshot, 'la'))
-
-	db
-		.ref('lb/')
-		.once('value')
-		.then(snapshot => uploadBooths(snapshot, 'lb'))
+		.then(snapshot => uploadBooths(snapshot))
 }
