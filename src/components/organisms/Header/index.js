@@ -168,7 +168,7 @@ Header.propTypes = {
 	toggleGrid: PropTypes.func.isRequired,
 	setFilter: PropTypes.func.isRequired,
 	loadBooths: PropTypes.func.isRequired,
-	user: PropTypes.oneOfType([null, PropTypes.object]).isRequired,
+	user: PropTypes.object,
 }
 
 const mapStateToProps = state => ({ user: state.user })

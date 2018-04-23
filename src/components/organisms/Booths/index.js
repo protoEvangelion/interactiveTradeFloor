@@ -3,7 +3,7 @@ import React, { Component, Fragment } from 'react'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import { connect } from 'react-redux'
 
-import { BOOTH_LAYOUT, USER_MAP } from 'appConfig'
+import { USER_MAP } from 'appConfig'
 import { Spinner } from 'components/atoms'
 import { Booth, GridLines } from 'components/molecules'
 import {
@@ -46,13 +46,13 @@ class Booths extends Component {
 								booth.status
 							)
 						}
-						borderWidth={BOOTH_LAYOUT.borderWidth}
+						borderWidth={this.props.boothLayout.borderWidth}
 						co={booth.company}
 						col={booth.col}
 						colorMap={USER_MAP}
 						customSize={booth.size}
 						description={booth.description}
-						dim={BOOTH_LAYOUT.dimension}
+						dim={this.props.boothLayout.dimension}
 						filter={this.props.filter}
 						i={i}
 						image={booth.image}
@@ -77,10 +77,10 @@ class Booths extends Component {
 			<div style={{ display: 'flex', justifyContent: 'center' }}>
 				<div
 					style={{
-						height: BOOTH_LAYOUT.rows * BOOTH_LAYOUT.dimension,
+						height: this.props.boothLayout.rows * this.props.boothLayout.dimension,
 						margin: '3rem 0',
 						position: 'relative',
-						width: BOOTH_LAYOUT.columns * BOOTH_LAYOUT.dimension,
+						width: this.props.boothLayout.columns * this.props.boothLayout.dimension,
 					}}
 				>
 					<ReactCSSTransitionGroup
@@ -91,7 +91,7 @@ class Booths extends Component {
 						{this.props.booths ? this.renderBooths() : <Spinner />}
 					</ReactCSSTransitionGroup>
 
-					<GridLines />
+					<GridLines boothLayout={this.props.boothLayout} />
 				</div>
 			</div>
 		)
@@ -100,6 +100,7 @@ class Booths extends Component {
 
 Booths.propTypes = {
 	boothClick: PropTypes.func.isRequired,
+	boothLayout: PropTypes.object.isRequired,
 	booths: PropTypes.array,
 	filter: PropTypes.string.isRequired,
 	loadBooths: PropTypes.func.isRequired,

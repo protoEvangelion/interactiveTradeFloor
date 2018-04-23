@@ -1,10 +1,10 @@
-import { isNumber } from 'lodash'
+import { isNumber, values } from 'lodash'
 
 import { db } from './'
 
 export function listenForBoothChanges(city = 'la', loadBooths) {
 	db.ref(`${city}/`).on('value', snapshot => {
-		loadBooths(snapshot.val())
+		loadBooths(values(snapshot.val()))
 	})
 }
 

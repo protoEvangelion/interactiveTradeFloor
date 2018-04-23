@@ -28,10 +28,18 @@ const BaseLayout = props => {
 	return (
 		<Fragment>
 			<Helmet
-				title="Gatsby Default Starter"
+				title="Interactive Floor Plan"
 				meta={[
-					{ name: `description`, content: `Sample` },
-					{ name: `keywords`, content: `sample, something` },
+					{
+						name: 'description',
+						content:
+							'Interactive floorplan built with modern tools to maximize speed and ease of use',
+					},
+					{
+						name: 'keywords',
+						content:
+							'gatsby, firebase, react, redux, floorplan, dynamic, interactive, es6, serverless',
+					},
 				]}
 			/>
 
@@ -46,7 +54,7 @@ const BaseLayout = props => {
 
 BaseLayout.propTypes = {
 	location: PropTypes.object,
-	children: PropTypes.node,
+	children: PropTypes.any,
 }
 
 export default BaseLayout

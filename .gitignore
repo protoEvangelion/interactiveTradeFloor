@@ -1,7 +1,6 @@
 .cache/
 .DS_Store
 *.log
-appConfig.js
 config.js
 coverage
 emailConfig.js

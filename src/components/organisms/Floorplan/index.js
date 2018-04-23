@@ -97,7 +97,11 @@ class Floorplan extends Component {
 	render() {
 		return (
 			<section>
-				<Booths boothClick={this.boothClick} path={this.props.path} />
+				<Booths
+					boothClick={this.boothClick}
+					boothLayout={this.props.boothLayout}
+					path={this.props.path}
+				/>
 
 				<Modal
 					closeModal={this.closeModal}
@@ -121,6 +125,7 @@ class Floorplan extends Component {
 }
 
 Floorplan.propTypes = {
+	boothLayout: PropTypes.object.isRequired,
 	path: PropTypes.string.isRequired,
 	updateBooths: PropTypes.func.isRequired,
 }
