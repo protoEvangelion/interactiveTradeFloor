@@ -54,6 +54,7 @@
 		"deploy": "firebase deploy",
 		"deploy:functions": "npm run copy && firebase deploy --only functions",
 		"deploy:hosting": "firebase deploy --only hosting",
-		"logs": "firebase functions:log"
+		"logs": "firebase functions:log",
+		"shell": "firebase functions:shell"
 	}
 }

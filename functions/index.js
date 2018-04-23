@@ -1,12 +1,13 @@
 const functions = require('firebase-functions')
 const nodemailer = require('nodemailer')
 
-const { AUTHENTICATED_USER_EMAILS, USER_MAP } = require('./config')
+const { AUTHENTICATED_USER_EMAILS } = require('./config')
 const { GMAIL_SETTINGS, RECIPIENT_EMAILS } = require('./emailConfig')
 
 exports.emailTeam = functions.https.onCall((data, context) => {
 	let isApprovedUser = false
 	const userEmail = context.auth.token.email
+	console.log('EMAIL', userEmail)
 
 	AUTHENTICATED_USER_EMAILS.map(email => {
 		if (email === userEmail) {
@@ -34,7 +35,7 @@ exports.emailTeam = functions.https.onCall((data, context) => {
 		}
 
 		const mailOptions = {
-			from: `${owner} <${USER_MAP[owner].email}>`,
+			from: `${owner} <${userEmail}>`,
 			to: RECIPIENT_EMAILS.join(','),
 			subject: `${num}=${status === 'open' ? 'Open' : company}`,
 			text: text.data,

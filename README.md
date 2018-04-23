@@ -128,6 +128,25 @@ service firebase.storage {
 }
 ```
 
+## Firebase Functions:
+
+* The only part of this app that would require a server is sending emails
+* However, thanks to Firebase Functions, we can still have a serverless web app that is blazingly fast
+* To run a local firebase shell:
+
+```
+npm run shell
+```
+
+* You can then call the email function directly from there if you would like to test it out
+
+```
+emailTeam()
+```
+
+* Otherwise you can just call the function from the web app and check the Firebase function logs:
+  ![Firebase Logs](https://user-images.githubusercontent.com/20076677/39110849-8d1089b2-4687-11e8-9659-06edfc1cf2af.png)
+
 ### Setting up email
 
 * Create a `emailConfig.js` file in your functions directory
@@ -151,6 +170,8 @@ module.exports = {
 	RECIPIENT_EMAILS,
 }
 ```
+
+## Go over npm scripts
 
 <p align="center">
   <a href="https://travis-ci.org/protoEvangelion/interactiveTradeFloor"><img src="https://img.shields.io/travis/protoEvangelion/interactiveTradeFloor/master.svg?style=flat-square" alt="Build Status" /></a>
