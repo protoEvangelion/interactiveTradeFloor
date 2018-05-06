@@ -24,7 +24,7 @@ const StyledForm = styled.form`
 
 const Form = ({ num, company, description, owner, status, submitForm }) => {
 	const schema = yup.object().shape({
-		company: yup.string().required(),
+		company: yup.string(),
 		description: yup.string(),
 		owner: yup.string().required(),
 		status: yup.string().required(),
