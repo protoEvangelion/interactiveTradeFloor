@@ -1,40 +1,37 @@
 <p align="center">
-  <a href="https://travis-ci.org/protoEvangelion/interactiveTradeFloor"><img src="https://img.shields.io/travis/protoEvangelion/interactiveTradeFloor/master.svg?style=flat-square" alt="Build Status" /></a>
   <a href="https://codecov.io/gh/protoEvangelion/interactiveTradeFloor"><img src="https://img.shields.io/codecov/c/github/protoEvangelion/interactiveTradeFloor.svg?style=flat-square" alt="Build Status" /></a>
   <a href="https://aoatradeshow.herokuapp.com/"><img src="https://img.shields.io/website-up-down-green-red/http/shields.io.svg" alt="Code Coverage" /></a>
   <a href="https://www.codacy.com/app/protoEvangelion/interactiveTradeFloor?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=protoEvangelion/interactiveTradeFloor&amp;utm_campaign=Badge_Grade"><img src="https://api.codacy.com/project/badge/Grade/488a2a3f487a4d568d005ec5ef831bfa" alt="Code Grade" /></a>
-  <a href="https://snyk.io/test/github/protoevangelion/interactivetradefloor"><img src="https://snyk.io/test/github/protoevangelion/interactivetradefloor/badge.svg" alt="Known Vulnerabilities" data-canonical-src="https://snyk.io/test/github/protoevangelion/interactivetradefloor" style="max-width:100%;"></a>
 </p>
 
 ![tradeshow](https://cloud.githubusercontent.com/assets/20076677/25107976/6cb4abd6-2387-11e7-8faa-69a684bc3054.gif)
 
 # Tradeshow Floorplan Manager
 
-This is a project that's dynamic and built to simplify the trade show management process.
+This is a blazingly fast static site built upon stable modern technologies like React and Firebase with a goal to simplify the trade show management process.
 
-It
+Specifically, it helps marketers/sales people consolidate their efforts and collaborate in real time with speed.
 
-Specifically, it helps sales people consolidate their efforts and collaborate in real time with team mates.
-
-Rather than track everything by paper, you can use this web app to keep track of all booths that you have **sold** or still need to **collect** on and **color code** it based on who the booth belongs to.
+Rather than track everything by paper, you can use this web app to keep track of all booths you are managing and **color code** them according to who is managing the booth.
 
 # Table of Contents
 
-* [Features](#features)
-* [Setup](#setup)
-  * [Available Scripts](#available-scripts)
-    * [Development Mode](#development-mode)
-    * [Production Mode](#production-mode)
-  * [Environment Variables](#environment-variables)
-  * [Email](#email)
-  * [MongoDB](#mongodb)
-  * [Changing booth layouts](#changing-booth-layouts)
-    * [Booth Data Model](#booth-data-model)
-  * [Authentications](#authentications)
-  * [SSL for Production](#ssl-for-production)
-  * [Custom JS &amp; CSS](#custom-js--css)
-  * [How to Specify Port](#how-to-specify-port)
-* [License](#license)
+- [Features](#features)
+- [Prerequisites:](#prerequisites)
+- [Setup](#setup)
+	- [Available Scripts](#available-scripts)
+			- [Development Mode](#development-mode)
+			- [Production Mode](#production-mode)
+	- [Changing Booth Layouts in Firebase](#changing-booth-layouts-in-firebase)
+		- [Booth API](#booth-api)
+	- [How To Deploy Firebase Functions And App To Firebase Hosting](#how-to-deploy-firebase-functions-and-app-to-firebase-hosting)
+	- [Firebase Authentication:](#firebase-authentication)
+	- [Firebase Database Rules:](#firebase-database-rules)
+	- [Firebase Storage Rules:](#firebase-storage-rules)
+	- [Firebase Functions:](#firebase-functions)
+	- [Setting Up The Emailing Feature](#setting-up-the-emailing-feature)
+	- [How On-demand Backups Work](#how-on-demand-backups-work)
+- [License](#license)
 
 ## Features
 
@@ -52,9 +49,16 @@ Rather than track everything by paper, you can use this web app to keep track of
 * 👮 Security with `Snyk` and `react-helmet`.
 * 📦 All source is bundled using `Webpack` and `Gatsby`.
 * 👼 `ESlint` Airbnb configuration for code quality.
+* 👼 `Prettier` for beautiful auto code formatting.
 * 🎭 `Jest` as the testing framework to ensure reliability.
 * ❤️ Continuous integration with `Travis-CI`.
 * 🎯 ES6 Javascript for terse readable code.
+
+## Prerequisites:
+
+1.  [Nodejs & NPM](https://nodejs.org/)
+2.  [Firebase](https://firebase.google.com/)
+3.  [Firebase tools](https://www.npmjs.com/package/firebase-tools)
 
 ## Setup
 
@@ -75,10 +79,10 @@ npm run build
 npm run deploy
 ```
 
-### Changing booth layouts in Firebase
+### Changing Booth Layouts in Firebase
 
 * Booth locations are computed based on **row**, **column** and **size** which defaults to 1x1
-* Accepts an image url as the `image` key
+* Accepts an image url as the `image` key which will center & resize the custom image over the booth
 * Accepts a custom `size` key which can be specified as `3x2` or whatever
 * Firebase is NoSQL so if a key is not required, you don't have to specify it
 
@@ -132,28 +136,17 @@ Example:
 }
 ```
 
-* The second key under "yourroute" must be unique but is for convenience only when trying to find a booth in the firebase console.
+* The second key under "yourroute" must be unique
+	* One of the main reasons for it is **convenience** when trying to find a booth in the firebase console
 
-## Prerequisites:
+### How To Deploy Firebase Functions And App To Firebase Hosting	
 
-1.  [Nodejs & NPM](https://nodejs.org/)
-2.  [Firebase](https://firebase.google.com/)
-3.  [Firebase tools](https://www.npmjs.com/package/firebase-tools)
+* To Set up Firebase head to: https://console.firebase.google.com
+	* Proceed through the instructions to set up a new project.
+	* Once you have completed those steps successfully, you can set up each of these sections below:
 
-make sure owner names are first letter captalized in db and config
-Ondemand client side db backup max 1 backup per day
-How to deploy functions and app
-package.json scripts
-
-To Set up Firebase head to: https://console.firebase.google.com
-
-Proceed through the instructions to set up a new project.
-
-Once you have completed those steps successfully, you can set up each of these sections below:
-
-Make sure `.firebaserc` in the root of this project has your project id.
-
-With `firebase-tools` installed you can run firebase from the command line
+1. Make sure `.firebaserc` in the root of this project has your **project id**.
+2. With `firebase-tools` installed you can run firebase from the command line
 
 ```
 firebase login
@@ -165,8 +158,10 @@ firebase login
 firebase setup:web
 ```
 
-* Add the credentials this command prints out in a new file called `config.js`
-* This file is in `.gitignore`
+* Create a new file called `config.js` in the root of this repo with the file below
+	* Add the credentials the `firebase setup:web` command prints out under the key `FIREBASE_CONFIG`
+	* This file is in `.gitignore` so will not be committed because it contains secrets
+	* Make sure the first letter of the owner names are captalized in both firebase db and the `config.js` `USER_MAP`
 
 ```js
 const AUTHENTICATED_USER_EMAILS = [
@@ -232,13 +227,13 @@ module.exports = {
 }
 ```
 
-## Firebase Authentication:
+### Firebase Authentication:
 
 * Only google auth is currently set up as provider
 
   ![Firebase Auth](https://user-images.githubusercontent.com/20076677/39107467-4c5c5fc8-4677-11e8-83d7-3461887f9e13.png)
 
-## Firebase Database Rules:
+### Firebase Database Rules:
 
 [Firebase DB Docs](https://firebase.google.com/docs/database/web/start?authuser=1)
 
@@ -251,7 +246,7 @@ module.exports = {
 }
 ```
 
-## Firebase Storage Rules:
+### Firebase Storage Rules:
 
 ```
 service firebase.storage {
@@ -264,11 +259,11 @@ service firebase.storage {
 }
 ```
 
-## Firebase Functions:
+### Firebase Functions:
 
 * The only part of this app that would require a server is sending emails
-* However, thanks to Firebase Functions, we can still have a serverless web app that is blazingly fast
-* To run a local firebase shell:
+* However, thanks to Firebase Functions, we can still have a **serverless** web app that is **blazingly fast**
+* To run a **local** firebase shell:
 
 ```
 npm run shell
@@ -289,11 +284,10 @@ npm run deploy:functions
 * Otherwise you can just call the function from the web app and check the Firebase function logs:
   ![Firebase Logs](https://user-images.githubusercontent.com/20076677/39110849-8d1089b2-4687-11e8-9659-06edfc1cf2af.png)
 
-### Setting up email
+### Setting Up The Emailing Feature
 
-* This file is in `.gitignore`
-* _If you need help setting up your gmail to send emails, we use_ [Nodemailer so check out their docs](https://nodemailer.com/about/) \* [Article on sending with a simple Gmail account](https://medium.com/@manojsinghnegi/sending-an-email-using-nodemailer-gmail-7cfa0712a799)
-* Create a `emailConfig.js` file in your `functions` directory:
+* In the `functions` directory create a new file called `emailConfig.js` that has the content below
+	* This file is in `.gitignore`
 
 ```js
 // functions/emailConfig.js
@@ -313,6 +307,18 @@ module.exports = {
 	RECIPIENT_EMAILS,
 }
 ```
+
+* _If you need further help setting up your gmail to send emails, we use_ [Nodemailer so check out their docs](https://nodemailer.com/about/) 
+* This project just uses a Gmail account to send emails
+	* [Article on sending with a simple Gmail account](https://medium.com/@manojsinghnegi/sending-an-email-using-nodemailer-gmail-7cfa0712a799)
+
+
+### How On-demand Backups Work
+
+* On-demand backups store the firebase db in json format in firebase storage for easy retrieval
+* The backups are launched when user visits site
+* On-demand client side db backup max 1 backup per day
+
 
 ## License
 
