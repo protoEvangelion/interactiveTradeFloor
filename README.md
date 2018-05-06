@@ -49,7 +49,7 @@ Rather than track everything by paper, you can use this web app to keep track of
 * 👮 Security with `Snyk` and `react-helmet`.
 * 📦 All source is bundled using `Webpack` and `Gatsby`.
 * 👼 `ESlint` Airbnb configuration for code quality.
-* 👼 `Prettier` for beautiful auto code formatting.
+* 🌈 `Prettier` for beautiful auto code formatting.
 * 🎭 `Jest` as the testing framework to ensure reliability.
 * ❤️ Continuous integration with `Travis-CI`.
 * 🎯 ES6 Javascript for terse readable code.
