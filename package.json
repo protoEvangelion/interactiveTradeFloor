@@ -22,7 +22,7 @@
     "styled-theme": "^0.3.3",
     "styled-tools": "^0.4.0",
     "yup": "^0.24.1",
-    "snyk": "^1.192.4"
+    "snyk": "^1.244.0"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.2",
