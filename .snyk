@@ -1,5 +1,5 @@
 # Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
-version: v1.13.5
+version: v1.14.0
 ignore: {}
 # patches apply the minimum changes required to fix a vulnerability
 patch:
@@ -35,3 +35,6 @@ patch:
   'npm:stringstream:20180511':
     - firebase > @firebase/firestore > grpc > node-pre-gyp > request > stringstream:
         patched: '2019-11-09T18:46:35.116Z'
+  SNYK-JS-TREEKILL-536781:
+    - snyk > snyk-sbt-plugin > tree-kill:
+        patched: '2019-12-17T01:04:23.093Z'
