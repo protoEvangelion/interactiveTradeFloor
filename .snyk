@@ -1,5 +1,5 @@
 # Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
-version: v1.13.5
+version: v1.14.1
 ignore: {}
 # patches apply the minimum changes required to fix a vulnerability
 patch:
@@ -35,3 +35,50 @@ patch:
   'npm:stringstream:20180511':
     - firebase > @firebase/firestore > grpc > node-pre-gyp > request > stringstream:
         patched: '2019-11-09T18:46:35.116Z'
+  SNYK-JS-LODASH-567746:
+    - react-redux > lodash:
+        patched: '2020-05-05T01:05:34.060Z'
+    - redux > lodash:
+        patched: '2020-05-05T01:05:34.060Z'
+    - styled-tools > lodash:
+        patched: '2020-05-05T01:05:34.060Z'
+    - yup > lodash:
+        patched: '2020-05-05T01:05:34.060Z'
+    - styled-theme > styled-tools > lodash:
+        patched: '2020-05-05T01:05:34.060Z'
+    - firebase > @firebase/firestore > grpc > lodash:
+        patched: '2020-05-05T01:05:34.060Z'
+    - lodash:
+        patched: '2020-05-05T01:05:34.060Z'
+    - snyk > @snyk/dep-graph > lodash:
+        patched: '2020-05-05T01:05:34.060Z'
+    - snyk > @snyk/dep-graph > graphlib > lodash:
+        patched: '2020-05-05T01:05:34.060Z'
+    - snyk > snyk-go-plugin > graphlib > lodash:
+        patched: '2020-05-05T01:05:34.060Z'
+    - snyk > snyk-nodejs-lockfile-parser > graphlib > lodash:
+        patched: '2020-05-05T01:05:34.060Z'
+    - snyk > @snyk/snyk-cocoapods-plugin > @snyk/dep-graph > lodash:
+        patched: '2020-05-05T01:05:34.060Z'
+    - snyk > snyk-nuget-plugin > dotnet-deps-parser > lodash:
+        patched: '2020-05-05T01:05:34.060Z'
+    - snyk > @snyk/snyk-cocoapods-plugin > @snyk/dep-graph > graphlib > lodash:
+        patched: '2020-05-05T01:05:34.060Z'
+    - snyk > @snyk/snyk-cocoapods-plugin > @snyk/cocoapods-lockfile-parser > @snyk/ruby-semver > lodash:
+        patched: '2020-05-05T01:05:34.060Z'
+    - snyk > @snyk/snyk-cocoapods-plugin > @snyk/cocoapods-lockfile-parser > @snyk/dep-graph > graphlib > lodash:
+        patched: '2020-05-05T01:05:34.060Z'
+    - snyk > lodash:
+        patched: '2020-05-05T01:05:34.060Z'
+    - snyk > inquirer > lodash:
+        patched: '2020-05-05T01:05:34.060Z'
+    - snyk > snyk-config > lodash:
+        patched: '2020-05-05T01:05:34.060Z'
+    - snyk > snyk-mvn-plugin > lodash:
+        patched: '2020-05-05T01:05:34.060Z'
+    - snyk > snyk-nodejs-lockfile-parser > lodash:
+        patched: '2020-05-05T01:05:34.060Z'
+    - snyk > snyk-nuget-plugin > lodash:
+        patched: '2020-05-05T01:05:34.060Z'
+    - snyk > snyk-php-plugin > @snyk/composer-lockfile-parser > lodash:
+        patched: '2020-05-05T01:05:34.060Z'
