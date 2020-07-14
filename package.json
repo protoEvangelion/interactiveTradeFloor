@@ -9,7 +9,7 @@
     "formik": "^0.11.11",
     "gatsby-link": "^1.6.40",
     "prop-types": "^15.6.1",
-    "lodash": "^4.17.12",
+    "lodash": "^4.17.16",
     "react-addons-css-transition-group": "^15.6.2",
     "react-helmet": "^5.2.0",
     "react-measure": "^2.0.2",
